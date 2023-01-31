@@ -19,12 +19,25 @@
 ## **2. Usuarios:**
   * **_Anónimo_**: no introduce ninguna credencial en la aplicación, se le muestra la cartelera de la película y series más recientes.
   * **_Registrado_**: se registra en la aplicación (nombre, apodo, fecha de nacimiento, foto y contraseña).
-    * Si hace login por 1ª vez: se le muestra la cartelera de películas y series más recientes
-    * Si no es la 1ª vez que hace login: se le muestra la cartelera de películas y series de
-
-  * **_Administrador_**: se registra en la app (nombre, apodo, fecha nacimiento, foto), tiene una contraseña cifrada en un fichero de configuración 
+  * **_Administrador_**: se registra en la app (nombre, apodo, fecha nacimiento, foto, contraseña). La contraseña está cifrada en un fichero de configuración 
 
 ## **3. Permisos de los usuarios:**
   * **_Anónimo_**: visualiza la cartelera (nombre, descripción, personajes, fecha de estreno, pais, calificación media, trailer de la peli o serie...), no puede subir reseñas ni visualizar las de otros
-  * **_Registrado_**: visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comenta reseñas de otros registrados
+  * **_Registrado_**: visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comenta reseñas de otros registrados, visualizar el histórico de reseñas realizadas
   * **_Administrador_**: eliminar reseñas, comentarios, información no verificada, añadir películas o series a la app, enviar mail a un usuario cuando una reseña suya haya sido comentada por otro
+
+## **4. Imágenes:**
+  * fotos de las películas y series
+
+## **5. Gráficos:**
+  * películas más taquilleras (un diagrama que clasifique las películas según el número de votos o número de reseñas o comentarios)
+  * premios
+## **6. Tecnología complementaria:**
+  * usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
+  * enviar un mail a un usuario registrado afectado cada vez que su reseña es comentada
+
+## **7. Algoritmo avanzado:**
+  * Usuario registrado:
+    * _Si no ha comentado la reseña de ningún usuario_: se le muestra la cartelera de películas y series más recientes (fecha más actual)
+    * _si lo ha hecho_: se le muestra la cartelera de películas y series de esos usuarios (ordenados de fecha más reciente a menos)
+
