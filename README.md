@@ -37,6 +37,7 @@
 ## **6. Tecnología complementaria:**
   * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
   * Enviar un mail a un usuario registrado afectado cada vez que su reseña es comentada
+  * Notificaciones de actulizaciones de los autores, peliculas y demas que sigues
   * Enlace a YouTube para visualizar el trailer
 
 ## **7. Algoritmo avanzado:**
