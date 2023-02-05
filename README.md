@@ -32,7 +32,7 @@
 ## **5. Gráficos:**
   * Películas más taquilleras 
   * Peliculas mas populares (Un diagrama que clasifique las películas según el número de votos o número de reseñas)
-  * Premios
+  * Directores, actices y demas con mas premios
   
 ## **6. Tecnología complementaria:**
   * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
