@@ -13,7 +13,7 @@
 ## **1. Entidades:**
   - Usuario
   - Película o serie
-  - Autor de la reseña
+  - Autor de la película
   - Crítica o reseña
 
 ## **2. Usuarios:**
