@@ -30,8 +30,7 @@
   * Fotos de portada las películas y series, cortas escenas, fotos de su elenco
 
 ## **5. Gráficos:**
-  * Películas más taquilleras 
-  * Un diagrama que clasifique las películas según el número de votos o número de reseñas o comentarios
+  * Películas más taquilleras (Un diagrama que clasifique las películas según el número de votos o número de reseñas o comentarios)
   * Premios
   
 ## **6. Tecnología complementaria:**
