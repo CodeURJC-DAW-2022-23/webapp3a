@@ -27,14 +27,17 @@
   * **_Administrador_**: eliminar reseñas, comentarios, información no verificada, añadir películas o series a la app, enviar mail a un usuario cuando una reseña suya haya sido comentada por otro
 
 ## **4. Imágenes:**
-  * fotos de las películas y series
+  * Fotos de portada las películas y series, cortas escenas, fotos de su elenco
 
 ## **5. Gráficos:**
-  * películas más taquilleras (un diagrama que clasifique las películas según el número de votos o número de reseñas o comentarios)
-  * premios
+  * Películas más taquilleras 
+  * Un diagrama que clasifique las películas según el número de votos o número de reseñas o comentarios
+  * Premios
+  
 ## **6. Tecnología complementaria:**
-  * usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
-  * enviar un mail a un usuario registrado afectado cada vez que su reseña es comentada
+  * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
+  * Enviar un mail a un usuario registrado afectado cada vez que su reseña es comentada
+  * Enlace a YouTube para visualizar el trailer
 
 ## **7. Algoritmo avanzado:**
   * Usuario registrado:
