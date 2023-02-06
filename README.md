@@ -38,7 +38,7 @@
   * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
   * Enviar un mail a un usuario registrado afectado cada vez que su reseña es comentada
   * Notificaciones de actulizaciones de los autores, peliculas y demas que sigues
-  * Generar un PDF con recomendaciones de series y películas (cartel incluido) y que este sea enviado a los usuários
+  * Generar un PDF con recomendaciones de series y películas (cartel incluido) y que este sea enviado a los usuários mediante un mail
  
 
 ## **7. Algoritmo avanzado:**
