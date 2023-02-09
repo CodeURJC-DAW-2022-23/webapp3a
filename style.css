@@ -1,0 +1,113 @@
+
+/*p {
+    font-family: Arial;
+    color:blue;
+    font-size: 12px;
+}
+
+ul li p{
+    font-family: 'Open Sans', sans-serif;
+    color: red;
+}
+
+span {
+    background-color:yellow;
+}
+
+table {
+    border: 1px solid black;
+}
+
+div {
+    border-radius: 26px;
+    border: 5px solid blue;
+    background-color:cornflowerblue;
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    display:inline;
+
+}
+
+#one {
+    background-color: red;
+    position:relative;
+    float:left;
+    top:0;
+    right:0;
+    width:200px;
+}
+
+#two {
+    background-color: blue;
+    position:relative;
+    top:0;
+    left:0;
+    width:200px;
+}
+
+#three {
+    background-color: yellow;
+}
+
+#four {
+    background-color: green;
+}
+
+a {
+    text-decoration: none;
+    color:dodgerblue;
+    font-family: Verdana, sans-serif;
+}
+
+span {
+    font-weight: bold;
+    font-size:18px;
+    color:aliceblue;
+}
+
+#anuncio_principal {
+    color:brown;
+    font_weight:bold;
+}
+
+.cita {
+    color:coral;
+}
+
+a {
+    color:blue;
+}
+
+a:visited {
+    color:darkmagenta;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+header {
+    grid-area: header;
+}
+
+.main {
+    grid-area: main;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+footer {
+    grid-area: footer;
+}
+
+.container {
+    display: grip;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: 
+       "header header"
+       "main sidebar"
+       "footer footer";
+}*/
