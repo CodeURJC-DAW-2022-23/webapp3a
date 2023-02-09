@@ -38,12 +38,13 @@
   * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
   * Notificaciones de actulizaciones de los autores, peliculas y demas que sigues
   * Generar un PDF con recomendaciones de series y películas (cartel incluido) y que este sea enviado a los usuários mediante un mail
+  * Enlace a YouTube para visualizar el trailer
  
 
 ## **7. Algoritmo avanzado:**
   * Usuario registrado:
     * _Si no ha publicado ninguna reseña_: se le muestra la cartelera de películas y series más recientes (fecha más actual)
     * _si lo ha hecho_: se le muestra la cartelera de películas y series de un estilo similar al de las ya reseñadas por el usuario (ordenados de fecha más reciente a menos)
-  * Enlace a YouTube para visualizar el trailer
+  
   
 
