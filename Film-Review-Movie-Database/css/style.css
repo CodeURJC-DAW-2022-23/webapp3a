@@ -4689,14 +4689,11 @@ ul {
   text-transform: none;
 }
 .title-hd-sm {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 25px;
-  border-bottom: 1px solid #233a50;
+  border-bottom: 1px;
   padding-bottom: 8px;
   margin-top: 30px;
 }
@@ -4715,9 +4712,7 @@ ul {
 .title-hd-sm h4 span {
   color: #abb7c4;
 }
-.title-hd-sm a {
-  color: #4280bf;
-}
+
 .title-hd-sm a:hover {
   color: #dcf836;
 }
@@ -5756,7 +5751,7 @@ ul {
   border-radius: 25px;
   display: inline-block;
   width: 170px;
-  margin: 15px 0;
+  margin: 5px;
 }
 .landing-version .redbtn:hover {
   color: #fff;
@@ -6116,7 +6111,15 @@ ul {
   -moz-border-radius: 30px;
   border-radius: 30px;
 }
-.movie-single .movie-single-ct .tab.review .mv-user-review-item {
+.mv-user-review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid #233a50;
+    padding: 20px 20px 20px 0;
+}
+.movie-single .movie-single-ct .tab.review {
+
   border-bottom: 1px solid #233a50;
   padding: 20px 20px 20px 0;
 }
