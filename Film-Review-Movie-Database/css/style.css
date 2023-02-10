@@ -8320,6 +8320,7 @@ input[type="radio"] {
 
 label {
   color: grey;
+  font-size:55px;
 }
 
 .clasificacion {
@@ -8337,7 +8338,7 @@ input[type="radio"]:checked ~ label {
 }
 
 label.reset {
-  font-size: 10px;
+  font-size: 20px;
   border: 1px;
   border-radius: 5px;
   margin: 10px 5px;
