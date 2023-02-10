@@ -1,12 +1,6 @@
 /*!
  * Dropdownhover v1.0.0 (http://bs-dropdownhover.kybarg.com)
  */
- .elem1 {
-  font-family: cursive;
-  color: rgb(187, 233, 233);
-  font-size: 120pt;
-  margin-top: 10%;
-}
 .dropdown .dropdown-menu .caret {
 	border: 4px solid transparent;
 	border-left-color: #000;
