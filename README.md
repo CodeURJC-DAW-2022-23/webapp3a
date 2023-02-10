@@ -18,8 +18,8 @@
 
 ## **2. Usuarios:**
   * **_Anónimo_**: no introduce ninguna credencial en la aplicación, se le muestra la cartelera de las películas y series más recientes.
-  * **_Registrado_**: se registra en la aplicación (nombre, apodo, fecha de nacimiento, foto y contraseña).
-  * **_Administrador_**: se registra en la app (nombre, apodo, fecha nacimiento, foto, contraseña). La contraseña está cifrada en un fichero de configuración 
+  * **_Registrado_**: se registra en la aplicación (nombre, apodo, fecha de nacimiento, email(para mandarle recomendaciones), foto y contraseña).
+  * **_Administrador_**: se registra en la app (nombre, apodo, fecha nacimiento, email(para mandarle recomendaciones), foto, contraseña). La contraseña está cifrada en un fichero de configuración 
 
 ## **3. Permisos de los usuarios:**
   * **_Anónimo_**: visualiza la cartelera (nombre, descripción, personajes, fecha de estreno, pais, calificación media, trailer de la peli o serie...), no puede subir reseñas ni visualizar las de otros
@@ -45,6 +45,6 @@
   * Usuario registrado:
     * _Si no ha publicado ninguna reseña_: se le muestra la cartelera de películas y series más recientes (fecha más actual)
     * _si lo ha hecho_: se le muestra la cartelera de películas y series de un estilo similar al de las ya reseñadas por el usuario (ordenados de fecha más reciente a menos)
-  
+
   
 
