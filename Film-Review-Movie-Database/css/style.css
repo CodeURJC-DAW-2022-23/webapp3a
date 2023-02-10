@@ -5653,8 +5653,7 @@ ul {
 }
 /*movie single hero*/
 .mv-single-hero {
-  background: url('../images/uploads/hero-bg.jpg') no-repeat;
-  height: 598px;
+  height: 389px;
 }
 /*series single hero*/
 .sr-single-hero {
