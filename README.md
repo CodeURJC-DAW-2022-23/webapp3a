@@ -17,12 +17,12 @@
   - Crítica o reseña
 
 ## **2. Usuarios:**
-  * **_Anónimo_**: no introduce ninguna credencial en la aplicación, se le muestra la cartelera de las películas y series más recientes.
+  * **_Anónimo_**: no introduce ninguna credencial en la aplicación, se le muestra la cartelera de las películas y series más recientes o mejor calificadas.
   * **_Registrado_**: se registra en la aplicación (nombre, apodo, fecha de nacimiento, email(para mandarle recomendaciones), foto y contraseña).
   * **_Administrador_**: se registra en la app (nombre, apodo, fecha nacimiento, email(para mandarle recomendaciones), foto, contraseña). La contraseña está cifrada en un fichero de configuración 
 
 ## **3. Permisos de los usuarios:**
-  * **_Anónimo_**: visualiza la cartelera (nombre, descripción, personajes, fecha de estreno, pais, calificación media, trailer de la peli o serie...), no puede subir reseñas ni visualizar las de otros
+  * **_Anónimo_**: visualiza la cartelera (nombres de peliculas, personajes, fecha de estreno, calificación media, trailer de la peli o serie...), no puede subir reseñas ni visualizar las de otros
   * **_Registrado_**: visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comentar reseñas de otros registrados, visualizar el histórico de reseñas realizadas
   * **_Administrador_**:visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comenta reseñas de otros registrados, visualizar el histórico de reseñas realizadas, eliminar reseñas de usuarios registrados, información no verificada y añadir películas o series a la app.
 
