@@ -3670,6 +3670,7 @@ h4,
 h5,
 h6 {
   margin: 0;
+  color:white;
 }
 html {
   font-size: 10px;
@@ -7849,7 +7850,7 @@ header .navbar-default .navbar-nav {
 header .navbar-default .navbar-nav li a {
   font-family: 'Dosis', sans-serif;
   font-size: 14px;
-  color: #abb7c4;
+  color: #fff;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
