@@ -23,8 +23,8 @@
 
 ## **3. Permisos de los usuarios:**
   * **_Anónimo_**: visualiza la cartelera (nombres de peliculas, personajes, fecha de estreno, calificación media, trailer de la peli o serie...), no puede subir reseñas ni visualizar las de otros
-  * **_Registrado_**: visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comentar reseñas de otros registrados, visualizar el histórico de reseñas realizadas
-  * **_Administrador_**:visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualiza y comenta reseñas de otros registrados, visualizar el histórico de reseñas realizadas, eliminar reseñas de usuarios registrados, información no verificada y añadir películas o series a la app.
+  * **_Registrado_**: visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualizar el histórico de reseñas realizadas
+  * **_Administrador_**:visualiza la cartelera, agrega/edita reseñas, vota películas o series, visualizar el histórico de reseñas realizadas, eliminar reseñas de usuarios registrados, información no verificada y añadir películas o series a la app.
 
 ## **4. Imágenes:**
   * Fotos de portada las películas y series, cortas escenas, fotos de su elenco
@@ -38,8 +38,6 @@
   * Usar "Google Maps" para mostrar el/los cines donde se puede ver una determinada película
   * Notificaciones de actulizaciones de los autores, peliculas y demas que sigues
   * Generar un PDF con recomendaciones de series y películas (cartel incluido) y que este sea enviado a los usuários mediante un mail
-  * Enlace a YouTube para visualizar el trailer
- 
 
 ## **7. Algoritmo avanzado:**
   * Usuario registrado:
