@@ -23,4 +23,10 @@ public class pruebaController {
 
         return "login_screen";
     }
+
+    @GetMapping("/movie")
+    public String movie(){
+
+        return "movie_screen";
+    }
 }
