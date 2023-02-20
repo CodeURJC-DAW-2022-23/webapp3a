@@ -2081,7 +2081,7 @@
  *          http://maps.google.com/?ll=48.857995,2.294297&spn=0.007666,0.021136&t=m&z=16
  *          http://maps.google.com/?ll=48.859463,2.292626&spn=0.000965,0.002642&t=m&z=19&layer=c&cbll=48.859524,2.292532&panoid=YJ0lq28OOy3VT2IqIuVY0g&cbp=12,151.58,,0,-15.56
  */
-;(function ($) {
+;/*(function ($) {
 	"use strict";
 
 	//Shortcut for fancyBox object
@@ -2109,7 +2109,7 @@
 		defaults : {
 			youtube : {
 				matcher : /(youtube\.com|youtu\.be|youtube-nocookie\.com)\/(watch\?v=|v\/|u\/|embed\/?)?(videoseries\?list=(.*)|[\w-]{11}|\?listType=(.*)&list=(.*)).*/i,
-				params  : {
+				/*params  : {
 					autoplay    : 1,
 					autohide    : 1,
 					fs          : 1,
@@ -2217,4 +2217,4 @@
 		}
 	};
 
-}(jQuery));
+}*/(jQuery);
