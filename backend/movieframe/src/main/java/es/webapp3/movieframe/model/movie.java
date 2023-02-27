@@ -10,7 +10,7 @@ public class movie {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id = null;
+	private Long id;
     String title;
     String director;
     String gender;
