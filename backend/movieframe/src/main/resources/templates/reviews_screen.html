@@ -69,52 +69,18 @@
 </div>
 <!-- blog list section-->
 <div class="page-single">
+	{{#reviews}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="blog-item-style-1 blog-item-style-3">
             		<div class="blog-it-infor">
             			<h3>Godzilla: King Of The Monsters Adds O’Shea Jackson Jr</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>Africa's burgeoning animation scene got a boost this week with the announcement of an ambitious new partnership that will pair rising talents from across the continent ...</p>
+            			<p>{{review.coments}}</p>
             		</div>
             	</div>
-            	<div class="blog-item-style-1 blog-item-style-3">
-            		<div class="blog-it-infor">
-            			<h3>Magnolia Nabs ‘Lucky’ Starring Harry Dean Stanton</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>Magnolia Pictures has acquired U.S. and international rights to the comedic drama Lucky John Carroll Lynch’s directorial debut. Lynch is an in-demand character actor who ...</p>
-            		</div>
-            	</div>
-				<div class="blog-item-style-1 blog-item-style-3">
-            		<div class="blog-it-infor">
-            			<h3>‘Going in Style’ Tops ‘Smurfs: The Lost Village’ at Thursday Box Office</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>New Line’s remake of “Going in Style” launched with a moderate $600,000 on Thursday night, while Sony’s animated “Smurfs: The Lost Village” debuted with $375,000 ...</p>
-            		</div>
-            	</div>
-            	<div class="blog-item-style-1 blog-item-style-3">
-            		<div class="blog-it-infor">
-            			<h3>India’s National Film Awards: ‘Kaasav’ Wins Best Picture</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>Although it sporadically errs on the side of sentimentality and simplification, "The Case for Christ" sustains interest, and even generates mild suspense ...</p>
-            		</div>
-            	</div>
-            	<div class="blog-item-style-1 blog-item-style-3">
-            		<div class="blog-it-infor">
-            			<h3>‘Kong: Skull Island’ Tops $500 Million at Worldwide Box Office</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>King Kong is still a box office giant. “Kong: Skull Island” has crossed the $500 million mark at the worldwide box office. It’s the third 2017 title to hit the milestone after Disney’s ...</p>
-            		</div>
-            	</div>
-            	<div class="blog-item-style-1 blog-item-style-3">
-            		<div class="blog-it-infor">
-            			<h3>Film Review: ‘Aftermath'</h3>
-            			<span class="time">27 Mar 2017</span>
-            			<p>"Aftermath" is a plane crash movie without a plane crash. Instead, the closest we get is a scene set in the control tower, where a computer screen shows two ...</p>
-            		</div>
-            	</div>
-                <!-- PAGINACION -->
+            	
+                <!-- PAGINACION 
             	<ul class="pagination">
             		<li class="icon-prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
             		<li class="active"><a href="#">1</a></li>
@@ -125,10 +91,15 @@
 					<li><a href="#">21</a></li>
 					<li><a href="#">22</a></li>
 					<li class="icon-next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-            	</ul>
+            	</ul>-->
 			</div>
 		</div>
 	</div>
+	{{/reviews}}
+
+	{{^reviews}}
+	<p>No review yet.</p>
+	{{/reviews}}
 </div>
 <!--end of blog list section-->
 <!-- footer section-->

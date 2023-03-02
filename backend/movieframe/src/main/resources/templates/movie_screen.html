@@ -133,14 +133,9 @@ end of signup form popup-->
 						</li>-->
 		
 						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1"s href="/"> Home </a>
+							<a class="btn btn-default dropdown-toggle lv1s" href="/"> Home </a>
 						</li>
 					
-					</ul>
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						
-						<li class="loginLink"><a href="#">LOG In</a></li>
-						<li class="btn signupLink"><a href="#">sign up</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
@@ -151,26 +146,20 @@ end of signup form popup-->
 	</div>
 </header>
 <!-- END | Header -->
-<li class="active"><a href="#">Home</a></li>
+<li class="active"><a href="/">Home</a></li>
 <div class="hero mv-single-hero"></div>
 
-<div class="page-single movie-single movie_single">
+<div class="page-single movie-single movie_single" action="movieInfo" method="get">
 	<div class="container">
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
 					<img src="images/uploads/movie-single.jpg" alt="">
-					<div class="movie-btn">	
-						<div class="btn-transform transform-vertical red">
-							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
-							<div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">Skyfall: Quantum of Spectre</h1>
+					<h1 class="bd-hd">{{title}}</h1>
 					
 					<div class="movie-tabs">
 						<div class="tabs">
@@ -180,137 +169,56 @@ end of signup form popup-->
 						        <div id="overview" class="tab active">
 						            <div class="row">
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-						            		<p>Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth's mightiest heroes must come together once again to protect the world from global extinction.</p>
-						            		<div class="title-hd-sm">
-												<h4>Photos</h4>
-											</div>
-											<div class="mvsingle-item ov-item">
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image11.jpg" ><img src="images/uploads/image1.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image21.jpg" ><img src="images/uploads/image2.jpg" alt=""></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image31.jpg" ><img src="images/uploads/image3.jpg" alt=""></a>
-												
-											</div>
-											<div class="title-hd-sm">
-												<h4>cast</h4>
-											</div>
-											<!-- movie cast -->
-											<div class="mvcast-item">											
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast1.jpg" alt="">
-														<p>Robert Downey Jr.</p>
-													</div>
-													<p>...  Robert Downey Jr.</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast2.jpg" alt="">
-														<p>Chris Hemsworth</p>
-													</div>
-													<p>...  Thor</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast3.jpg" alt="">
-														<p>Mark Ruffalo</p>
-													</div>
-													<p>...  Bruce Banner/ Hulk</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast4.jpg" alt="">
-														<p>Chris Evans</p>
-													</div>
-													<p>...  Steve Rogers/ Captain America</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast5.jpg" alt="">
-														<p>Scarlett Johansson</p>
-													</div>
-													<p>...  Natasha Romanoff/ Black Widow</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast6.jpg" alt="">
-														<p>Jeremy Renner</p>
-													</div>
-													<p>...  Clint Barton/ Hawkeye</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast7.jpg" alt="">
-														<p>James Spader</p>
-													</div>
-													<p>...  Ultron</p>
-												</div>
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cast9.jpg" alt="">
-														<p>Don Cheadle</p>
-													</div>
-													<p>...  James Rhodes/ War Machine</p>
-												</div>
-											</div>
+						            		<p>{{movie.description}}</p>
+						            		
                                             <!-- movie user review -->
                                             <div class="mv-user-review-item">
-
-                                                <form>
+                                                 
+                                                <form action="saveReview" method="post">
                                                     <p class="clasificacion">
-                                                      <input id="radio1" type="radio" name="rating" value="5">
-                                                      <label for="radio1">★</label>
-                                                      <input id="radio2" type="radio" name="rating" value="4">
-                                                      <label for="radio2">★</label>
-                                                      <input id="radio3" type="radio" name="rating" value="3">
-                                                      <label for="radio3">★</label>
-                                                      <input id="radio4" type="radio" name="rating" value="2">
-                                                      <label for="radio4">★</label>
-                                                      <input id="radio5" type="radio" name="rating" value="1">
-                                                      <label for="radio5">★</label>
-                                                      <input id="radio0" type="radio" name="rating" value="0">
-                                                      
-                                
+														<input id="radio1" type="radio" name="rating" value="5">
+														<label for="radio1">★</label>
+														<input id="radio2" type="radio" name="rating" value="4">
+														<label for="radio2">★</label>
+														<input id="radio3" type="radio" name="rating" value="3">
+														<label for="radio3">★</label>
+														<input id="radio4" type="radio" name="rating" value="2">
+														<label for="radio4">★</label>
+														<input id="radio5" type="radio" name="rating" value="1">
+														<label for="radio5">★</label>
+														<input id="radio0" type="radio" name="rating" value="0">
                                                     </p>
                                                     <label class=reset for=radio0>reset</label>
                                                     <div id=texto>no calification</div>
-                                                  </form>
+                                                </form>
 
-                                                <p class="time">
-                                                    17/12/2016
-                                                </p>
                                                 <div>
-                                                    <form action="#">
-                                                        <textarea name="coments" rows="20" cols="100" placeholder="Review description..."></textarea>
+                                                    <form action="saveReview" method="post">
+                                                        <textarea name="coments" rows="7" cols="40" placeholder="Review description..."></textarea>
                                                     </form>
                                                 </div>
                                                 <div class="title-hd-sm">
-                                                    <a href="#" class="redbtn">Write Review <i class="ion-ios-arrow-right"></i></a>
+                                                    <a href="/review/new" class="redbtn">Write Review <i class="ion-ios-arrow-right"></i></a>
                                                 </div>
+                                             
+                                                <p>{{review.author}}</p>
+												<p>{{review.rating}}</p>
+												<p>{{review.coments}}</p>
                                             </div>
 						            	</div>
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
 						            			<h6>Director: </h6>
-						            			<p><a href="#">Joss Whedon</a></p>
+						            			<p>{{movie.director}}</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Stars: </h6>
-						            			<p>Robert Downey Jr, Chris Evans, Mark Ruffal, Scarlett Johansson</p>
+						            			<p>{{movie.stars}}</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Genres:</h6>
-						            			<p>Action, Sci-Fi, Adventure</p>
-						            		</div>
-						            		<div class="sb-it">
-						            			<h6>Release Date:</h6>
-						            			<p>01/05/2015</p>
-						            		</div>	
-                                            <!--Google map-->
-                                            <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
-                                                <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                                                style="border:0" allowfullscreen></iframe>
-                                            </div>
-                                            <!--Google Maps-->            		
+						            			<p>{{movie.category}}</p>
+						            		</div>            		
 						            	</div>
 						            </div>
                                     

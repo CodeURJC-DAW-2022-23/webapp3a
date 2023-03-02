@@ -75,43 +75,21 @@
 				<div class="blog-detail-ct">
 					
 					<!-- comment items -->
-					<div class="comments">
+					<div class="comments" action="deleteReview" method="get">
+						{{#reviews}}
 						<div class="cmt-item flex-it">
 							<div class="author-infor">
 								<div class="flex-it2">
-									<h6>Steve Perry</h6> <span class="time"> - 27 Mar 2017</span>
+									<h6>{{author}}</h6>
 								</div>
-								<p>Even though Journey's classic vocalist Steve Perry didn’t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.</p>
-								<p><a class="rep-btn" href="#">+ Delete</a></p>
+								<p>{{coments}}</p>
+								<p><a class="rep-btn" href="/review/{{author}}/{{numPost}}/delete">+ Delete</a></p>
 							</div>
 						</div>
-						<div class="cmt-item flex-it">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6>Joss Whedon</h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Prince died not long after the 2016 Rock Hall ceremony, so this year's edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.</p>
-							    <p><a class="rep-btn" href="#">+ Delete</a></p>
-                            </div>
-						</div>
-						<div class="cmt-item flex-it">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6>Dave McNary</h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Blue Sky Studios is one of the world’s leading digital animation movie studios and we are proud of their commitment to stay and grow in Connecticut.</p>
-							    <p><a class="rep-btn" href="#">+ Delete</a></p>
-                            </div>
-						</div>
-						<div class="cmt-item flex-it">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6>Margot Robbie</h6> <span class="time"> - 27 Mar 2017</span>
-								</div>
-								<p>Joan Baez was the sharpest of the Rock Hall inductees, singing about deportees and talking social activism as well as joking about her age and the likelihood that a good portion of the Barclays. </p>
-								<p><a class="rep-btn" href="#">+ Delete</a></p>
-							</div>
-						</div>
+						{{/reviews}}
+						{{^reviews}}
+						<p>no coment yet.</p>
+						{{/reviews}}
 					</div>
 					
 				</div>
