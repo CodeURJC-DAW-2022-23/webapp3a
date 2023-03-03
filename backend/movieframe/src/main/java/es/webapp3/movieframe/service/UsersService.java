@@ -23,8 +23,13 @@ public class UsersService {
         return reviews;
 	}
 
-    public List<Review> findByAuthor(User user) {
-		return user.getReviews();
+    public List<Review> findByAuthor(String author) {
+        for(User us: users){
+            if(us.getUsername().equals(author)){
+		        return us.getReviews();
+            }
+        }
+        return null;
 	}
 
 	public Review findById(User user,long id) {
@@ -37,11 +42,24 @@ public class UsersService {
 
 		review.setId(id);
 
-		user.getReviews().add((int)id, review);
+		int index = users.indexOf(user);
+        users.get(index).getReviews().add((int)id, review);
 	}
 
-	public void deleteById(User user, long id) {
-		user.getReviews().remove((int)id);
+    public void save(User user) {
+
+		long id = nextId.getAndIncrement();
+
+		user.setId(id);
+        users.add(user);
+	}
+
+	public void deleteById(String author, long id) {
+        for(User us: users){
+            if(us.getUsername().equals(author)){
+		        us.getReviews().remove((int)id);
+            }
+        }
 	}
     
 }

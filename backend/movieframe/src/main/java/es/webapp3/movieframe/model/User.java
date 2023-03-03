@@ -3,13 +3,9 @@ package es.webapp3.movieframe.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
-
-@Component
-@SessionScope
 public class User {
 
+    private Long id;
     private String username;
     private String password;
     private String name;
@@ -22,6 +18,30 @@ public class User {
         this.password=password;
         this.name=name;
         this.email=mail;
+    }
+
+    public void setId(Long id){
+        this.id=id;
+    }
+
+    public void setUsername(String username){
+        this.username=username;
+    }
+
+    public void setPassword(String password){
+        this.password=password;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+
+    public void setEmail(String mail){
+        this.email=mail;
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public String getUsername(){

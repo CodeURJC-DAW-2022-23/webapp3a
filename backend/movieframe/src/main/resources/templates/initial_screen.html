@@ -51,8 +51,11 @@
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					
 					<ul class="nav navbar-nav flex-child-menu menu-right">
+					{{#user}}{{.}}{{/user}}
+					{{^user}}
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/sign_up">sign up</a></li>
+					{{/user}}
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->

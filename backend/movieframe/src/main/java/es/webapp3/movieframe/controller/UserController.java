@@ -1,62 +1,51 @@
 package es.webapp3.movieframe.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.ResponseEntity;
 
-import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.model.User;
+import es.webapp3.movieframe.service.ImageService;
+import es.webapp3.movieframe.service.UserSession;
 import es.webapp3.movieframe.service.UsersService;
 
 @Controller
 public class UserController {
 
+    private static final String USERS_FOLDER = "users";
+
     @Autowired
-    private User user;
+    private UserSession usersession;
 
     @Autowired
     private UsersService usersService;
 
-    List<User> users = new ArrayList<>();
+    @Autowired
+    private ImageService imageservice;
 
-    @PostMapping("/review/new")
-	public void newReview(Model model, Review review,@RequestParam String rating, @RequestParam String coments) {
-        review.setRating(rating);
-        review.setComent(coments);
-        review.setAuthor(user.getUsername());
-        user.getReviews().add(review);
-        usersService.save(user, review);
-	}
+    @PostMapping("/user/new")
+	public String newPost(Model model, User user, MultipartFile image) throws IOException {
 
-    @GetMapping("/reviews")
-    public String showReviews(Model model){
-        model.addAttribute("reviews",usersService.findAll());
-        return "modification_reviews_screen.html";
-    }
-
-    @GetMapping("/{user}")
-    public String showUserReviews(Model model,User user){
-         model.addAttribute("reviews",usersService.findByAuthor(user));
-
-         return "reviews_screen.html";
-    }
-
-    @GetMapping("/review/{author}/{id}/delete")
-	public void deleteReview(Model model, @PathVariable int id, @PathVariable String author) {
-        for(User us: users){
-            if(us.getUsername().equals(author)){
-                usersService.deleteById(us, id);
-            }
-        }
+		usersService.save(user);
 		
+        usersession.setUser(user);
+		imageservice.saveImage(USERS_FOLDER, user.getId(), image);
 
+		return "initial_screen.html";
 	}
-    
+
+    @GetMapping("/post/{id}/image")	
+	public ResponseEntity<Object> downloadImage(@PathVariable int id) throws MalformedURLException {
+
+		return imageservice.createResponseFromImage(USERS_FOLDER, id);		
+	}
+
 }
