@@ -14,7 +14,7 @@ public class UsersService {
     List<User> users = new ArrayList<>();
     List<Review> reviews = new ArrayList<>();
 
-    private AtomicLong nextId = new AtomicLong();
+    private AtomicLong nextId = new AtomicLong(1);
 
     public List<Review> findAll() {
         for(User us: users){
@@ -32,8 +32,13 @@ public class UsersService {
         return null;
 	}
 
-	public Review findById(User user,long id) {
-		return user.getReviews().get((int)id);
+	public Review findById(String author,long id) {
+        for(User us: users){
+            if(us.getUsername().equals(author)){
+		        return us.getReviews().get((int)id);
+            }
+        }
+        return null;
 	}
 
 	public void save(User user,Review review) {
@@ -57,7 +62,7 @@ public class UsersService {
 	public void deleteById(String author, long id) {
         for(User us: users){
             if(us.getUsername().equals(author)){
-		        us.getReviews().remove((int)id);
+                us.getReviews().remove((int)id);
             }
         }
 	}

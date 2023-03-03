@@ -1,17 +1,19 @@
 package es.webapp3.movieframe.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Review {
     
-    private Long id;
-    private String author;
-    private String rating;
-    private String coments;
-    private String title;
+    interface Basic{}
 
-    @Autowired
-    private Movie movie;
+    
+    private Long id;
+
+    private String author;
+
+    private String rating;
+
+    private String coments;
+
+    private String title;
 
     public Review(){}
 
@@ -30,7 +32,7 @@ public class Review {
     }
 
     public void setTitle(String title){
-        this.title=movie.getTitle();
+        this.title=title;
     }
 
     public String getTitle(){

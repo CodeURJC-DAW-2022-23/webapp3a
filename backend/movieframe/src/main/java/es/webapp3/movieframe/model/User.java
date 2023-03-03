@@ -10,6 +10,7 @@ public class User {
     private String password;
     private String name;
     private String email;
+
     private List<Review> reviews = new ArrayList<>();
 
     public User(String username,String password,String name,String mail){

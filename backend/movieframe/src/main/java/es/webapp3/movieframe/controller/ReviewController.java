@@ -1,10 +1,16 @@
 package es.webapp3.movieframe.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -12,7 +18,7 @@ import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.service.UserSession;
 import es.webapp3.movieframe.service.UsersService;
 
-@Controller
+@RestController
 public class ReviewController {
 
     @Autowired
@@ -22,7 +28,7 @@ public class ReviewController {
     private UsersService usersService;
 
     @PostMapping("/review/new")
-	public String newReview(Model model, Review review,@RequestParam String rating, @RequestParam String coments) {
+	public ResponseEntity<Review> newReview(Model model,@RequestBody Review review,@RequestParam String rating, @RequestParam String coments) {
         review.setRating(rating);
         review.setComent(coments);
         review.setAuthor(usersession.getUser().getUsername());
@@ -31,7 +37,9 @@ public class ReviewController {
 
         usersService.save(usersession.getUser(), review);
 
-        return "movie_screen.html";
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(review.getId()).toUri();
+
+		return ResponseEntity.created(location).body(review);
 	}
 
     @GetMapping("/reviews")
@@ -48,12 +56,15 @@ public class ReviewController {
     }
 
     @GetMapping("/review/{author}/{id}/delete")
-	public String deleteReview(Model model, @PathVariable int id, @PathVariable String author) {
-        usersService.deleteById(author, id);
+	public ResponseEntity<Review> deleteReview(Model model, @PathVariable int id, @PathVariable String author) {
+        Review review = usersService.findById(author, id);
 
-        model.addAttribute("reviews",usersService.findAll());
-
-        return "modification_reviews_screen.html";
+        if (review != null) {
+			usersService.deleteById(author,id);
+			return ResponseEntity.ok(review);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
     
 }
