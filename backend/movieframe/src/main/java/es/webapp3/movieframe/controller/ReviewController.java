@@ -11,14 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import es.webapp3.movieframe.model.Review;
+import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.UserSession;
 import es.webapp3.movieframe.service.UsersService;
 
 @RestController
+@RequestMapping("/reviews")
 public class ReviewController {
 
     @Autowired
@@ -27,35 +30,37 @@ public class ReviewController {
     @Autowired
     private UsersService usersService;
 
-    @PostMapping("/review/new")
-	public ResponseEntity<Review> newReview(Model model,@RequestBody Review review,@RequestParam String rating, @RequestParam String coments) {
+    @PostMapping("/new")
+	public ResponseEntity<Review> newReview(Model model,@RequestBody Review review,@RequestParam int rating, @RequestParam String coments) {
         review.setRating(rating);
         review.setComent(coments);
         review.setAuthor(usersession.getUser().getUsername());
 
         model.addAttribute("user",usersession.getUser().getUsername());
 
-        usersService.save(usersession.getUser(), review);
+        usersService.save(usersession.getUser().getUsername(), review);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(review.getId()).toUri();
 
 		return ResponseEntity.created(location).body(review);
 	}
 
-    @GetMapping("/reviews")
+    @GetMapping("/")
     public String showReviews(Model model){
-        model.addAttribute("reviews",usersService.findAll());
+        for(User us: usersService.findAll()){
+            model.addAttribute("reviews",us.getReviews());
+        }
         return "modification_reviews_screen.html";
     }
 
-    @GetMapping("/{user}")
+    @GetMapping("/")
     public String showUserReviews(Model model){
          model.addAttribute("reviews",usersService.findByAuthor(usersession.getUser().getUsername()));
 
          return "reviews_screen.html";
     }
 
-    @GetMapping("/review/{author}/{id}/delete")
+    @GetMapping("/{author}/{id}/delete")
 	public ResponseEntity<Review> deleteReview(Model model, @PathVariable int id, @PathVariable String author) {
         Review review = usersService.findById(author, id);
 

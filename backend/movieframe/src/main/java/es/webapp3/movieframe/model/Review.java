@@ -1,34 +1,29 @@
 package es.webapp3.movieframe.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Review {
     
-    interface Basic{}
 
-    
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String author;
-
-    private String rating;
-
-    private String coments;
-
+    private int rating;
+    private String coments; 
     private String title;
+    private Movie movie;
 
     public Review(){}
 
-    public Review(String rating,String coments){
+    public Review(String author,int rating,String coments,String title){
         super();
+        this.author=author;
         this.rating=rating;
         this.coments=coments;
-    }
-
-    public void setId(Long id){
-        this.setId(id);
-    }
-
-    public Long getId(){
-        return id;
+        this.title=title;
     }
 
     public void setTitle(String title){
@@ -39,6 +34,18 @@ public class Review {
         return title;
     }
 
+    public void setId(Long id){
+        this.setId(id);
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public Movie getMovie(){
+        return movie;
+    }
+
     public void setAuthor(String author){
         this.author=author;
     }
@@ -47,11 +54,11 @@ public class Review {
         return author;
     }
 
-    public void setRating(String rating){
+    public void setRating(int rating){
         this.rating = rating;
     }
 
-    public String getRating(){
+    public int getRating(){
         return rating;
     }
 

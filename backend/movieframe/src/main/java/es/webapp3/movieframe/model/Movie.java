@@ -3,8 +3,16 @@ package es.webapp3.movieframe.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.*;
+
+
+@Entity
 public class Movie {
 
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     private String movie_img;
     private String movie_category;
     private String movie_title;
@@ -42,6 +50,10 @@ public class Movie {
 
     public String getCategory(){
         return movie_category;
+    }
+
+    public void setTitle(String title){
+        this.movie_title=title;
     }
 
     public String getTitle(){

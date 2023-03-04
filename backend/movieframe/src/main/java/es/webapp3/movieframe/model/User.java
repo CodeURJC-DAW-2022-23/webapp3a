@@ -3,15 +3,24 @@ package es.webapp3.movieframe.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity
 public class User {
 
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String password;
     private String name;
     private String email;
 
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
+
+    public User(){}
 
     public User(String username,String password,String name,String mail){
         super();
