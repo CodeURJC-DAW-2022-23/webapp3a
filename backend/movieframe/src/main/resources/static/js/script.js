@@ -22,6 +22,32 @@ function loadContent(callback){
     //mostrar spinner
 }
 
+//Create item in server
+function createItem(item, callback) {
+    $.ajax({
+        method: "POST",
+        url: 'http://localhost:8081/reviews/',
+        data: JSON.stringify(item),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (item) {
+        console.log("Item created: " + JSON.stringify(item));
+        callback(item);
+    })
+}
+
+//Delete item from server
+function deleteItem(itemId) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://localhost:8081/reviews/' + itemId
+    }).done(function (item) {
+        console.log("Deleted item " + itemId)
+    })
+}
+
 $(document).ready(function () {
 
     loadItems(function (items) {
@@ -31,4 +57,4 @@ $(document).ready(function () {
         }
     });
     //upload more elements when pressed button "more results"
-    
+}
