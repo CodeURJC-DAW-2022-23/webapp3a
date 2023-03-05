@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +61,7 @@ public class ReviewController {
          return "reviews_screen.html";
     }
 
-    @GetMapping("/{author}/{id}/delete")
+    @DeleteMapping("/{author}/{id}/delete")
 	public ResponseEntity<Review> deleteReview(Model model, @PathVariable int id, @PathVariable String author) {
         Review review = usersService.findById(author, id);
 
