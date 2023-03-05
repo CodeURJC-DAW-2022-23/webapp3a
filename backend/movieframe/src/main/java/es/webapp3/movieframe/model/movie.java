@@ -1,9 +1,12 @@
 package es.webapp3.movieframe.model;
+import java.sql.Blob;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 public class movie {
@@ -18,6 +21,11 @@ public class movie {
     @Column(columnDefinition = "TEXT")
     String description;
 
+    @Lob
+	private Blob imageFile;
+
+	private boolean image;
+    
     public movie(){}
 
     public movie( String title, String director, String gender, String description) {
@@ -29,6 +37,22 @@ public class movie {
 
     public Long getId() {
         return id;
+    }
+    
+    public Blob getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Blob imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public boolean isImage() {
+        return image;
+    }
+
+    public void setImage(boolean image) {
+        this.image = image;
     }
 
     public void setId(Long id) {

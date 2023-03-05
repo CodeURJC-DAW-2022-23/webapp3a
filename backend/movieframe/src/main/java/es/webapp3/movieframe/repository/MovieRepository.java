@@ -14,8 +14,8 @@ public interface MovieRepository extends JpaRepository<movie, Long>{
     @Query("select m from movie m where m.title like %:title%")
     movie findSingleByTitle(String title);
 
-    /* 
-    @Query("SELECT m FROM Movie m WHERE m.gender = :gender")
-    Page<movie> findByTitle(String gender, Pageable pageable);
-    */
+    
+    @Query("select m from movie m where m.gender like %:gender%")
+    movie findByGender(String gender);
+    
 }

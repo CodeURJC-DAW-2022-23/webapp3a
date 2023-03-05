@@ -1,6 +1,11 @@
 package es.webapp3.movieframe.service;
 
+import java.io.IOException;
+
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import es.webapp3.movieframe.model.movie;
@@ -14,10 +19,11 @@ public class DataBaseInizialiter {
     private MovieRepository movieRepository;
 
     @PostConstruct
-    public void init(){
+    public void init() throws IOException{
         
         //sample movies
-        movie movie1 = new es.webapp3.movieframe.model.movie("Avatar", "James Cameron", "Sci-Fi", "Jake Sully vive con su nueva familia en el planeta de Pandora. Cuando una amenaza conocida regresa, Jake debe trabajar con Neytiri y el ejército de la raza na'vi para proteger su planeta.");   
+        movie movie1 = new es.webapp3.movieframe.model.movie("Avatar", "James Cameron", "Sci-Fi", "Jake Sully vive con su nueva familia en el planeta de Pandora. Cuando una amenaza conocida regresa, Jake debe trabajar con Neytiri y el ejército de la raza na'vi para proteger su planeta.");  
+        setBookImage(movie1,"/images/uploads/film1.jpg"); 
         movieRepository.save(movie1);
         movie movie2 = new es.webapp3.movieframe.model.movie("Ant-Man and the Wasp: Quantumania", "Peyton Reed", "Sci-Fi", "Ant-Man and the Wasp: Quantumania es una película de superhéroes estadounidense basada en los personajes de Marvel Comics, Scott Lang / Ant-Man y Hope van Dyne / Wasp. Producida por Marvel Studios y distribuida por Walt Disney Studios Motion Pictures, es la secuela de Ant-Man y Ant-Man and the Wasp y la película número 31 del Universo cinematográfico de Marvel, también es la primera película de la Fase 5. La película está dirigida por Peyton Reed a partir de un guion de Jeff Loveness, y está protagonizada por Paul Rudd como Scott Lang y Evangeline Lilly como Hope van Dyne, junto a Jonathan Majors, Kathryn Newton, Michelle Pfeiffer, Michael Douglas, David Dastmalchian, William Jackson Harper y Katy O'Brian. En la película, Lang y van Dyne exploran el Reino Cuántico junto con su familia y se enfrentan a Kang el Conquistador.");   
         movieRepository.save(movie2);
@@ -31,6 +37,12 @@ public class DataBaseInizialiter {
         movieRepository.save(movie6);
     }
     
+
+    public void setBookImage(movie movie, String classpathResource) throws IOException {
+		movie.setImage(true);
+		Resource image = new ClassPathResource(classpathResource);
+		movie.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+	}
 
 
 }

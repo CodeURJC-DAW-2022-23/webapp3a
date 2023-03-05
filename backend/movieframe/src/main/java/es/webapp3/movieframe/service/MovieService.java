@@ -32,6 +32,9 @@ public class MovieService {
 	public movie findSingleByTitle(String title) {
 		return repository.findSingleByTitle(title);
 	}
+	public movie findByGender(String gender){
+		return repository.findByGender(gender);
+	}
 	
 	public void save(movie movie) {
 		repository.save(movie);
