@@ -1,6 +1,6 @@
-function loadContent(callback){
+function loadContent(callback, size){
     $.ajax({
-        url: 'http://localhost:8081/reviews/?page=1&size=10',
+        url: 'http://localhost:8081/reviews/?page=1&size='+size,
     })
     .then(response => {
         if(response.status !== 200){
@@ -57,4 +57,4 @@ $(document).ready(function () {
         }
     });
     //upload more elements when pressed button "more results"
-}
+})
