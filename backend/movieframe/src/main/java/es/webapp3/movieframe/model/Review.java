@@ -1,13 +1,15 @@
 package es.webapp3.movieframe.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 
 @Entity
-public class Review {
+public class Review implements Serializable{
     
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String author;
