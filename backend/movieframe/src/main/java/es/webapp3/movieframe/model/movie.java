@@ -14,12 +14,13 @@ public class movie {
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-    String title;
-    String director;
-    String gender;
+    private String title;
+    private String director;
+    private String gender;
+    private String trailer;
 
     @Column(columnDefinition = "TEXT")
-    String description;
+    private String description;
 
     @Lob
 	private Blob imageFile;
@@ -28,12 +29,17 @@ public class movie {
     
     public movie(){}
 
-    public movie( String title, String director, String gender, String description) {
+    
+    
+    public movie(String title, String director, String gender, String description, String trailer) {
         this.title = title;
         this.director = director;
         this.gender = gender;
+        this.trailer = trailer;
         this.description = description;
     }
+
+
 
     public Long getId() {
         return id;
@@ -89,6 +95,14 @@ public class movie {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
     
 }

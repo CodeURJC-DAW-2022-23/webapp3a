@@ -17,7 +17,7 @@
     <body>
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="../images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
@@ -40,7 +40,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+				    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -65,8 +65,13 @@
 				<div class="movie-item">
 					
 					<div class="mv-img">
-					<img src="images/uploads/slider1.jpg" alt="" width="285" height="437">
-					</div>
+					{{#image}}
+						<img src="/movies/{{id}}/image" alt="" width="285" height="437">
+					{{/image}}
+					{{^image}}
+					<img src="/images/no_image.png">
+					{{/image}}
+				</div>
 					<div class="title-in">
 						<div class="cate">
 							<span class="blue">{{gender}}</span>
@@ -143,10 +148,12 @@
 				</div>
 				<div class="videos">
 				 	<div class="slider-for-2 video-ft">
-                        <div>
-					    	<iframe class="item-video"  data-src="https://www.youtube.com/embed/1Q8fG0TtVAY"></iframe>
-					    </div>
-					    <div>
+						{{#movies}}
+							<div>
+								<iframe class="item-video"  data-src={{trailer}}></iframe>
+							</div>
+						{{/movies}}
+					    <!--<div>
 					    	<iframe class="item-video"  data-src="https://www.youtube.com/embed/w0qQkSuWOS8"></iframe>
 					    </div>
 					    <div>
@@ -160,19 +167,26 @@
 					    </div>
 					    <div>
 					    	<iframe class="item-video"  data-src="https://www.youtube.com/embed/NxhEZG0k9_w"></iframe>
-					    </div>	
+					    </div>	-->
 					</div>
 					<div class="slider-nav-2 thumb-ft">
-						<div class="item">
-							<div class="trailer-img">
-								<img src="images/uploads/trailer7.jpg"  alt="photo by Barn Images" width="4096" height="2737">
+						{{#movies}}
+							<div class="item">
+								<div class="trailer-img">
+									{{#image}}
+										<img src="/movies/{{id}}/image" alt="photo by Barn Images" width="4096" height="2737">
+										{{/image}}
+										{{^image}}
+										<img src="/images/no_image.png"alt="photo by Barn Images" width="4096" height="2737">
+									{{/image}}
+								</div>
+								<div class="trailer-infor">
+									<h4 class="desc">{{title}}</h4>
+									<p>2:30</p>
+								</div>
 							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">Wonder Woman</h4>
-	                        	<p>2:30</p>
-	                        </div>
-						</div>
-						<div class="item">
+						{{/movies}}	
+						<!--<div class="item">
 							<div class="trailer-img">
 								<img src="images/uploads/trailer2.jpg"  alt="photo by Barn Images" width="350" height="200">
 							</div>
@@ -216,7 +230,7 @@
 	                        	<h4 class="desc">Fast&Furious 8</h4>	
 	                        	<p>3:11</p>
 	                        </div>	
-						</div>
+						</div>-->
 					
 					</div>
 				</div>   
