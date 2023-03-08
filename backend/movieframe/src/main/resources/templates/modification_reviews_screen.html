@@ -75,22 +75,12 @@
 				<div class="blog-detail-ct">
 					
 					<!-- comment items -->
-					<div class="comments" action="deleteReview" method="get">
-						{{#reviews}}
-						<div class="cmt-item flex-it">
-							<div class="author-infor">
-								<div class="flex-it2">
-									<h6>{{author}}</h6>
-								</div>
-								<p>{{coments}}</p>
-								<p><a class="rep-btn" href="/review/{{author}}/{{numPost}}/delete">+ Delete</a></p>
-							</div>
-						</div>
-						{{/reviews}}
-						{{^reviews}}
-						<p>no coment yet.</p>
-						{{/reviews}}
-					</div>
+					{{#reviews}}
+					<div class="comments" action="showReviews" method="get"></div>	
+					{{/reviews}}
+					{{^reviews}}
+					<p>no coment yet.</p>
+					{{/reviews}}
 					
 				</div>
 			</div>
@@ -98,6 +88,11 @@
 		</div>
 	</div>
 </div>
+
+<ul class="pagination">
+	<li id="more"><a href="/reviews/">more results</a></li>
+	<div  class="spinner"></div>
+</ul>
 <!-- end of  blog detail section-->
 <!-- footer section-->
 <footer class="ht-footer">

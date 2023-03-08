@@ -68,23 +68,21 @@
 	</div>
 </div>
 <!-- blog list section-->
-<div class="page-single">
+<div class="page-single" action="showUserReviews" method="get">
 	{{#reviews}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="blog-item-style-1 blog-item-style-3">
             		<div class="blog-it-infor">
-            			<h3>Godzilla: King Of The Monsters Adds O’Shea Jackson Jr</h3>
-            			<p>{{review.coments}}</p>
+            			<h3 id="value_title">{{review.title}}</h3>
+            			<p id="value_description">{{review.coments}}</p>
             		</div>
             	</div>
-            	
-                <!-- PAGINACION 
-            	<ul class="pagination">
-            		<li class="icon-prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
+				<!-- PAGINACION 
+            	<li class="icon-prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
             		<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
+					<li><a href="#">more results</a></li>
 					<li><a href="#">3</a></li>
 					<li><a href="#">4</a></li>
 					<li><a href="#">...</a></li>
@@ -101,6 +99,11 @@
 	<p>No review yet.</p>
 	{{/reviews}}
 </div>
+
+<ul class="pagination">
+	<li id="more"><a href="/reviews/{{user}}">more results</a></li>
+	<div class="spinner"></div>
+</ul>
 <!--end of blog list section-->
 <!-- footer section-->
 <footer class="ht-footer">

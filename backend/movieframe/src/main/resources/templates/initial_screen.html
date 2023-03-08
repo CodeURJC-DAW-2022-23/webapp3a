@@ -51,8 +51,12 @@
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-					{{#user}}{{.}}{{/user}}
-					{{^user}}
+					{{#user}}<!--if already logged-->
+					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/{user}">reviews</a></li>
+						<!--if administrator logged-->
+						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews/">reviews</a></li>
+					{{/user}}
+					{{^user}}<!--if didn´t log yet-->
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/sign_up">sign up</a></li>
 					{{/user}}
@@ -63,32 +67,31 @@
 </header>
 <!-- END | Header -->
 
-<div class="slider movie-items">
+<div class="slider movie-items" action="home" method="get">
+	{{#movieframe}}
 	<div class="container">
 		<div class="row">
 	    	<div  class="slick-multiItemSlider" >
-				{{#movieframe}}
 	    		<div class="movie-item" action="list_movies">
-					
 						<div class="mv-img">
-						<img alt="" width="285" height="437">{{movie_img}}</img>
+						    <img alt="" width="285" height="437"><a href="/movie/{id}"></a>{{movie_img}}</img>
 						</div>
 						<div class="title-in">
 							<div class="cate">
-								<span class="blue">{{movie_category}}</span>
+								<span class="blue">{{gender}}</span>
 							</div>
-							<h6><a href="/particular">{{movie_title}}</a></h6>
-							<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /10</p>
+							<h6><a href="/movie/{id}">{{title}}</a></h6>
+							<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /5</p>
 						</div>
-					
 	    		</div>
-				{{/movieframe}}
 	    	</div>
 	    </div>
 	</div>
+	{{/movieframe}}
 </div>
 
 <div class="trailers">
+	{{#movieframe}}
 	<div class="container">
 		<div class="row ipad-width">
 			<div class="col-md-12">
@@ -98,13 +101,14 @@
 				<div class="videos">
 				 	<div class="slider-for-2 video-ft">
                         <div>
-					    	<iframe class="item-video"  data-src="https://www.youtube.com/embed/1Q8fG0TtVAY"></iframe>
+					    	<iframe class="item-video">{{trailer}}</iframe>
 					    </div>	
 					</div>
 				</div>   
 			</div>
 		</div>
 	</div>
+	{{/movieframe}}
 </div>
 
 <!--end of latest new v1 section-->

@@ -14,22 +14,24 @@ public class Movie implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String movie_img;
-    private String movie_category;
-    private String movie_title;
-    private String movie_votes;
+    private String title;
+    private String gender;
     private String movie_description;
-
+    private String movie_img;
+    private int movie_votes;
+    private String trailer;
+    
     private List<Review> reviews = new ArrayList<>();
 
     public Movie(){}
 
-    public Movie(String description,String category,String title,String votes){
+    public Movie(String title,String category,String description,String img,int votes,String spoiler){
         super();
         this.movie_description=description;
-        this.movie_category=category;
-        this.movie_title=title;
+        this.gender=category;
+        this.title=title;
         this.movie_votes=votes;
+        this.trailer=spoiler;
         
     }
 
@@ -50,18 +52,22 @@ public class Movie implements Serializable{
     }
 
     public String getCategory(){
-        return movie_category;
+        return gender;
     }
 
     public void setTitle(String title){
-        this.movie_title=title;
+        this.title=title;
     }
 
     public String getTitle(){
-        return movie_title;
+        return title;
     }
 
-    public String getVotes(){
+    public int getVotes(){
         return movie_votes;
+    }
+
+    public String getTrailer(){
+        return trailer;
     }
 }

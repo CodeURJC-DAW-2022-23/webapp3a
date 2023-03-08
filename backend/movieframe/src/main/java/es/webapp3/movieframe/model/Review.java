@@ -12,7 +12,7 @@ public class Review implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String author;
+    private String user;
     private int rating;
     private String coments; 
     private String title;
@@ -22,7 +22,7 @@ public class Review implements Serializable{
 
     public Review(String author,int rating,String coments,String title){
         super();
-        this.author=author;
+        this.user=author;
         this.rating=rating;
         this.coments=coments;
         this.title=title;
@@ -49,11 +49,11 @@ public class Review implements Serializable{
     }
 
     public void setAuthor(String author){
-        this.author=author;
+        this.user=author;
     }
 
     public String getAuthor(){
-        return author;
+        return user;
     }
 
     public void setRating(int rating){

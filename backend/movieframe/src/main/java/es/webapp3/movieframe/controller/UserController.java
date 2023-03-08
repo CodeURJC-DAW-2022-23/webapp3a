@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.ImageService;
 import es.webapp3.movieframe.service.UserSession;
-import es.webapp3.movieframe.service.UsersService;
+import es.webapp3.movieframe.service.UserService;
 
 @Controller
 public class UserController {
@@ -26,7 +26,7 @@ public class UserController {
     private UserSession usersession;
 
     @Autowired
-    private UsersService usersService;
+    private UserService userService;
 
     @Autowired
     private ImageService imageservice;
@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/user/new")
 	public String newPost(Model model, User user, MultipartFile image) throws IOException {
 
-		usersService.save(user);
+		userService.saveUser(user);
 		
         usersession.setUser(user);
 		imageservice.saveImage(USERS_FOLDER, user.getId(), image);
