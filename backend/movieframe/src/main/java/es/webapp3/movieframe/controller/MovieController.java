@@ -45,6 +45,21 @@ public class MovieController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	@GetMapping("/movies/{id}/imageTrailer")
+	public ResponseEntity<Object> downloadImageTrailer(@PathVariable long id) throws SQLException {
+
+		Optional<movie> movie = movieService.findById(id);
+		if (movie.isPresent() && movie.get().getImageTrailer() != null) {
+
+			Resource file = new InputStreamResource(movie.get().getImageTrailer().getBinaryStream());
+
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpg")
+					.contentLength(movie.get().getImageTrailer().length()).body(file);
+
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 
     

@@ -1,5 +1,6 @@
 package es.webapp3.movieframe.model;
 import java.sql.Blob;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +19,7 @@ public class movie {
     private String director;
     private String gender;
     private String trailer;
+    private List<String> actors;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -26,6 +28,11 @@ public class movie {
 	private Blob imageFile;
 
 	private boolean image;
+    
+    @Lob
+	private Blob imageTrailer;
+
+	private boolean imageTR;
     
     public movie(){}
 
@@ -37,6 +44,30 @@ public class movie {
         this.gender = gender;
         this.trailer = trailer;
         this.description = description;
+    }
+
+
+
+    public Blob getImageTrailer() {
+        return imageTrailer;
+    }
+
+
+
+    public void setImageTrailer(Blob imageTrailer) {
+        this.imageTrailer = imageTrailer;
+    }
+
+
+
+    public boolean isImageTR() {
+        return imageTR;
+    }
+
+
+
+    public void setImageTR(boolean imageTR) {
+        this.imageTR = imageTR;
     }
 
 
@@ -103,6 +134,18 @@ public class movie {
 
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+
+
+    public List<String> getActors() {
+        return actors;
+    }
+
+
+
+    public void setActors(List<String> actors) {
+        this.actors = actors;
     }
     
 }

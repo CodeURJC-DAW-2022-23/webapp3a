@@ -71,11 +71,11 @@
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="../images/uploads/movie-single.jpg" alt="">
+					<img src="/movies/{{movie.id}}/image" alt="">
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
-							<div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+							<div><a href={{movie.trailer}} class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
 						</div>
 					</div>
 				</div>
@@ -108,13 +108,13 @@
 											<!-- movie cast -->
 											<div class="mvcast-item">											
 												<div class="cast-it">
-													<div class="cast-left">
-														<img src="../images/uploads/cast1.jpg" alt="">
-														<p>Robert Downey Jr.</p>
-													</div>
-													<p>...  Robert Downey Jr.</p>
+													<ul>
+														{{#movie.actors}}
+														<li>{{.}}</li>
+														{{/movie.actors}}
+													</ul>
 												</div>
-												<div class="cast-it">
+												<!--<div class="cast-it">
 													<div class="cast-left">
 														<img src="../images/uploads/cast2.jpg" alt="">
 														<p>Chris Hemsworth</p>
@@ -162,7 +162,7 @@
 														<p>Don Cheadle</p>
 													</div>
 													<p>...  James Rhodes/ War Machine</p>
-												</div>
+												</div>-->
 											</div>
                                             <!-- movie user review -->
                                             <div class="mv-user-review-item">
@@ -207,11 +207,15 @@
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Stars: </h6>
-						            			<p>Robert Downey Jr, Chris Evans, Mark Ruffal, Scarlett Johansson</p>
+						            			<ul>
+													{{#movie.actors}}
+
+													{{/movie.actors}}
+												</ul>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Genres:</h6>
-						            			<p>Action, Sci-Fi, Adventure</p>
+						            			<p>{{movie.gender}}</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Release Date:</h6>
