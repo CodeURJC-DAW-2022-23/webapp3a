@@ -10,8 +10,8 @@
         <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="../css/plugins.css">
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="css/plugins.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
@@ -20,13 +20,96 @@
 
         <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="../images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
     </div>
 </div>
+<!--end of preloading
+--login form popup--
+<div class="login-wrapper" id="login-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Login</h3>
+        <form method="post" action="#">
+        	<div class="row">
+        		 <label for="username">
+                    Username:
+                    <input type="text" name="username" id="username" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+        	</div>
+           
+            <div class="row">
+            	<label for="password">
+                    Password:
+                    <input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+            	<div class="remember">
+					<div>
+						<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
+					</div>
+            		<a href="#">Forget password ?</a>
+            	</div>
+            </div>
+           <div class="row">
+           	 <button type="submit">Login</button>
+           </div>
+        </form>
+        <div class="row">
+        	<p>Or via social</p>
+            <div class="social-btn-2">
+            	<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+            	<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+            </div>
+        </div>
+    </div>
+</div>
 
+--end of login form popup--
+--signup form popup--
+
+<div class="login-wrapper"  id="signup-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>sign up</h3>
+        <form method="post" action="#">
+            <div class="row">
+                 <label for="username-2">
+                    Username:
+                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+            </div>
+           
+            <div class="row">
+                <label for="email-2">
+                    your email:
+                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="password-2">
+                    Password:
+                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="repassword-2">
+                    re-type Password:
+                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+           <div class="row">
+             <button type="submit">sign up</button>
+           </div>
+        </form>
+    </div>
+</div>
+end of signup form popup-->
+
+<!-- BEGIN | Header -->
 <header class="ht-header">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
@@ -40,7 +123,7 @@
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="../images/logoMF.png" alt="" width="80" height="58">
+				    <img class="logo" src="images/logoMF.png" alt="" width="80" height="58">
 			    <!--</div>-->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -50,9 +133,14 @@
 						</li>-->
 		
 						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1s" href="/"> Home </a>
+							<a class="btn btn-default dropdown-toggle lv1"s href="initial_screen.html"> Home </a>
 						</li>
 					
+					</ul>
+					<ul class="nav navbar-nav flex-child-menu menu-right">
+						
+						<li class="loginLink"><a href="#">LOG In</a></li>
+						<li class="btn signupLink"><a href="#">sign up</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
@@ -63,25 +151,26 @@
 	</div>
 </header>
 <!-- END | Header -->
-<li class="active"><a href="/">Home</a></li>
+<li class="active"><a href="#">Home</a></li>
 <div class="hero mv-single-hero"></div>
 
-<div class="page-single movie-single movie_single" action="getMovie" method="get">
-	{{movie}}
+<div class="page-single movie-single movie_single">
 	<div class="container">
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-
-					{{movie.movie_img}}
-
+					<img src="images/uploads/movie-single.jpg" alt="">
+					<div class="movie-btn">	
+						<div class="btn-transform transform-vertical red">
+							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
+							<div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a></div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-
-					<h1 class="bd-hd" id="value_title">{{movie.title}}</h1>
-
+					<h1 class="bd-hd">Skyfall: Quantum of Spectre</h1>
 					
 					<div class="movie-tabs">
 						<div class="tabs">
@@ -91,59 +180,137 @@
 						        <div id="overview" class="tab active">
 						            <div class="row">
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-
-						            		<p>{{movie.movie_description}}</p>
-
+						            		<p>Tony Stark creates the Ultron Program to protect the world, but when the peacekeeping program becomes hostile, The Avengers go into action to try and defeat a virtually impossible enemy together. Earth's mightiest heroes must come together once again to protect the world from global extinction.</p>
+						            		<div class="title-hd-sm">
+												<h4>Photos</h4>
+											</div>
+											<div class="mvsingle-item ov-item">
+												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image11.jpg" ><img src="images/uploads/image1.jpg" alt=""></a>
+												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image21.jpg" ><img src="images/uploads/image2.jpg" alt=""></a>
+												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/image31.jpg" ><img src="images/uploads/image3.jpg" alt=""></a>
+												
+											</div>
+											<div class="title-hd-sm">
+												<h4>cast</h4>
+											</div>
+											<!-- movie cast -->
+											<div class="mvcast-item">											
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast1.jpg" alt="">
+														<p>Robert Downey Jr.</p>
+													</div>
+													<p>...  Robert Downey Jr.</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast2.jpg" alt="">
+														<p>Chris Hemsworth</p>
+													</div>
+													<p>...  Thor</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast3.jpg" alt="">
+														<p>Mark Ruffalo</p>
+													</div>
+													<p>...  Bruce Banner/ Hulk</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast4.jpg" alt="">
+														<p>Chris Evans</p>
+													</div>
+													<p>...  Steve Rogers/ Captain America</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast5.jpg" alt="">
+														<p>Scarlett Johansson</p>
+													</div>
+													<p>...  Natasha Romanoff/ Black Widow</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast6.jpg" alt="">
+														<p>Jeremy Renner</p>
+													</div>
+													<p>...  Clint Barton/ Hawkeye</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast7.jpg" alt="">
+														<p>James Spader</p>
+													</div>
+													<p>...  Ultron</p>
+												</div>
+												<div class="cast-it">
+													<div class="cast-left">
+														<img src="images/uploads/cast9.jpg" alt="">
+														<p>Don Cheadle</p>
+													</div>
+													<p>...  James Rhodes/ War Machine</p>
+												</div>
+											</div>
                                             <!-- movie user review -->
                                             <div class="mv-user-review-item">
-                                                 
-                                                <form action="saveReview" method="post">
+
+                                                <form>
                                                     <p class="clasificacion">
-														<input id="value_radio" type="radio" name="rating" value="5">
-														<label for="radio1">★</label>
-														<input id="value_radio" type="radio" name="rating" value="4">
-														<label for="radio2">★</label>
-														<input id="value_radio" type="radio" name="rating" value="3">
-														<label for="radio3">★</label>
-														<input id="value_radio" type="radio" name="rating" value="2">
-														<label for="radio4">★</label>
-														<input id="value_radio" type="radio" name="rating" value="1">
-														<label for="radio5">★</label>
-														<input id="value_radio" type="radio" name="rating" value="0">
+                                                      <input id="radio1" type="radio" name="rating" value="5">
+                                                      <label for="radio1">★</label>
+                                                      <input id="radio2" type="radio" name="rating" value="4">
+                                                      <label for="radio2">★</label>
+                                                      <input id="radio3" type="radio" name="rating" value="3">
+                                                      <label for="radio3">★</label>
+                                                      <input id="radio4" type="radio" name="rating" value="2">
+                                                      <label for="radio4">★</label>
+                                                      <input id="radio5" type="radio" name="rating" value="1">
+                                                      <label for="radio5">★</label>
+                                                      <input id="radio0" type="radio" name="rating" value="0">
+                                                      
+                                
                                                     </p>
                                                     <label class=reset for=radio0>reset</label>
                                                     <div id=texto>no calification</div>
-                                                </form>
+                                                  </form>
 
+                                                <p class="time">
+                                                    17/12/2016
+                                                </p>
                                                 <div>
-                                                    <form action="saveReview" method="post">
-                                                        <textarea name="coments" rows="7" cols="40" placeholder="Review description..." id="value_description"></textarea>
+                                                    <form action="#">
+                                                        <textarea name="coments" rows="20" cols="100" placeholder="Review description..."></textarea>
                                                     </form>
                                                 </div>
                                                 <div class="title-hd-sm">
-                                                    <a href="/review/new" class="redbtn" id="write_review">Write Review <i class="ion-ios-arrow-right"></i></a>
+                                                    <a href="#" class="redbtn">Write Review <i class="ion-ios-arrow-right"></i></a>
                                                 </div>
-                                             
-                                                <p id="value_author">{{review.author}}</p>
-												<p>{{review.rating}}</p>
-												<p>{{review.coments}}</p>
                                             </div>
 						            	</div>
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
-						            		<!--<div class="sb-it">
+						            		<div class="sb-it">
 						            			<h6>Director: </h6>
-						            			<p>{{movie.director}}</p>
+						            			<p><a href="#">Joss Whedon</a></p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Stars: </h6>
-
-						            			<p>{{movie.stars}}</p>
-						            		</div>-->
+						            			<p>Robert Downey Jr, Chris Evans, Mark Ruffal, Scarlett Johansson</p>
+						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Genres:</h6>
-						            			<p>{{movie.gender}}</p>
-						            		</div>            		
-
+						            			<p>Action, Sci-Fi, Adventure</p>
+						            		</div>
+						            		<div class="sb-it">
+						            			<h6>Release Date:</h6>
+						            			<p>01/05/2015</p>
+						            		</div>	
+                                            <!--Google map-->
+                                            <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
+                                                <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                                style="border:0" allowfullscreen></iframe>
+                                            </div>
+                                            <!--Google Maps-->            		
 						            	</div>
 						            </div>
                                     
@@ -526,7 +693,6 @@
 			</div>
 		</div>
 	</div>
-	{{/movie}}
 </div>
 <!-- footer section-->
 <footer class="ht-footer">
@@ -543,10 +709,10 @@
 </footer>
 <!-- end of footer section-->
       
-        <script src="../js/jquery.js"></script>
-        <script src="../js/plugins.js"></script>
-        <script src="../js/plugins2.js"></script>
-        <script src="../js/custom.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/plugins2.js"></script>
+        <script src="js/custom.js"></script>
 
     </body>
 </html>

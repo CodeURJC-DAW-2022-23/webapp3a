@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 */
+
 import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.repository.MovieRepository;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MovieService {
 
     @Autowired
+
     private MovieRepository movieRepository;
 
     public Optional<Movie> findById(long id) {
@@ -42,5 +44,6 @@ public class MovieService {
 
 	public void delete(long id) {
 		movieRepository.deleteById(id);
+
 	}
 }
