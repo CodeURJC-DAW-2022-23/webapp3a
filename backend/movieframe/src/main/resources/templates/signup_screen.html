@@ -67,15 +67,16 @@
 		<div class="row ipad-width">
 			<div class="col-md-3 col-sm-12 col-xs-12">
 				<div class="user-information">
-					<div class="user-img">
-						<a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
-						<a href="#" class="redbtn">Set avatar</a>
+					<div class="user-img" placeholder="Set avatar">
+						<img src="/user/{{user.id}}/image">
+							
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" action="#">
-					<form action="#" class="user">
+					<form action="/user/new" method="post" class="user">
 						<div class="row">
 							<div class="col-md-6 form-it">
 								<label>Username</label>
@@ -102,6 +103,9 @@
 								<input type="text" placeholder="***************">
 							</div>
 						</div>
+						<form action="/user/new" method="post" enctype="multipart/form-data" class="user">
+							<input class="redbtn" type='file' name='image' accept=".jpg, .jpeg">
+						</form>
 						<div class="row">
 							<div class="col-md-2">
 								<input class="submit" type="submit" value="register">
