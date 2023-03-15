@@ -10,19 +10,16 @@
          <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="css/plugins.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
 
-		<script src="js/jquery.js"></script>
-		
-		<script src="Chart.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
 
-    <body>
+<body>
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="../images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
@@ -55,6 +52,7 @@
 					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/{user}">reviews</a></li>
 						<!--if administrator logged-->
 						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews/">reviews</a></li>
+						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/reviews/">recommendations</a></li>
 					{{/user}}
 					{{^user}}<!--if didn´t log yet-->
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
@@ -62,59 +60,46 @@
 					{{/user}}
 					</ul>
 				</div>
-			<!-- /.navbar-collapse -->
-	    </nav>	    
+			<!-- /.navbar-collapse-->
+	    </nav>	 
+	</div>   
 </header>
 <!-- END | Header -->
 
-<div class="slider movie-items" action="home" method="get">
-	{{#movieframe}}
-	<div class="container">
+<div class="slider movie-items">
+
+	
+	<div class="container" id="movie_item">
+			<form action="/movies/{name}" method="post">
+				<input class="movie_filter" type="text" placeholder="Enter a movie">
+				<input class="submit" type="submit" value="search">
+			</form>	
+	 
 		<div class="row">
-
-	    	<div  class="slick-multiItemSlider" >
-	    		<div class="movie-item" action="list_movies">
-
-						<div class="mv-img">
-						    <img alt="" width="285" height="437"><a href="/movie/{id}"></a>{{movie_img}}</img>
-						</div>
-						<div class="title-in">
-							<div class="cate">
-								<span class="blue">{{gender}}</span>
-							</div>
-							<h6><a href="/movie/{id}">{{title}}</a></h6>
-							<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /5</p>
-						</div>
-	    		</div>
-
-	    	</div>
-	    </div>
-	</div>
-	{{/movieframe}}
-</div>
-
-<div class="trailers">
-	{{#movieframe}}
-	<div class="container">
-		<div class="row ipad-width">
-			<div class="col-md-12">
-				<div class="title-hd">
-					<h2>TRAILER</h2>
-				</div>
-				<div class="videos">
-				 	<div class="slider-for-2 video-ft">
-
-                        <div>
-					    	<iframe class="item-video">{{trailer}}</iframe>
-					    </div>	
+			<div  class="slick-multiItemSlider" >
+				{{#movieframe}}
+				<div class="movie-item">
+					
+					<div class="mv-img">
+						<img src="/movie/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
 					</div>
-
-				</div>   
+					
+					<div class="title-in">
+						<div class="cate">
+							<span class="blue">{{gender}}</span>
+						</div>
+					</div>
+					<h6><a href="/movie/{{id}}">{{title}}</a></h6>
+					<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /5</p>
+					
+				</div>
+				{{/movieframe}}
 			</div>
 		</div>
 	</div>
-	{{/movieframe}}
+	
 </div>
+
 
 <!--end of latest new v1 section-->
 <style>
@@ -123,10 +108,10 @@
 		margin: 20px auto;
 	}
 </style>
-            <div>
-				<canvas id="myChart" width="400" height="150"></canvas>
-			</div>
-				
+            <div id="plotlyChart" width="400" height="150"></div>
+		
+
+<!--BEGIN | Header -->
 
 <!-- footer section-->
 <footer class="ht-footer">
@@ -143,31 +128,62 @@
 </footer>
 <!-- end of footer section-->
 
-        
-        <script src="js/plugins.js"></script>
-        <script src="js/plugins2.js"></script>
-        <script src="js/custom.js"></script>
+		
+        <script src="/js/jquery.js"></script>
+        <script src="/js/plugins.js"></script>
+        <script src="/js/plugins2.js"></script>
+        <script src="/js/custom.js"></script>
 </body>
+
+
+
 <script>
-	const ctx = document.getElementById('myChart');
-  
-	new Chart(ctx, {
-	  type: 'bar',
-	  data: {
-		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-		datasets: [{
-		  label: 'Graph',
-		  data: [12, 19, 3, 5, 2, 3],
-		  borderWidth: 1
-		}]
-	  },
-	  options: {
-		scales: {
-		  y: {
-			beginAtZero: true
-		  }
-		}
-	  }
+
+$(document).ready(function () {
+
+	function loadMovies(){
+		$.ajax({
+			url: 'https://localhost:8443/movies',
+		}).done(data => {
+			//JSON.stringify(data);
+			console.log(data);
+			responseMovies(data);
+		})
+		.catch(function(err){
+			console.log("Error :-S",err);
+		});
+	}
+
+
+    function responseMovies (movies) {
+        //const ctx = document.getElementById('myChart');
+
+        //charge just 4 films from server
+		titles = [];
+        for(var i=0; i<movies.length; i++){
+			//console.log(movies[i]);
+            titles.push(movies[i].title);
+        }
+
+		reviews =[];
+		for(var i=0; i<movies.length; i++){
+			//console.log(movies[i].reviews.length);
+            reviews.push(movies[i].reviews.length);
+        }
+    
+		var data = [
+        {
+          x: titles,
+          y: reviews,
+          type: 'bar'
+        }
+      ];
+
+      Plotly.newPlot('plotlyChart', data);
+    }
+
+	loadMovies();
+
 	});
-  </script>
+</script>
 </html>

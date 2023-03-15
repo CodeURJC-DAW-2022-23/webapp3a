@@ -35,9 +35,9 @@ public class ReviewController {
 
     @PostMapping("/new")
 	public ResponseEntity<Review> newReview(Model model,@PathVariable Movie movie,@RequestBody Review review) {
-        review.setAuthor(usersession.getUser().getUsername());
+        //review.setAuthor(usersession.getUser().getUsername());
 
-        review.setTitle(movie.getTitle());
+       
 
         movie.getReviews().add(review);
 
@@ -55,15 +55,15 @@ public class ReviewController {
 
             model.addAttribute("reviews",reviewService.findReviews());
 
-            return "modification_reviews_screen.html";
+            return "modification_reviews_screen";
     }
 
     @GetMapping("/{user}")
     public String showUserReviews(Model model){
 
-         model.addAttribute("reviews",reviewService.findUserReviews(usersession.getUser()));
+         //model.addAttribute("reviews",reviewService.findUserReviews(usersession.getUser()));
 
-         return "reviews_screen.html";
+         return "reviews_screen";
     }
 
     @DeleteMapping("/{id}/delete")
@@ -72,9 +72,9 @@ public class ReviewController {
 
         if (review.isPresent()) {
 			reviewService.deleteReview(id);
-			return "modification_reviews_screen.html";
+			return "modification_reviews_screen";
 		} else {
-			return "404.html";
+			return "404";
 		}
 	}
     

@@ -10,8 +10,8 @@
         <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="css/plugins.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
     <body>
@@ -20,94 +20,14 @@
 
         <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
     </div>
 </div>
-<!--end of preloading
---login form popup--
-<div class="login-wrapper" id="login-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>Login</h3>
-        <form method="post" action="#">
-        	<div class="row">
-        		 <label for="username">
-                    Username:
-                    <input type="text" name="username" id="username" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
-        	</div>
-           
-            <div class="row">
-            	<label for="password">
-                    Password:
-                    <input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-            <div class="row">
-            	<div class="remember">
-					<div>
-						<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
-					</div>
-            		<a href="#">Forget password ?</a>
-            	</div>
-            </div>
-           <div class="row">
-           	 <button type="submit">Login</button>
-           </div>
-        </form>
-        <div class="row">
-        	<p>Or via social</p>
-            <div class="social-btn-2">
-            	<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
-            	<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!--end of preloading-->
 
---end of login form popup--
---signup form popup--
-
-<div class="login-wrapper"  id="signup-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>sign up</h3>
-        <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
-            </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
-        </form>
-    </div>
-</div>
-end of signup form popup-->
 
 <!-- BEGIN | Header -->
 <header class="ht-header">
@@ -123,7 +43,7 @@ end of signup form popup-->
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="images/logoMF.png" alt="" width="80" height="58">
+				    <img class="logo" src="/images/logoMF.png" alt="" width="80" height="58">
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -131,9 +51,9 @@ end of signup form popup-->
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
-						<li class="dropdown first">
-							<a class="btn btn-default dropdown-toggle lv1"s> Home </a>
-						</li>
+							<li class="dropdown first">
+								<a class="btn btn-default dropdown-toggle lv1"s> Home </a>
+							</li>
 					
 					</ul>
 				</div>
@@ -144,19 +64,18 @@ end of signup form popup-->
 	    
 	</div>
 </header>
-<!-- END | Header -->
-<li class="active"><a href="#">Home</a></li>
+<!-- END | Header 
+<li class="active"><a href="#">Home</a></li>-->
 <div class="hero mv-single-hero"></div>
 
 <div class="page-single movie-single movie_single">
 	<div class="container">
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12" style="margin-top: 60px;">
-				<img src="images/uploads/josh_whedon3.jpg" alt="">
+				<img src="/movie/{{id}}/director/image" alt="">{{avatar}}</img>
 			</div>
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
-					<h1 class="bd-hd">Joss Whedon</h1>
 					
 					<div class="movie-tabs">
 						<div class="tabs">
@@ -165,129 +84,41 @@ end of signup form popup-->
 						    <div class="tab-content">
 						        <div id="overview" class="tab active">
 						            <div class="row">
+										
 						            	<div class="col-md-8 col-sm-12 col-xs-12">
-						            		<p>Joseph Hill Whedon (/ˈhwiːdən/; born June 23, 1964) is an American filmmaker, composer, and comic book writer. He is the
-											founder of Mutant Enemy Productions, co-founder of Bellwether Pictures, and is best known as the creator of several
-											television series: the supernatural drama Buffy the Vampire Slayer (1997–2003) and its spinoff Angel (1999–2004), the
-											short-lived space Western Firefly (2002), the Internet musical miniseries Dr. Horrible's Sing-Along Blog (2008), the
-											science fiction drama Dollhouse (2009–2010), the Marvel Cinematic Universe series Agents of S.H.I.E.L.D. (2013–2020),
-											and the science fiction drama The Nevers (2021).
-											
-											After beginning his career in sitcoms, Whedon wrote the poorly-received horror comedy film Buffy the Vampire Slayer
-											(1992) – which he later adapted into the acclaimed television series of the same name – co-wrote the Pixar animated film
-											Toy Story (1995), and wrote the science fiction horror film Alien Resurrection (1997). After achieving success as a
-											television showrunner, Whedon returned to film to write and direct the Firefly film continuation Serenity (2005),
-											co-write and produce the horror comedy film The Cabin in the Woods (2012), and write and direct the Shakespeare
-											adaptation Much Ado About Nothing (2012). For the Marvel Cinematic Universe, Whedon wrote and directed the ensemble
-											superhero film The Avengers (2012) and its sequel Avengers: Age of Ultron (2015). He also co-wrote the DC Extended
-											Universe superhero film Justice League (2017), for which he also served as director for re-shoots, replacing Zack Snyder
-											(who retained directorial credit).</p>
-						            		<div class="title-hd-sm">
-												<h4>Photos</h4>
-											</div>
-											<div class="mvsingle-item ov-item">
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/josh_whedon2.jpg" ><img src="images/uploads/josh_whedon2.jpg" alt="" width="100" height="100"></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/josh_whedon.jpg" ><img src="images/uploads/josh_whedon.jpg" alt="" width="100" height="100"></a>
-												<a class="img-lightbox"  data-fancybox-group="gallery" href="images/uploads/josh_whedon4.jpg" ><img src="images/uploads/josh_whedon4.jpg" alt="" width="100" height="100"></a>
-												
-											</div>
 											<div class="title-hd-sm">
-												<h4>Films</h4>
+												<h4>{{director}}</h4>
 											</div>
-											<!-- movie cast -->
-											<div class="mvcast-item">											
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/buff.jpg" alt="" width="70" height="70">
-														<p><a href="">Buffy the Vampire Slayer</a></p>
-													</div>
-													<p>1992</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/toy_story.jpg" alt="" width="70" height="70">
-														<p><a href="">Toy Story</a></p>
-													</div>
-													<p>1995</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/avengers.jpg" alt="" width="70" height="70">
-														<p><a href="">The Avengers</a></p>
-													</div>
-													<p>2012</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/firefly.jpg" alt="" width="70" height="70">
-														<p><a href="">Firefly</a></p>
-													</div>
-													<p>2002</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/serenity.jpg" alt="" width="70" height="70">
-														<p><a href="">Serenity</a></p>
-													</div>
-													<p>2005</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/cabin.jpg" alt="" width="70" height="70">
-														<p><a href="">The Cabin in the Woods</a></p>
-													</div>
-													<p>2012</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/avengers2.jpg" alt="" width="70" height="70">
-														<p><a href="">Avengers: Age of Ultron</a></p>
-													</div>
-													<p>2015</p>
-												</div>
-												
-												<div class="cast-it">
-													<div class="cast-left">
-														<img src="images/uploads/justicia.jpg" alt="" width="70" height="70">
-														<p><a href="">Justice League</a></p>
-													</div>
-													<p>2017</p>
-												</div>
+											<div class="sb-it">
+												<h6>Biography: </h6>
+												<p>{{biography}}</p>
 											</div>
-						            	</div>
+										</div>	
 						            	<div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
 						            			<h6>Name: </h6>
-						            			<p>Joseph Hill Whedon</p>
+						            			<p>{{name}}</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Born: </h6>
-						            			<p>	23 de junio de 1964 (58 años), New York</p>
+						            			<p>{{born}}</p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Genre:</h6>
-						            			<p>Action, Sci-Fi, Adventure</p>
+												{{#genre}}
+						            			<p>{{.}}</p>
+												{{/genre}}
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Residence:</h6>
-						            			<p>New York</p>
+						            			<p>{{residence}}</p>
 						            		</div>
 											<div class="sb-it">
 												<h6>Score:</h6>
-												<p>4.0 / 5.0</p>
+												<p>{{score}} / 5.0</p>
 											</div>
 						            	</div>
 						            </div>
-                                    
-						        </div>
-						    
-						            
 						        </div>
 						    </div>
 						</div>
@@ -314,10 +145,10 @@ end of signup form popup-->
 </footer>
 <!-- end of footer section-->
       
-        <script src="js/jquery.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/plugins2.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/plugins.js"></script>
+        <script src="/js/plugins2.js"></script>
+        <script src="/js/custom.js"></script>
 
     </body>
 </html>

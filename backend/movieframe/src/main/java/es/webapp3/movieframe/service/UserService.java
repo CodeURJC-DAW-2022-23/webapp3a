@@ -8,24 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class UserService {
 
-    @Autowired
+	@Autowired
 	private UserRepository usersRepository;
-
-	@PostConstruct
-	public void init() {
-		
-		usersRepository.save(new User("edwardKennedy","edu123456","Edward","edward@kennedy.com"));
-        usersRepository.save(new User("hughjackman","maninthemiddle","Hugh","hugh@jack.com"));
-
-		for(int i=0; i<10; i++) {
-			usersRepository.save(new User("Username"+i, "Password"+i, "Name"+i, "Mail"+i));
-		}
-    }
 
     private AtomicLong nextId = new AtomicLong(1);
 

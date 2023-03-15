@@ -1,151 +1,120 @@
 package es.webapp3.movieframe.model;
+
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
-public class movie {
+public class Movie{
+
+
     
-    @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-    private String title;
-    private String director;
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    
+    private String title;  
     private String gender;
-    private String trailer;
-    private List<String> actors;
 
+    
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String movie_description;
 
-    @Lob
-	private Blob imageFile;
-
-	private boolean image;
-    
-    @Lob
-	private Blob imageTrailer;
-
-	private boolean imageTR;
-    
-    public movie(){}
-
+    @Lob 
+    private Blob movie_img;
     
     
-    public movie(String title, String director, String gender, String description, String trailer) {
-        this.title = title;
-        this.director = director;
-        this.gender = gender;
-        this.trailer = trailer;
-        this.description = description;
+    private int movie_votes;
+
+
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+   
+    @ManyToMany(mappedBy="movies")
+    private List<Director> directors = new ArrayList<>();
+
+    public Movie(){}
+
+    public void setReview(Review review){
+        reviews.add(review);
+        review.setMovie(this);
     }
 
-
-
-    public Blob getImageTrailer() {
-        return imageTrailer;
+    public void removeReview(Review review){
+        reviews.remove(review);
+        review.setMovie(null);
     }
 
-
-
-    public void setImageTrailer(Blob imageTrailer) {
-        this.imageTrailer = imageTrailer;
+    public List<Review> getReviews(){
+        return reviews;
     }
 
-
-
-    public boolean isImageTR() {
-        return imageTR;
+    public void removeDirector(Director director){
+        this.directors.remove(director);
+        director.removeMovie(this);
     }
 
-
-
-    public void setImageTR(boolean imageTR) {
-        this.imageTR = imageTR;
+    public void setDirectors(List<Director> movieDirectors){
+        this.directors = movieDirectors;
     }
 
-
-
-    public Long getId() {
-        return id;
-    }
-    
-    public Blob getImageFile() {
-        return imageFile;
+    public List<Director> getDirectors(){
+        return directors;
     }
 
-    public void setImageFile(Blob imageFile) {
-        this.imageFile = imageFile;
+    public void setDescription(String descript){
+        this.movie_description=descript;
     }
 
-    public boolean isImage() {
-        return image;
+    public String getDescription(){
+        return movie_description;
     }
 
-    public void setImage(boolean image) {
-        this.image = image;
+    public Blob getImageFile(){
+        return movie_img;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setImageFile(Blob image){
+        this.movie_img=image;
     }
 
-    public String getTitle() {
-        return title;
+    public void setCategory(String gender){
+        this.gender=gender;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public String getGender() {
+    public String getCategory(){
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setTitle(String title){
+        this.title=title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTitle(){
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setVotes(int votes){
+        this.movie_votes=votes;
     }
 
-    public String getTrailer() {
-        return trailer;
+    public int getVotes(){
+        return movie_votes;
     }
 
-    public void setTrailer(String trailer) {
-        this.trailer = trailer;
-    }
-
-
-
-    public List<String> getActors() {
-        return actors;
-    }
-
-
-
-    public void setActors(List<String> actors) {
-        this.actors = actors;
-    }
-    
 }

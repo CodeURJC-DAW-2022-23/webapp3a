@@ -1,36 +1,53 @@
 package es.webapp3.movieframe.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-public class User implements Serializable{
+public class User{
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String username;
-    private String password;
+    private String encodedPassword;
     private String name;
     private String email;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
+
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     public User(){}
 
-    public User(String username,String password,String name,String mail){
+    public User(String username,String encodedPassword,String name,String mail,String... roles){
         super();
         this.username=username;
-        this.password=password;
+        this.encodedPassword=encodedPassword;
         this.name=name;
         this.email=mail;
+        this.roles=List.of(roles);
     }
 
+    public void setReview(Review review){
+        reviews.add(review);
+        review.setUser(this);
+    }
+
+    public void removeReview(Review review){
+        reviews.remove(review);
+        review.setUser(null);
+    }
+
+    public List<Review> getReviews(){
+        return reviews;
+    }
+    
     public void setId(Long id){
         this.id=id;
     }
@@ -39,8 +56,8 @@ public class User implements Serializable{
         this.username=username;
     }
 
-    public void setPassword(String password){
-        this.password=password;
+    public void setEncodedPassword(String password){
+        this.encodedPassword=password;
     }
 
     public void setName(String name){
@@ -51,6 +68,10 @@ public class User implements Serializable{
         this.email=mail;
     }
 
+    public void setRoles(List<String> roles){
+        this.roles=roles;
+    }
+
     public Long getId(){
         return id;
     }
@@ -59,8 +80,8 @@ public class User implements Serializable{
         return username;
     }
 
-    public String getPassword(){
-        return password;
+    public String getEncodedPassword(){
+        return encodedPassword;
     }
 
     public String getName(){
@@ -70,9 +91,9 @@ public class User implements Serializable{
     public String getEmail(){
         return email;
     }
-    
-    public List<Review> getReviews(){
-        return reviews;
+
+    public List<String> getRoles(){
+        return roles;
     }
     
 }

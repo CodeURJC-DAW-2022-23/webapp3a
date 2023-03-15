@@ -6,5 +6,5 @@ import es.webapp3.movieframe.model.Review;
 
 public interface ReviewRepository extends JpaRepository<Review,Long>{
 
-    List<Review> findByUser(String author);
+    //List<Review> findByUser(String author);
 }

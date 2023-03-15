@@ -1,39 +1,33 @@
 package es.webapp3.movieframe.model;
 
-import java.io.Serializable;
+import javax.persistence.*;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Review implements Serializable{
-    
+public class Review{   
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String user;
     private int rating;
-    private String coments; 
-    private String title;
+    private String coments;
+
+    @ManyToOne
+    @JsonIgnore
     private Movie movie;
+
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
     public Review(){}
 
-    public Review(String author,int rating,String coments,String title){
+    public Review(int rating,String coments){
         super();
-        this.user=author;
         this.rating=rating;
         this.coments=coments;
-        this.title=title;
-    }
-
-    public void setTitle(String title){
-        this.title=title;
-    }
-
-    public String getTitle(){
-        return title;
     }
 
     public void setId(Long id){
@@ -44,17 +38,6 @@ public class Review implements Serializable{
         return id;
     }
 
-    public Movie getMovie(){
-        return movie;
-    }
-
-    public void setAuthor(String author){
-        this.user=author;
-    }
-
-    public String getAuthor(){
-        return user;
-    }
 
     public void setRating(int rating){
         this.rating = rating;
@@ -70,5 +53,21 @@ public class Review implements Serializable{
 
     public String getComents(){
         return coments;
+    }
+
+    public void setMovie(Movie movie){
+        this.movie=movie;
+    }
+
+    public Movie getMovie(){
+        return movie;
+    }
+
+    public void setUser(User user){
+        this.user=user;
+    }
+
+    public User getUser(){
+        return user;
     }
 }
