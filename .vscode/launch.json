@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Application",
+            "request": "launch",
+            "mainClass": "es.codeurjc.items.Application",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-MovieframeApplication<movieframe>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

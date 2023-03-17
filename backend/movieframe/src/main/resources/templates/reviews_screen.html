@@ -11,15 +11,15 @@
          <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="css/plugins.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
     <body>
 
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
@@ -41,12 +41,12 @@
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+				    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav flex-child-menu menu-right">             
-						<li class="btn btn-default dropdown-toggle lv1"><a href="initial_screen.html">Home</a></li>
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/">Home</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
@@ -68,43 +68,34 @@
 	</div>
 </div>
 <!-- blog list section-->
-<div class="page-single" action="showUserReviews" method="get">
-	{{#reviews}}
+<div class="page-single">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 col-sm-12 col-xs-12">
+
 				<div class="blog-item-style-1 blog-item-style-3">
             		<div class="blog-it-infor">
-            			<h3 id="value_title">{{review.title}}</h3>
-            			<p id="value_description">{{review.coments}}</p>
+            			<div id="comments"></div>
             		</div>
             	</div>
-				<!-- PAGINACION 
-            	<li class="icon-prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-            		<li class="active"><a href="#">1</a></li>
-					<li><a href="#">more results</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">...</a></li>
-					<li><a href="#">21</a></li>
-					<li><a href="#">22</a></li>
-					<li class="icon-next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-            	</ul>-->
+				<ul class="pagination">               
+					<li ><button>more results</button></li>
+				</ul>
 			</div>
 		</div>
 	</div>
-	{{/reviews}}
-
-	{{^reviews}}
-	<p>No review yet.</p>
-	{{/reviews}}
 </div>
 
-<ul class="pagination">
+<div id="spinner-div" class="pt-5">
+	<div class="spinner-border text-primary" role="status">
+	</div>
+  </div>
+  
+<!--<ul class="pagination">
 	<li id="more"><a href="/reviews/{{user}}">more results</a></li>
 	<div class="spinner"></div>
 </ul>
-<!--end of blog list section-->
+end of blog list section-->
 <!-- footer section-->
 <footer class="ht-footer">
 	<div class="container">
@@ -119,12 +110,42 @@
 	
 </footer>
 <!-- end of footer section-->
-	<script src="js/script.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/plugins2.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/plugins2.js"></script>
+    <script src="/js/custom.js"></script>
 
 </body>
+<script>
+
+	function loadUserReviews(callback) {
+		$.ajax({
+			url: 'https://localhost:8443/userReviewsList/{{id}}'
+		}).done(function (user) {
+			console.log('reviews loaded: ' + JSON.stringify(user));
+			callback(user);
+		})
+	}
+
+	//Show review in page
+	function showReview(review) {
+
+		$('.col-md-9 col-sm-12 col-xs-12').append(
+			'<div id="review-' + review.id + '">' + '<class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
+			review.rating + '</span> /5</h3><p>' + review.coments + '</p>2</div></div>'
+		)
+	}
+
+	$(document).ready(function () {
+
+		loadReviews(function(user) {
+			//When reviews are loaded from server
+			for (var i = 0; i < user.reviews.length; i++) {
+				showReview(user.reviews[i]);
+			}
+		});
+	})
+
+</script>
 
 </html>

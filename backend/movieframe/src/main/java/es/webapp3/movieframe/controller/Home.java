@@ -1,8 +1,11 @@
 package es.webapp3.movieframe.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +20,23 @@ import com.fasterxml.jackson.annotation.JsonView;
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
+import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.MovieService;
 import es.webapp3.movieframe.service.DirectorService;
+import es.webapp3.movieframe.service.ReviewService;
+import es.webapp3.movieframe.service.UserService;
 
 @Controller
 public class home {
 
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private DirectorService directorService;
@@ -56,7 +68,26 @@ public class home {
             return "404";
         }   
     }
+ 
+    @GetMapping("/reviews/user/{id}")
+    public String getReviewsUser(Model model,@PathVariable Long id,Pageable pageable){
 
+        Optional<User> user = userService.findById(id);
+
+        model.addAttribute("reviews",user.get().getReviews());
+        
+        return "reviews_screen";
+    }
+
+    @GetMapping("/reviews")
+    public String getReviews(Model model,Pageable pageable){
+
+        Page<Review> reviews = reviewService.findAll(pageable);
+
+        model.addAttribute("reviews",reviews);
+        
+        return "modification_reviews_screen";
+    }
  
     @GetMapping("/movie/{id}")
     public String getMovie(Model model,@PathVariable Long id){

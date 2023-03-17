@@ -66,13 +66,10 @@ public class DataBaseInitializer {
         movie1.setDescription("Jake Sully vive con su nueva familia en el planeta de Pandora. Cuando una amenaza conocida regresa, Jake debe trabajar con Neytiri y el ejército de la raza na'vi para proteger su planeta.");
         movie1.setVotes(3);  
 		setMovieImage(movie1, "/images/uploads/film1.jpg");
-        movie1.setReview(review1);
-        movie1.setReview(review2);
 
 		movieRepository.save(movie1);
 
-        reviewRepository.save(review1);
-        reviewRepository.save(review2);
+        
 		
         Movie movie2 = new Movie();
         movie2.setTitle("Ant-Man and the Wasp: Quantumania");
@@ -82,19 +79,15 @@ public class DataBaseInitializer {
 		setMovieImage(movie2,"/images/uploads/film2.jpg");
 
         movieRepository.save(movie2);
-        
 
         Movie movie3 = new Movie();
         movie3.setTitle("Missing");
         movie3.setCategory("mystery");
         movie3.setDescription("June Allen, una adolescente que intenta encontrar a su madre desaparecida luego de que esta desaparece de vacaciones en Colombia con su nuevo novio.");
         movie3.setVotes(2);   
-		setMovieImage(movie3,"/images/uploads/film3.jpg");
-        movie3.setReview(review3); 
+		setMovieImage(movie3,"/images/uploads/film3.jpg"); 
 
         movieRepository.save(movie3);
-
-        reviewRepository.save(review3);
 
         Movie movie4 = new Movie();
         movie4.setTitle("El Gato con Botas: el último deseo");
@@ -128,9 +121,25 @@ public class DataBaseInitializer {
 
         movieRepository.save(movie6);  		
 		
-		usersRepository.save(new User("edwardKennedy",passwordEncoder.encode("edu123456"),"Edward","edward@kennedy.com","USER"));
-        usersRepository.save(new User(user,"{bcrypt}"+encodedPassword,"Hugh","hugh@jack.com","USER","ADMIN"));
+		User user1 = new User("edwardKennedy",passwordEncoder.encode("edu123456"),"Edward","edward@kennedy.com","USER");     
+        usersRepository.save(user1);
+
+        User user2 = new User(user,"{bcrypt}"+encodedPassword,"Hugh","hugh@jack.com","USER","ADMIN");        
+        usersRepository.save(user2);
         
+        //a single movie can have many reviews
+        review1.setMovie(movie1);
+        review2.setMovie(movie1);
+
+        review3.setMovie(movie3);
+
+        //a single user can also have several reviews
+        review1.setUser(user1);
+        review2.setUser(user1);
+
+        reviewRepository.save(review1);
+        reviewRepository.save(review2);
+        reviewRepository.save(review3);
     }
 
     public void setMovieImage(Movie movie, String ClasspathResource)throws IOException{

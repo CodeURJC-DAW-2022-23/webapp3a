@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/user/new")
 	public String newPost(Model model, User user, MultipartFile image) throws IOException {
 
-		userService.saveUser(user);
+		userService.save(user);
 		
         usersession.setUser(user);
 		imageservice.saveImage(USERS_FOLDER, user.getId(), image);

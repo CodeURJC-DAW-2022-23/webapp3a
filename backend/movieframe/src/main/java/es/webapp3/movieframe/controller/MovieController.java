@@ -9,10 +9,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +29,23 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
+import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.MovieService;
 import es.webapp3.movieframe.service.ReviewService;
 import es.webapp3.movieframe.service.DirectorService;
+import es.webapp3.movieframe.service.UserService;
 
 @RestController
 public class movieController {
     
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private DirectorService directorService;
@@ -45,6 +56,35 @@ public class movieController {
         return ResponseEntity.ok(movieService.findAll());
     }
 
+    @GetMapping("/reviewsList")
+    public Page<Review> getReviews(Model model,Pageable page){
+
+        return reviewService.findAll(page);
+    }
+
+    @GetMapping("/userReviewsList/{id}")
+    public ResponseEntity<Object> getUserReviews(Model model,@PathVariable Long id){
+
+        Optional<User> user = userService.findById(id);
+        if(user.isPresent()){
+            return ResponseEntity.ok(user.get().getReviews());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/reviewsList/{id}")
+    public ResponseEntity<Object> getReviewById(Model model,@PathVariable Long id) {
+
+        Optional<Review> review = reviewService.findById(id);
+
+        if(review.isPresent()){
+            reviewService.deleteById(id);
+            return ResponseEntity.ok(review.get());
+        }else{
+            return ResponseEntity.notFound().build();
+        }   
+    }
     
     @GetMapping("/directors/{id}")
     public ResponseEntity<Director> getDirector(@PathVariable long id){

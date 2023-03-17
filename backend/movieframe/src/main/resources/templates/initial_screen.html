@@ -48,16 +48,16 @@
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-					{{#user}}<!--if already logged-->
-					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/{user}">reviews</a></li>
+					<!--if user logged-->
+					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/user/{id}">reviews</a></li>
 						<!--if administrator logged-->
-						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews/">reviews</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/reviews/">recommendations</a></li>
-					{{/user}}
-					{{^user}}<!--if didn´t log yet-->
+						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews">reviews</a></li>
+						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/recommendations">recommendations</a></li>
+					
+					<!--if didn´t log yet-->
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/sign_up">sign up</a></li>
-					{{/user}}
+					
 					</ul>
 				</div>
 			<!-- /.navbar-collapse-->
@@ -70,10 +70,11 @@
 
 	
 	<div class="container" id="movie_item">
-			<form action="/movies/{name}" method="post">
-				<input class="movie_filter" type="text" placeholder="Enter a movie">
-				<input class="submit" type="submit" value="search">
-			</form>	
+
+		<form action="/movies/{name}" method="post">
+			<input class="movie_filter" type="text" placeholder="Enter a movie">
+			<input class="submit" type="submit" value="search">
+		</form>	
 	 
 		<div class="row">
 			<div  class="slick-multiItemSlider" >
@@ -85,7 +86,7 @@
 					</div>
 					
 					<div class="title-in">
-						<div class="cate">
+						<div class="cate">´´
 							<span class="blue">{{gender}}</span>
 						</div>
 					</div>

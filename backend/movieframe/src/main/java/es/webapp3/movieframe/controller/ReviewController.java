@@ -43,7 +43,7 @@ public class ReviewController {
 
         model.addAttribute("review",review);
 
-        reviewService.saveReview(review);
+        reviewService.save(review);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(review.getId()).toUri();
 
@@ -53,7 +53,9 @@ public class ReviewController {
     @GetMapping("/")
     public String showReviews(Model model){
 
-            model.addAttribute("reviews",reviewService.findReviews());
+            //Optional<Review> review = reviewService.findById();
+
+            //model.addAttribute("reviews",review);
 
             return "modification_reviews_screen";
     }
@@ -68,10 +70,10 @@ public class ReviewController {
 
     @DeleteMapping("/{id}/delete")
 	public String deleteReview(Model model, @PathVariable Long id) {
-        Optional<Review> review = reviewService.findReview(id);
+        Optional<Review> review = reviewService.findById(id);
 
         if (review.isPresent()) {
-			reviewService.deleteReview(id);
+			reviewService.deleteById(id);
 			return "modification_reviews_screen";
 		} else {
 			return "404";

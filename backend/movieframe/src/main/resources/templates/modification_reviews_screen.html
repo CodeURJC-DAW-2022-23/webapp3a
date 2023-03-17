@@ -11,15 +11,15 @@
         <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="css/plugins.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
 <body>
 
 <!--preloading-->
 <div id="preloader">
-    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
     <div id="status">
         <span></span>
         <span></span>
@@ -41,12 +41,12 @@
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="images/logoMF.png" alt="" width="119" height="58">
+				    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav flex-child-menu menu-right">               
-						<li class="btn btn-default dropdown-toggle lv1"><a href="initial_screen.html">Home</a></li>
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/">Home</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
@@ -75,26 +75,27 @@
 				<div class="blog-detail-ct">
 					
 					<!-- comment items -->
-					{{#reviews}}
-					<div class="comments" action="showReviews" method="get"></div>	
-					{{/reviews}}
-					{{^reviews}}
-					<p>no coment yet.</p>
-					{{/reviews}}
+					<div id="comments">
+
+					</div>	
 					
 				</div>
+				<ul class="pagination">               
+					<li ><button>more results</button></li>
+				</ul>
 			</div>
 			
 		</div>
 	</div>
 </div>
 
-<ul class="pagination">
-	<li id="more"><a href="/reviews/">more results</a></li>
-	<div  class="spinner"></div>
-</ul>
-<!-- end of  blog detail section-->
-<!-- footer section-->
+<div id="spinner-div" class="pt-5">
+	<div class="spinner-border text-primary" role="status">
+	</div>
+  </div>
+  
+ <!--end of  blog detail section
+footer section-->
 <footer class="ht-footer">
 	<div class="container">
 		<div class="flex-parent-ft">
@@ -108,13 +109,108 @@
 	
 </footer>
 <!-- end of footer section-->
-	<script src="js/script.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/plugins2.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/plugins2.js"></script>
+    <script src="/js/custom.js"></script>
 
 </body>
+<script>
 
-<!-- blogdetail13:40-->
+	var tam = 10;
+	console.log(tam);
+	
+	let ruta='https://localhost:8443/reviewsList/?size=' + tam;
+	console.log(ruta);
+
+	function loadReviews(callback,tam) {
+		$.ajax({
+			url: ruta
+		}).done(function (reviews) {
+			console.log('reviews loaded: ' + JSON.stringify(reviews));
+			console.log(reviews.content);
+			console.log(reviews.content.length);
+			callback(reviews.content);
+		})
+	}
+
+	//Show review in page
+	function showReview(review) {
+
+		$('#comments').append(
+			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '">'+ '+ Delete</button></p></div></div>'
+		)
+	}
+
+	//Delete item from server
+	function deleteReview(revId) {
+		$.ajax({
+			method: 'DELETE',
+			url: '/reviewsList/' + revId
+		}).done(function (review) {
+			console.log("Deleted review " + revId)
+		})
+	}
+
+	$(document).ready(function () {
+
+		loadReviews(function(reviews,tam) {
+			//When reviews are loaded from server
+			if(reviews.length != 0){
+				for (var i = 0; i < reviews.length; i++) {
+					showReview(reviews[i]);
+				}
+			}
+		});
+
+		var info2 = $('.pagination');	
+
+		info2.click(function () {
+			tam+=10;
+
+			let ruta='https://localhost:8443/reviewsList/?size=' + tam;
+			console.log(ruta);
+			$("#spinner-div").show();
+			$.ajax({
+				url: ruta
+			}).done(function (reviews) {
+				console.log('reviews loaded: ' + JSON.stringify(reviews));
+				console.log(reviews.content);
+				console.log(reviews.content.length);
+				if(reviews.length != 0){
+					for (var i = tam-10; i < reviews.content.length; i++) {
+						showReview(reviews.content[i]);
+					}
+				}
+				$("#spinner-div").hide();
+			})
+		})
+
+		var info = $("#comments");
+
+		//Handle delete buttons
+		info.click(function (event) {
+			var val = $(event.target).attr("id").split("-")[1];	
+			//alert(val);
+			deleteReview(val);
+			
+			loadReviews(function(reviews,tam) {
+				//When reviews are loaded from server
+				if(reviews.length != 0){
+					for (var i = 0; i < reviews.length; i++) {
+						showReview(reviews[i]);
+					}
+				}
+			});
+			window.location.reload();
+
+			//talert("review deleted");
+		})
+
+		
+	})
+
+</script>
+
 </html>    

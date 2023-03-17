@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.repository.ReviewRepository;
@@ -22,20 +24,20 @@ public class ReviewService {
         return reviewsRepository.findByUser(user.getUsername());
 	}*/
 
-	public List<Review> findReviews() {
-        return reviewsRepository.findAll();
+	public Page<Review> findAll(Pageable page) {
+        return reviewsRepository.findAll(page);
 	}
 
-	public Optional<Review> findReview(Long id) {
+	public Optional<Review> findById(Long id) {
         return reviewsRepository.findById(id);
 	}
 
-	public void saveReview(Review review) {
+	public void save(Review review) {
 
 		reviewsRepository.save(review);
 	}
 
-	public void deleteReview(long id) {
+	public void deleteById(long id) {
         reviewsRepository.deleteById(id);
 	}
     
