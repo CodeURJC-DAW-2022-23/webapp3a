@@ -71,8 +71,8 @@
 	
 	<div class="container" id="movie_item">
 
-		<form action="/movies/{name}" method="post">
-			<input class="movie_filter" type="text" placeholder="Enter a movie">
+		<form action="/movies/name" method="post">
+			<input name="name" class="movie_filter" type="text" placeholder="Enter a movie">
 			<input class="submit" type="submit" value="search">
 		</form>	
 	 
@@ -86,7 +86,7 @@
 					</div>
 					
 					<div class="title-in">
-						<div class="cate">´´
+						<div class="cate">
 							<span class="blue">{{gender}}</span>
 						</div>
 					</div>

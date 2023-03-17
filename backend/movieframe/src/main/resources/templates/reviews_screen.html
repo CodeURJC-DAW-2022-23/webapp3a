@@ -90,7 +90,7 @@
 	<div class="spinner-border text-primary" role="status">
 	</div>
   </div>
-  
+
 <!--<ul class="pagination">
 	<li id="more"><a href="/reviews/{{user}}">more results</a></li>
 	<div class="spinner"></div>
@@ -120,7 +120,7 @@ end of blog list section-->
 
 	function loadUserReviews(callback) {
 		$.ajax({
-			url: 'https://localhost:8443/userReviewsList/{{id}}'
+			url: 'https://localhost:8443/userReviewsList/'+tam
 		}).done(function (user) {
 			console.log('reviews loaded: ' + JSON.stringify(user));
 			callback(user);

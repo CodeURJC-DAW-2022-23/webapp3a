@@ -47,6 +47,17 @@ public class home {
         return "initial_screen";
     }
 
+    @PostMapping("/movies/name")
+    public String newReview(Model model,@RequestParam String name){
+
+        List<Movie> movies = movieService.findByTitle(name);
+
+        model.addAttribute("movieframe",movies);
+
+        return "initial_screen";
+        
+    }
+
     @PostMapping("/movie/{id}/review/new")
     public String newReview(Model model,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments){
 
