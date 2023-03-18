@@ -63,7 +63,7 @@ public class DataBaseInitializer {
         Movie movie1 = new Movie();
         movie1.setTitle("Avatar");
         movie1.setCategory("Sci-Fi");
-        movie1.setDescription("Jake Sully vive con su nueva familia en el planeta de Pandora. Cuando una amenaza conocida regresa, Jake debe trabajar con Neytiri y el ejército de la raza na'vi para proteger su planeta.");
+        movie1.setDescription("Jake Sully vive con su nueva familia en el planeta de Pandora. \nCuando una amenaza conocida regresa, Jake debe trabajar \ncon Neytiri y el ejército de la raza na'vi para proteger su planeta.");
         movie1.setVotes(3);  
 		setMovieImage(movie1, "/images/uploads/film1.jpg");
 
@@ -121,7 +121,7 @@ public class DataBaseInitializer {
 
         movieRepository.save(movie6);  		
 		
-		User user1 = new User("edwardKennedy",passwordEncoder.encode("edu123456"),"Edward","edward@kennedy.com","USER");     
+		User user1 = new User("edwardKennedy",passwordEncoder.encode("edu123456"),"Edward","mimiteemoc999@gmail.com","USER");     
         usersRepository.save(user1);
 
         User user2 = new User(user,"{bcrypt}"+encodedPassword,"Hugh","hugh@jack.com","USER","ADMIN");        

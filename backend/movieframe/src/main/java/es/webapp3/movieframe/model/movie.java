@@ -32,7 +32,7 @@ public class Movie{
     private String gender;
 
     
-    @Column(columnDefinition = "TEXT")
+   
     private String movie_description;
 
     @Lob 
@@ -108,6 +108,14 @@ public class Movie{
 
     public String getTitle(){
         return title;
+    }
+
+    public void setId(Long id){
+        this.id=id;
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public void setVotes(int votes){

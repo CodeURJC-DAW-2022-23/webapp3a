@@ -3,6 +3,7 @@ package es.webapp3.movieframe.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,13 @@ public class UserController {
 
     @Autowired
     private ImageService imageservice;
+
+    @GetMapping("/user")
+    public String mostrarUsuario(Authentication auth){
+        String username = auth.name();
+        System.out.println(username);
+        return username;
+    }
 
     @PostMapping("/user/new")
 	public String newPost(Model model, User user, MultipartFile image) throws IOException {

@@ -1,5 +1,9 @@
 package es.webapp3.movieframe.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
@@ -41,21 +43,55 @@ public class home {
     @Autowired
     private DirectorService directorService;
     
+    private static final Path IMAGES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
+
+	@PostMapping("/upload_image")
+	public String uploadImage(Model model,@RequestParam String imageName, @RequestParam MultipartFile image1)throws IOException {
+
+        Files.createDirectories(IMAGES_FOLDER);
+		
+		Path imagePath = IMAGES_FOLDER.resolve("image.jpg");
+		
+		image1.transferTo(imagePath);
+		model.addAttribute("imageName", imageName);
+
+		return "recommendations_screen";
+	}
+
+    @PostMapping("/recommendation/new")
+    public String createNewsMovie(Model model,@RequestParam String movie_title,@RequestParam String movie_description){
+
+        Movie movie = new Movie();
+        movie.setTitle(movie_title);
+        movie.setDescription(movie_description);
+
+        movieService.save(movie);
+
+        //model.addAttribute("movieTitle",movie_title);
+        //model.addAttribute("movieDescription",movie_description);
+
+        return "recommendations_screen";       
+    }
+
+    @GetMapping("/news")
+    public String showRecommendationScreen(){        
+        return "recommendations_screen";
+    }
+    
     @GetMapping("/")
-    public String home(Model model){
-        model.addAttribute("movieframe", movieService.findAll());
+    public String home(Model model,Pageable page){
+        model.addAttribute("movieframe", movieService.findAll(page));
         return "initial_screen";
     }
 
     @PostMapping("/movies/name")
-    public String newReview(Model model,@RequestParam String name){
+    public String newReview(Model model,@RequestParam String name,Pageable page){
 
-        List<Movie> movies = movieService.findByTitle(name);
+        Page<Movie> movies = movieService.findByTitle(name,page);
 
         model.addAttribute("movieframe",movies);
 
-        return "initial_screen";
-        
+        return "initial_screen";       
     }
 
     @PostMapping("/movie/{id}/review/new")
@@ -79,7 +115,7 @@ public class home {
             return "404";
         }   
     }
- 
+
     @GetMapping("/reviews/user/{id}")
     public String getReviewsUser(Model model,@PathVariable Long id,Pageable pageable){
 
@@ -141,7 +177,7 @@ public class home {
     public String showDirector(){
         return "director_screen";
     }
-    
+
     @GetMapping("/log_in")
     public String login(){
         return "login_screen";

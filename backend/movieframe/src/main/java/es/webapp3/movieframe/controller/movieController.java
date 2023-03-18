@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -51,15 +52,21 @@ public class movieController {
     private DirectorService directorService;
 	
     @GetMapping("/movies")
-    public ResponseEntity<List<Movie>> getMovies(Model model){
+    public Page<Movie> getMovies(Model model,Pageable page){
 
-        return ResponseEntity.ok(movieService.findAll());
+        return movieService.findAll(page);
     }
 
     @GetMapping("/reviewsList")
     public Page<Review> getReviews(Model model,Pageable page){
 
         return reviewService.findAll(page);
+    }
+
+    @GetMapping("/usersList")
+    public Page<User> getUsers(Model model,Pageable page){
+
+        return userService.findAll(page);
     }
 
     @GetMapping("/userReviewsList/{id}")
@@ -71,6 +78,18 @@ public class movieController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/movies/{id}")
+    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+
+        Optional<Movie> movie = movieService.findById(id);
+
+        if(movie.isPresent()){
+            return ResponseEntity.ok(movie.get());
+        }else{
+            return ResponseEntity.notFound().build();
+        }   
     }
 
     @DeleteMapping("/reviewsList/{id}")
@@ -91,20 +110,19 @@ public class movieController {
         Optional<Director> director = directorService.findById(id);
         return ResponseEntity.ok(director.get());
     }
-	
-	
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Object> getMovie(Model model,@PathVariable Long id) {
-
-        Optional<Movie> movie = movieService.findById(id);
-
-        if(movie.isPresent()){
-            return ResponseEntity.ok(movie.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }   
-    }
      
+    /*@PostMapping("/newsMovie")
+    public ResponseEntity<Movie> createNewsMovie(@RequestBody Movie movie,@PathVariable Long id) {
+
+        movieService.save(movie);
+        
+
+        URI location = fromCurrentRequest().path("/newsMovie")
+        .buildAndExpand(movie.getId()).toUri();
+
+        return ResponseEntity.created(location).body(movie);
+    }*/
+
     @PostMapping("/movies/{id}/review/new")
     public ResponseEntity<Review> newReview(Model model,@PathVariable Long id,@RequestBody Review review){
 
