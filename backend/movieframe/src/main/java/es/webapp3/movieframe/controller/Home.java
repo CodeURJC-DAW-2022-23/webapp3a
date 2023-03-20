@@ -1,16 +1,21 @@
 package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,6 +46,19 @@ public class home {
     @Autowired
     private DirectorService directorService;
 
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if(principal != null) {
+            model.addAttribute("logged", true);
+            model.addAttribute("userName", principal.getName());
+            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            model.addAttribute("user", request.isUserInRole("USER"));
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
+
     @GetMapping("/news")
     public String showRecommendationScreen(){        
         return "recommendations_screen";
@@ -59,7 +77,16 @@ public class home {
     }
 
     @GetMapping("/")
-    public String home(Model model,Pageable page){
+    public String home(Model model,Pageable page,HttpServletRequest request){
+
+        String name = request.getUserPrincipal().getName();
+
+        User user = userService.findByName(name).orElseThrow();
+
+        model.addAttribute("username",user.getName());
+        model.addAttribute("user",request.isUserInRole("USER"));
+        model.addAttribute("admin",request.isUserInRole("ADMIN"));
+
         model.addAttribute("movieframe", movieService.findAll(page));
         return "initial_screen";
     }
@@ -175,7 +202,6 @@ public class home {
             return "404";
         }   
     }
-
     @GetMapping("/movie/{id}/director")
     public String getDirector(Model model,@PathVariable Long id){
 
@@ -202,18 +228,21 @@ public class home {
     }
 
     @GetMapping("/log_in")
-    public String login(){
+    public String login(Model model, HttpServletRequest request) {
+ 
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+        model.addAttribute("token", token.getToken()); 
         return "login_screen";
+    }
+
+    @PostMapping("/log_out")
+    public String logout(){
+        return "initial_screen";
     }
 
     @GetMapping("/log_error")
     public String loginerror(){
         return "404";
-    }
-
-    @GetMapping("/show_reviews")
-    public String showReviews(){
-        return "modification_reviews_screen";
     }
 
     @GetMapping("/sign_up")

@@ -63,7 +63,7 @@ public class DataBaseInitializer {
         Movie movie1 = new Movie();
         movie1.setTitle("Avatar");
         movie1.setCategory("Sci-Fi");
-        movie1.setDescription("Jake Sully vive con su nueva familia en el planeta de Pandora. \nCuando una amenaza conocida regresa, Jake debe trabajar \ncon Neytiri y el ejército de la raza na'vi para proteger su planeta.");
+        movie1.setDescription("Jake Sully vive con su nueva familia en el planeta de Pandora. \nCuando una amenaza conocida regresa, Jake debe trabajar con Neytiri \ny el ejército de la raza na'vi para proteger su planeta.");
         movie1.setVotes(3);  
 		setMovieImage(movie1, "/images/uploads/film1.jpg");
 
