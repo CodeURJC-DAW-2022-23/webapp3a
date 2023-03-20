@@ -1,17 +1,15 @@
 package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,42 +40,24 @@ public class home {
 
     @Autowired
     private DirectorService directorService;
-    
-    private static final Path IMAGES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
-
-	@PostMapping("/upload_image")
-	public String uploadImage(Model model,@RequestParam String imageName, @RequestParam MultipartFile image1)throws IOException {
-
-        Files.createDirectories(IMAGES_FOLDER);
-		
-		Path imagePath = IMAGES_FOLDER.resolve("image.jpg");
-		
-		image1.transferTo(imagePath);
-		model.addAttribute("imageName", imageName);
-
-		return "recommendations_screen";
-	}
-
-    @PostMapping("/recommendation/new")
-    public String createNewsMovie(Model model,@RequestParam String movie_title,@RequestParam String movie_description){
-
-        Movie movie = new Movie();
-        movie.setTitle(movie_title);
-        movie.setDescription(movie_description);
-
-        movieService.save(movie);
-
-        //model.addAttribute("movieTitle",movie_title);
-        //model.addAttribute("movieDescription",movie_description);
-
-        return "recommendations_screen";       
-    }
 
     @GetMapping("/news")
     public String showRecommendationScreen(){        
         return "recommendations_screen";
     }
     
+    @GetMapping("/movie/addition")
+    public String movieAdditionScreen(Model model){ 
+        model.addAttribute("state","no movie added yet");       
+        return "movie_aggregation";
+    }
+
+    @GetMapping("/user/reviews/edition")
+    public String reviewEditionScreen(Model model){ 
+        model.addAttribute("state","no review updated");       
+        return "review_edition";
+    }
+
     @GetMapping("/")
     public String home(Model model,Pageable page){
         model.addAttribute("movieframe", movieService.findAll(page));
@@ -85,13 +65,30 @@ public class home {
     }
 
     @PostMapping("/movies/name")
-    public String newReview(Model model,@RequestParam String name,Pageable page){
+    public String searchMovie(Model model,@RequestParam String name,Pageable page){
 
         Page<Movie> movies = movieService.findByTitle(name,page);
 
         model.addAttribute("movieframe",movies);
 
         return "initial_screen";       
+    }
+
+    @PostMapping("/movie/addition/new")
+    public String newMovie(Model model,Movie movie,@RequestParam String title,@RequestParam String gender,@RequestParam String description,@RequestParam int votes,MultipartFile image1)throws IOException {
+
+        //Movie movie = new Movie();
+        movie.setTitle(title);
+        movie.setCategory(gender);
+        movie.setDescription(description);
+        movie.setVotes(votes);
+        movie.setImageFile(BlobProxy.generateProxy(image1.getInputStream(), image1.getSize()));
+
+        movieService.save(movie);
+
+        model.addAttribute("state","movie saved");
+
+        return "movie_aggregation";       
     }
 
     @PostMapping("/movie/{id}/review/new")
@@ -116,14 +113,40 @@ public class home {
         }   
     }
 
+    @PutMapping("/user/reviews/edition/{id}")
+    public String editReview(Model model,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments){
+
+        Review newReview = new Review(rating,coments);
+        newReview.setId(id);
+
+        reviewService.save(newReview);
+
+        model.addAttribute("state","review updated"); 
+        
+        return "review_edition";
+    }
+
     @GetMapping("/reviews/user/{id}")
-    public String getReviewsUser(Model model,@PathVariable Long id,Pageable pageable){
+    public String getUserReviews(Model model,@PathVariable Long id){
 
         Optional<User> user = userService.findById(id);
 
         model.addAttribute("reviews",user.get().getReviews());
         
         return "reviews_screen";
+    }
+
+    @DeleteMapping("/reviews/deletion/{id}")
+    public String deleteReviewById(Model model,@PathVariable Long id) {
+
+        Optional<Review> review = reviewService.findById(id);
+
+        if(review.isPresent()){
+            reviewService.deleteById(id);
+            return "reviews_screen";
+        }else{
+            return "404";
+        }   
     }
 
     @GetMapping("/reviews")

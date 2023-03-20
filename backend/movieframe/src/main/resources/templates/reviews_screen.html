@@ -63,6 +63,7 @@
 				<div class="hero-ct">
 					<h1> Review listing</h1>
 				</div>
+				<div type="hidden" id="userId">{{userId}}</div>
 			</div>
 		</div>
 	</div>
@@ -75,7 +76,10 @@
 
 				<div class="blog-item-style-1 blog-item-style-3">
             		<div class="blog-it-infor">
+
+						<!-- comment items -->
             			<div id="comments"></div>
+
             		</div>
             	</div>
 				<ul class="pagination">               
@@ -118,34 +122,68 @@ end of blog list section-->
 </body>
 <script>
 
-	function loadUserReviews(callback) {
+	var tam = 10;
+	//console.log(tam);
+	
+	let ruta='https://localhost:8443/userReviewsList/{{id}}/?size=' + tam;
+	//console.log(ruta);
+
+	function loadReviews(callback,tam) {
 		$.ajax({
-			url: 'https://localhost:8443/userReviewsList/'+tam
-		}).done(function (user) {
-			console.log('reviews loaded: ' + JSON.stringify(user));
-			callback(user);
+			url: ruta
+		}).done(function (reviews) {
+			console.log('reviews loaded: ' + JSON.stringify(reviews));
+			console.log(reviews);
+			console.log(reviews.length);
+			callback(reviews);
 		})
 	}
 
 	//Show review in page
 	function showReview(review) {
 
-		$('.col-md-9 col-sm-12 col-xs-12').append(
-			'<div id="review-' + review.id + '">' + '<class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
-			review.rating + '</span> /5</h3><p>' + review.coments + '</p>2</div></div>'
+		$('#comments').append(
+			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '" href="/user/reviews/{{id}}">'+ '+ Edit</button></p></div></div>'
 		)
 	}
 
 	$(document).ready(function () {
 
-		loadReviews(function(user) {
+		loadReviews(function(reviews,tam) {
 			//When reviews are loaded from server
-			for (var i = 0; i < user.reviews.length; i++) {
-				showReview(user.reviews[i]);
+			if(reviews.length != 0){
+				for (var i = 0; i < reviews.length; i++) {
+					showReview(reviews[i]);
+				}
 			}
 		});
+
+		var info2 = $('.pagination');	
+
+		info2.click(function () {
+			tam+=10;
+
+			let ruta='https://localhost:8443/userReviewsList/{{id}}/?size=' + tam;
+			console.log(ruta);
+			$("#spinner-div").show();
+			$.ajax({
+				url: ruta
+			}).done(function (reviews) {
+				console.log('reviews loaded: ' + JSON.stringify(reviews));
+				console.log(reviews);
+				console.log(reviews.length);
+				if(reviews.length != 0){
+					for (var i = tam-10; i < reviews.length; i++) {
+						showReview(reviews[i]);
+					}
+				}
+				$("#spinner-div").hide();
+			})
+		})
+		
 	})
 
 </script>
 
-</html>
+</html>    

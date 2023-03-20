@@ -52,10 +52,11 @@
 					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/user/{id}">reviews</a></li>
 						<!--if administrator logged-->
 						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews">reviews</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/news">recommendations</a></li>
+						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/news">news</a></li>
+						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/movie/addition">new movie</a></li>
 					
 					<!--if didn´t log yet-->
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/login">log in</a></li>
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/sign_up">sign up</a></li>
 					
 					</ul>
@@ -148,7 +149,7 @@ $(document).ready(function () {
 		}).done(data => {
 			//JSON.stringify(data);
 			console.log(data);
-			responseMovies(data);
+			responseMovies(data.content);
 		})
 		.catch(function(err){
 			console.log("Error :-S",err);

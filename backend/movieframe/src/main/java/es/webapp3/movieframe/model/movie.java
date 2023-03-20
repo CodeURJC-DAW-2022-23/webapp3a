@@ -38,7 +38,7 @@ public class Movie{
     @Lob 
     private Blob movie_img;
     
-    
+    //this attribute contains a movie average value of votes
     private int movie_votes;
 
 

@@ -120,7 +120,7 @@ footer section-->
 	var tam = 10;
 	console.log(tam);
 	
-	let ruta='https://localhost:8443/reviewsList/?size=' + tam;
+	let ruta='https://localhost:8443/userReviewsList/?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -139,7 +139,7 @@ footer section-->
 
 		$('#comments').append(
 			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
-			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '">'+ '+ Delete</button></p></div></div>'
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '" href="/reviews/deletion/{{id}}">'+ '+ Delete</button></p></div></div>'
 		)
 	}
 

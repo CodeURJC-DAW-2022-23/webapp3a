@@ -1,11 +1,13 @@
 package es.webapp3.movieframe.controller;
 
+import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -19,9 +21,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -70,9 +74,10 @@ public class movieController {
     }
 
     @GetMapping("/userReviewsList/{id}")
-    public ResponseEntity<Object> getUserReviews(Model model,@PathVariable Long id){
+    public ResponseEntity<List<Review>> getUserReviews(Model model,@PathVariable Long id){
 
         Optional<User> user = userService.findById(id);
+
         if(user.isPresent()){
             return ResponseEntity.ok(user.get().getReviews());
         }else{
@@ -93,7 +98,7 @@ public class movieController {
     }
 
     @DeleteMapping("/reviewsList/{id}")
-    public ResponseEntity<Object> getReviewById(Model model,@PathVariable Long id) {
+    public ResponseEntity<Review> deleteReviewById(Model model,@PathVariable Long id) {
 
         Optional<Review> review = reviewService.findById(id);
 
@@ -103,6 +108,20 @@ public class movieController {
         }else{
             return ResponseEntity.notFound().build();
         }   
+    }
+
+    @PutMapping("/user/reviews/{id}")
+    public ResponseEntity<Review> editReview(@PathVariable long id,@RequestBody Review newReview) {
+
+        Optional<Review> review = reviewService.findById(id);
+
+        if (review.isPresent()) {
+            newReview.setId(id);
+            reviewService.save(newReview);
+            return ResponseEntity.ok(newReview);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
     
     @GetMapping("/directors/{id}")
@@ -123,21 +142,6 @@ public class movieController {
         return ResponseEntity.created(location).body(movie);
     }*/
 
-    @PostMapping("/movies/{id}/review/new")
-    public ResponseEntity<Review> newReview(Model model,@PathVariable Long id,@RequestBody Review review){
-
-        Optional<Movie> movie = movieService.findById(id);
-
-        movie.get().setReview(review);
-
-        movieService.save(movie.get());
-
-        URI location = fromCurrentRequest().path("/movies/{id}/review/new")
-        .buildAndExpand(review.getId()).toUri();
-
-        return ResponseEntity.created(location).body(review); 
-    }
-
     /* 
 
     @GetMapping("/movie/{title}")
@@ -157,7 +161,33 @@ public class movieController {
         return "initial_screen";
     }
 */
-	
+    @PostMapping("/movies/{id}/review/new")
+    public ResponseEntity<Review> newReview(Model model,@PathVariable Long id,@RequestBody Review review){
+
+        Optional<Movie> movie = movieService.findById(id);
+
+        movie.get().setReview(review);
+
+        movieService.save(movie.get());
+
+        URI location = fromCurrentRequest().path("/movies/{id}/review/new")
+        .buildAndExpand(review.getId()).toUri();
+
+        return ResponseEntity.created(location).body(review); 
+    }
+
+    @PostMapping("/movies/addition/new")
+    public ResponseEntity<Movie> newMovie(Model model,Movie movie,MultipartFile imageFile) throws IOException {
+        
+        movie.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+
+        movieService.save(movie);
+
+        URI location = fromCurrentRequest().path("/movies/addition/new")
+        .buildAndExpand(movie.getId()).toUri();
+
+        return ResponseEntity.created(location).body(movie); 
+    }
     
     @GetMapping("/movie/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
