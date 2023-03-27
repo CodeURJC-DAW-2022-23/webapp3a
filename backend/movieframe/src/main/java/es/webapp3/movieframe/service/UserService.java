@@ -1,8 +1,6 @@
 package es.webapp3.movieframe.service;
 
-import java.util.List;
 import java.util.Optional;
-//import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,8 +25,8 @@ public class UserService {
         return usersRepository.findById(id);
 	}
 
-	public Optional<User> findByName(String username) {
-        return usersRepository.findByName(username);
+	public Optional<User> findByUsername(String username) {
+        return usersRepository.findByUsername(username);
 	}
 
 	public void save(User user) {

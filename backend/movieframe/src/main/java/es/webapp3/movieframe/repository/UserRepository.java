@@ -13,7 +13,10 @@ public interface UserRepository extends JpaRepository<User,Long>{
     /*@Query(value = "SELECT u.name, u.lastname, u.email, r.description FROM User u JOIN Review r ON r.name = u.name WHERE u.name = :name", 
             nativeQuery = true)
     User findReviewByAuthorQuery(Long id);*/
-    Optional<User> findByName(String name);
+
+
+    
+    Optional<User> findByUsername(String username);
 
     Page<User> findAll(Pageable page);
 }

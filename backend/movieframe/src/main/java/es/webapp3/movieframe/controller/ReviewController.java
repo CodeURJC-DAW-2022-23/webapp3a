@@ -1,83 +1,97 @@
 package es.webapp3.movieframe.controller;
 
-import java.net.URI;
+import java.security.Principal;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
-import es.webapp3.movieframe.service.UserSession;
+import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.ReviewService;
+import es.webapp3.movieframe.service.UserService;
 
-@RestController
-@RequestMapping("/reviews")
+@Controller
 public class ReviewController {
-
-    @Autowired
-    private UserSession usersession;
 
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private UserService userService;
+
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+
+        Principal principal = request.getUserPrincipal();
+        
+        if(principal != null) {
+            model.addAttribute("logged", true);
+            model.addAttribute("userName", principal.getName());
+            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            model.addAttribute("user", request.isUserInRole("USER"));
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
     
+    @GetMapping("/reviews/user")
+    public String getUserReviews(Model model,HttpServletRequest request){    
 
-    @PostMapping("/new")
-	public ResponseEntity<Review> newReview(Model model,@PathVariable Movie movie,@RequestBody Review review) {
-        //review.setAuthor(usersession.getUser().getUsername());
+        if(request.isUserInRole("USER")){
+            String name = request.getUserPrincipal().getName();
 
-       
+            Optional<User> user = userService.findByUsername(name);
 
-        movie.getReviews().add(review);
+            if(!user.get().getReviews().isEmpty()){
+                model.addAttribute("reviews",user.get().getReviews());
+            }else{
+                model.addAttribute("reviews"," ");
+            }
+            return "reviews_screen";
+        } else {
+            return "404";
+        }
+    }
 
-        model.addAttribute("review",review);
+    @DeleteMapping("/reviews/deletion/{id}")
+    public String deleteReviewById(Model model,@PathVariable Long id,HttpServletRequest request) {
 
-        reviewService.save(review);
+        if(request.isUserInRole("ADMIN")){
+            Optional<Review> review = reviewService.findById(id);
 
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(review.getId()).toUri();
+            if(review.isPresent()){
+                reviewService.deleteById(id);
+                return "reviews_screen";
+            }else{
+                return "404";
+            }   
+        } else {
+            return "404";
+        }
+    }
 
-		return ResponseEntity.created(location).body(review);
-	}
+    @GetMapping("/reviews")
+    public String getReviews(Model model,Pageable pageable,HttpServletRequest request){
 
-    @GetMapping("/")
-    public String showReviews(Model model){
+        if(request.isUserInRole("ADMIN")){
+            Page<Review> reviews = reviewService.findAll(pageable);
 
-            //Optional<Review> review = reviewService.findById();
-
-            //model.addAttribute("reviews",review);
+            model.addAttribute("reviews",reviews);
 
             return "modification_reviews_screen";
+        } else {
+            return "404";
+        }
     }
-
-    @GetMapping("/{user}")
-    public String showUserReviews(Model model){
-
-         //model.addAttribute("reviews",reviewService.findUserReviews(usersession.getUser()));
-
-         return "reviews_screen";
-    }
-
-    @DeleteMapping("/{id}/delete")
-	public String deleteReview(Model model, @PathVariable Long id) {
-        Optional<Review> review = reviewService.findById(id);
-
-        if (review.isPresent()) {
-			reviewService.deleteById(id);
-			return "modification_reviews_screen";
-		} else {
-			return "404";
-		}
-	}
     
 }

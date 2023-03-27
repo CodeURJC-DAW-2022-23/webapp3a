@@ -1,4 +1,6 @@
-# MovieFrame
+# **MovieFrame**
+
+# FASE 1
 
 | Nombre y apellidos | Correo | Cuenta github |
 | --- | --- | --- |
@@ -57,3 +59,80 @@
 
 ![Screen](Screens.JPG)
 
+# FASE 2
+
+## **1. Navegación:**
+
+Navegación del usuaurio anónimo
+
+![navegacionIII](navegacion_III(public).JPG)
+
+Navegación del usuaurio registrado
+
+![navegacionI](navegacion_I(user).JPG)
+
+Navegación del administrador
+
+![navegacionII](navegacion_II(admin).JPG)
+## **2. Instrucciones de ejecucción:**
+
+Éstos serían los pasos para ejecutar el proyecto sin comandos:
+1. clonar el proyecto 
+2. incoporar el proyecto en Visual Studio Code con GitHub Desktop
+3. instalar las dependencias de spring boot en el archivo pom.xml
+4. en el archivo application.properties meter el usuario, contraseña con la que se registró en MySQL, otro usuario y contraseña que funciona como administrador y agregar el fichero keystore.jks
+5. arrancar el proyecto con el dashboard
+6. meter la url `https://localhost:8443` en navegador
+
+Éstos serían los pasos a seguir en caso de utilizar comandos:
+
+El proyecto requiere de una base de datos MySQL que se puede arrancar usando Docker con el comando `$Docker run --rm -e MySQL_ROOT_PASSWORD=password \ -e MYSQL_DATABASE=webapp3 -p 3306:3306 -d mysql:8.0`
+
+La aplicación se ejecuta con el comando `mvn spring-boot:run`
+
+El proyecto usa una base de datos MySQL:
+* esquema: movieframe
+* usuario: webapp3
+* contraseña: Mundialmente1
+
+Dentro de una de las tablas (user) de la base de datos se han almacenado usuarios de la aplicación por defecto, éstos son:
+
+* usuario: `edwardkennedy`, contraseña: `edu123456`
+* usuario: `hughjackman`, contraseña cifrada: `$2a$12$NUjPcJThs24gfYaXVqmrt.tLICeySGE05lJQRm4wn5w9mCThfnp0O`
+
+La versión de java es la 17
+
+## **3. Entidades de la base de datos:**
+![entidades](Entidades.JPG)
+## **4. Diagrama de clases y templates:**
+![clases](Clases.JPG)
+
+## **5. Participación:**
+#### **_5.1. Tareas:_**
+En esta fase se han realizado las siguientes tareas:
+
+- una gráfica de las películas en el que se muestra un diagrama de barras donde el eje horizontal muestra el nombre de las películas disponibles, y el vertical, el número de reseñas que se han hecho sobre una peli particular 
+- posibilitar al usuario registrado añadir una reseña (votar y meter un comentario)
+- mostrar la información de una película al pulsar sobre ella desde la pantalla de inicio
+- mostrar el listado de películas al iniciar la aplicación
+- mostrar los enlaces de los directores de una película; y mostrar la info. de uno particular al clikar sobre el enlace
+- posibilitar al administrador eliminar una reseña de cualquier usuario
+- mostrar al administrador todas las reseñas de todos los usuarios y posibilitarle eliminar una
+- se implementó un algoritmo de consulta avanzada donde en un buscador se introduce el nombre de una peli y se muestran todas aquellas ordenadas de mayor a menor puntuación de votos
+- se agregó una pantalla donde el administrador crea una nueva peli (rellena los campos para meter el títulos, descripción, imagen,...), - se agregó una pantalla donde el administador selecciona una película y se genera un PDF sobre la misma como recomendación; para ello se usó una librería externa
+- se posibilitó al usuario registrado mostrarle todas sus reseñas en una pantalla y  editar una
+- se añadió seguridad para chequear el tipo de usuario logeado después de iniciar sesión
+#### **_5.2. Commits:_**
+* a36aab1736b5930af5d56943880c7ceb17878684 --> implementadas funcionalidades de la gráfica, mostrar películas de la pantalla inicial, mostrar una movie, escribir una reseña, mostrar info. de un director
+* 9dad6feca2b5f09d9c0538e13f40a939e0aa4e21
+--> implementada pantalla del administrador
+* d388b8478dcb7b264b9f684b7d7e88282dd25f78 --> algoritmo de consulta avanzada
+* b1e1a342334029d30fc58e480a3d3a7dcbc34643 --> generar recomendación de una peli en PDF
+* fa90679c32908f059306abd9555ebb78af2cf26c --> @post del administrador de una peli con imagen
+#### **_5.3. Ficheros:_**
+
+- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\Home.java
+- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieController.java
+- backend\movieframe\src\main\java\es\webapp3\movieframe\model\movie.java
+- backend\movieframe\src\main\java\es\webapp3\movieframe\service\DataBaseInitializer.java
+- backend\movieframe\src\main\resources\templates\recommendations_screen.html

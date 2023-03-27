@@ -3,21 +3,19 @@ package es.webapp3.movieframe.security;
 
 import java.security.SecureRandom;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    RepositoryUserDetailsService userDetailsService;
+    UserDetailService userDetailsService;
     
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -35,26 +33,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/log_in").permitAll();
-        http.authorizeRequests().antMatchers("/login_error").permitAll();
-        http.authorizeRequests().antMatchers("/log_out").permitAll();
-        http.authorizeRequests().antMatchers("/sign_up").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/loginerror").permitAll();
+        http.authorizeRequests().antMatchers("/logout").permitAll();
+        http.authorizeRequests().antMatchers("/signup").permitAll();
         http.authorizeRequests().antMatchers("/movies/name").permitAll();
+        http.authorizeRequests().antMatchers("/movie/{id}").permitAll();
 
         // Private pages (all other pages)
         http.authorizeRequests().antMatchers("/reviews/new").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/reviews/user/{{id}}").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/movie/{{id}}/review/new").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/movie/{{id}}").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/movie/{{id}}/director").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/director").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/reviews/user/{id}").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/review/{id}/edition").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/reviews/user").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/movie/{id}/review/new").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/movie/{id}/director").hasAnyRole("USER");
 
-        http.authorizeRequests().antMatchers("/reviews/*").hasAnyRole("ADMIN");
+
+        http.authorizeRequests().antMatchers("/movie/addition").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/reviews/deletion/{id}").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/reviews").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/news").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/movie/*").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/director").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/movie/{id}/edition").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/movie/addition/new").hasAnyRole("ADMIN");
         
 
         // Login form
@@ -63,6 +63,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin().passwordParameter("password");
         http.formLogin().defaultSuccessUrl("/");
         http.formLogin().failureUrl("/loginerror");
+
+        // Logout
+        http.logout().logoutUrl("/logout");
+        http.logout().logoutSuccessUrl("/");
 
         // Disable CSRF at the moment
         http.csrf().disable();

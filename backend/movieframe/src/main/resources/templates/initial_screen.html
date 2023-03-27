@@ -51,31 +51,22 @@
 						<!--if user logged-->
 						{{#logged}}
 						{{#user}}
-					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/user/{{id}}">reviews</a></li>
-						<ul class="btn btn-default dropdown-toggle lv1">
-							<form action="/log_out" method="post">
-								<input type="submit" value="Sign Out" />
-								<input type="hidden" name="_csrf" value="{{token}}"/>
-							</form>
-						</ul>
+					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/user">reviews</a></li>
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/logout">sign out</a></li>
 						{{/user}}
 						<!--if administrator logged-->
 						{{#admin}}
 						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews">reviews</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/news">news</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" id="send_recommendations"><a href="/movie/addition">new movie</a></li>
-						<ul class="btn btn-default dropdown-toggle lv1">
-							<form action="/log_out" method="post">
-								<input type="submit" value="Sign Out" />
-								<input type="hidden" name="_csrf" value="{{token}}"/>
-							</form>
-						</ul>
+						<li class="btn btn-default dropdown-toggle lv1" ><a href="/news">news</a></li>
+						<li class="btn btn-default dropdown-toggle lv1" ><a href="/movie/addition">new movie</a></li>
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/logout">sign out</a></li>
 						{{/admin}}
 						{{/logged}}
 						<!--if didn´t log yet-->
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/log_in">log in</a></li>
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/sign_up">sign up</a></li>						
-						
+						{{^logged}}
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/login">log in</a></li>	
+						<li class="btn btn-default dropdown-toggle lv1"><a href="/signup">sign up</a></li>					
+						{{/logged}}
 					</ul>
 				</div>
 			<!-- /.navbar-collapse-->
@@ -108,7 +99,7 @@
 							<span class="blue">{{gender}}</span>
 						</div>
 					</div>
-					<h6>{{#logged}}<a href="/movie/{{id}}"></a>{{/logged}}{{title}}</h6>
+					{{#logged}}<h6><a href="/movie/{{id}}">{{title}}</a></h6>{{/logged}}{{^logged}}<h6>{{title}}</h6>{{/logged}}
 					<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /5</p>
 					
 				</div>

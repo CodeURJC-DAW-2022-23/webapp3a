@@ -68,13 +68,15 @@
 <div class="hero mv-single-hero"></div>
 
 <div class="page-single movie-single movie_single">
-	<div class="container" action="getMovie" method="get">
+	<div class="container">
 		<div class="row ipad-width2">
+
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
 					<img src="/movie/{{id}}/image"/>{{picture}}</img>
 				</div>
 			</div>
+			
 			<div class="col-md-8 col-sm-12 col-xs-12">
 				<div class="movie-single-ct main-content">
 					<h1 class="bd-hd" id="value_title">{{title}}</h1>
@@ -114,7 +116,7 @@
 														
 													</div>
 													<div class="title-hd-sm">
-														<input type='submit' value='write_review' class="redbtn" id="write_review" onclick="loadMovie();"><i class="ion-ios-arrow-right"></i></input>
+														<input type='submit' value='write review' class="redbtn" id="write_review" onclick="loadMovie();"><i class="ion-ios-arrow-right"></i></input>
 													</div>
 												</form>
 
@@ -146,10 +148,28 @@
 						</div>
 					</div>
 				</div>
+				{{#admin}}
+				<form action="/movie/{{id}}/edition" method="post">
+					<div>
+						<input type="text" name="title" rows="5" cols="2" placeholder="Movie title..."/>
+					</div>
+					<div>
+						<input type="text" name="gender" rows="5" cols="2" placeholder="Movie gender..."/>
+					</div>
+					<div>
+						<textarea name="description" rows="5" cols="20" placeholder="Movie description..."></textarea>
+					</div>
+
+					<div class="title-hd-sm">
+						<input type="submit" value="update movie" class="redbtn"/>
+					</div>			
+				</form>
+				{{/admin}}
 			</div>
-		</div>
-	</div>
+		</div>		
+	</div>	
 </div>
+
 <!-- footer section-->
 <footer class="ht-footer">
 	<div class="container">

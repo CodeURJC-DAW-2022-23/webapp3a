@@ -7,14 +7,14 @@
         <meta name="format-detection" content="telephone-no">
 
          <!--Google Font-->
-        <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+         <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
        
         <!-- CSS files -->
-        <link rel="stylesheet" href="css/plugins.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="/css/plugins.css">
+        <link rel="stylesheet" href="/css/style.css">
     </head>
 
-<body>
+    <body>
 
 <!-- BEGIN | Header -->
 <header class="ht-header">
@@ -23,100 +23,62 @@
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header logo">
 				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					    <span class="sr-only">MovieFrame</span>
+					    <span class="sr-only">Toggle navigation</span>
 					    <div id="nav-icon1">
 							<span></span>
 							<span></span>
 							<span></span>
 						</div>
 				    </div>
-				    <img class="logo" src="images/logoMF.png" alt="" width="80" height="58">
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav flex-child-menu menu-left">
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>
+						
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/">Home</a></li>
+                        <li class="btn btn-default dropdown-toggle lv1"><a href="/">Home</a></li>
 					</ul>
 				</div>
 			<!-- /.navbar-collapse -->
 	    </nav>
-	    
-	    <!-- top search form -->
-	    
 	</div>
 </header>
 <!-- END | Header -->
 
-<div class="hero user-hero">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="hero-ct">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-			<div class="col-md-3 col-sm-12 col-xs-12">
-				<div class="user-information">
-					<div class="user-img" placeholder="Set avatar">
-						<img src="/user/{{user.id}}/image">
-							
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="col-md-9 col-sm-12 col-xs-12">
-				<div class="form-style-1 user-pro" action="#">
-					<form action="/user/new" method="post" class="user">
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<label>Username</label>
-								<input type="text" name="username">
-							</div>
-							<div class="col-md-6 form-it">
-								<label>Email Address</label>
-								<input type="text" name="mail">
-							</div>
+				<div class="form-style-1 user-pro">
+					<form action="/signup/new" method="post">
+						<div class="col-md-6 form-it">
+							<label>Username</label>
+							<input type="text" name="username"></input>
 						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<label>First Name</label>
-								<input type="text" name="name">
-							</div>
-							<div class="col-md-6 form-it">
-								<label>Last Name</label>
-								<input type="text"  name="lastname">
-							</div>
+                        <div class="col-md-6 form-it">
+							<label>Name</label>
+							<input type="text" name="name"></input>
 						</div>
-						<div class="row">
-							<div class="col-md-6 form-it">
-								<label>Password</label>
-								<input type="text" name="password" placeholder="***************">
-							</div>
+                        <div class="col-md-6 form-it">
+							<label>E-mail</label>
+							<input type="email" name="email"></input>
 						</div>
-						<form action="/user/new" method="post" enctype="multipart/form-data" class="user">
-							<input class="redbtn" type='file' name='image' accept=".jpg, .jpeg">
-						</form>
-						<div class="row">
-							<div class="col-md-2">
-								<input class="submit" type="submit" value="register">
-							</div>
-						</div>	
+						<div class="col-md-6 form-it">
+							<label>Password</label>
+							<input type="text" name="password" placeholder="***************"></input>
+						</div>
+						<div class="col-md-2">
+							<input class="submit" type="submit" value="register"></input>
+						</div>
 					</form>
+                    <p>{{state}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 <!-- footer section-->
 <footer class="ht-footer">
 	<div class="container">
@@ -132,12 +94,11 @@
 </footer>
 <!-- end of footer section-->
 
-        <script src="js/jquery.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/plugins2.js"></script>
-        <script src="js/custom.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/plugins2.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
-
-<!-- userprofile14:04-->
+<!-- userprofile_light16:31-->
 </html>

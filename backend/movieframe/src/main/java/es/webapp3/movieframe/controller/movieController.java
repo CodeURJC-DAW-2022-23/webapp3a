@@ -1,225 +1,203 @@
 package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
-import java.net.URI;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.security.Principal;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
-import es.webapp3.movieframe.model.User;
-import es.webapp3.movieframe.service.MovieService;
-import es.webapp3.movieframe.service.ReviewService;
 import es.webapp3.movieframe.service.DirectorService;
-import es.webapp3.movieframe.service.UserService;
+import es.webapp3.movieframe.service.MovieService;
 
-@RestController
-public class movieController {
-    
+@Controller
+public class MovieController {
+
     @Autowired
     private MovieService movieService;
 
     @Autowired
-    private ReviewService reviewService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
     private DirectorService directorService;
-	
-    @GetMapping("/movies")
-    public Page<Movie> getMovies(Model model,Pageable page){
 
-        return movieService.findAll(page);
-    }
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
 
-    @GetMapping("/reviewsList")
-    public Page<Review> getReviews(Model model,Pageable page){
-
-        return reviewService.findAll(page);
-    }
-
-    @GetMapping("/usersList")
-    public Page<User> getUsers(Model model,Pageable page){
-
-        return userService.findAll(page);
-    }
-
-    @GetMapping("/userReviewsList/{id}")
-    public ResponseEntity<List<Review>> getUserReviews(Model model,@PathVariable Long id){
-
-        Optional<User> user = userService.findById(id);
-
-        if(user.isPresent()){
-            return ResponseEntity.ok(user.get().getReviews());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
-
-        Optional<Movie> movie = movieService.findById(id);
-
-        if(movie.isPresent()){
-            return ResponseEntity.ok(movie.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }   
-    }
-
-    @DeleteMapping("/reviewsList/{id}")
-    public ResponseEntity<Review> deleteReviewById(Model model,@PathVariable Long id) {
-
-        Optional<Review> review = reviewService.findById(id);
-
-        if(review.isPresent()){
-            reviewService.deleteById(id);
-            return ResponseEntity.ok(review.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }   
-    }
-
-    @PutMapping("/user/reviews/{id}")
-    public ResponseEntity<Review> editReview(@PathVariable long id,@RequestBody Review newReview) {
-
-        Optional<Review> review = reviewService.findById(id);
-
-        if (review.isPresent()) {
-            newReview.setId(id);
-            reviewService.save(newReview);
-            return ResponseEntity.ok(newReview);
+        Principal principal = request.getUserPrincipal();
+        
+        if(principal != null) {
+            model.addAttribute("logged", true);
+            model.addAttribute("userName", principal.getName());
+            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            model.addAttribute("user", request.isUserInRole("USER"));
         } else {
-            return ResponseEntity.notFound().build();
+            model.addAttribute("logged", false);
         }
     }
     
-    @GetMapping("/directors/{id}")
-    public ResponseEntity<Director> getDirector(@PathVariable long id){
-        Optional<Director> director = directorService.findById(id);
-        return ResponseEntity.ok(director.get());
+    @GetMapping("/movie/addition")
+    public String movieAdditionScreen(Model model,HttpServletRequest request){ 
+    
+        if(request.isUserInRole("ADMIN")){
+            model.addAttribute("state","no movie added yet"); 
+
+            return "movie_aggregation";
+        }else{
+            return "404";        
+        }
     }
-     
-    /*@PostMapping("/newsMovie")
-    public ResponseEntity<Movie> createNewsMovie(@RequestBody Movie movie,@PathVariable Long id) {
 
-        movieService.save(movie);
-        
+    @PostMapping("/movies/name")
+    public String searchMovie(Model model,@RequestParam String name,Pageable page){
 
-        URI location = fromCurrentRequest().path("/newsMovie")
-        .buildAndExpand(movie.getId()).toUri();
-
-        return ResponseEntity.created(location).body(movie);
-    }*/
-
-    /* 
-
-    @GetMapping("/movie/{title}")
-	public String showMovie(Model model, @PathVariable String title) {
-
-		Movie movie = movieService.findSingleByTitle(title);
-		model.addAttribute("movie",movie);
-		return "movie_screen";
-
-	}
-
-    @GetMapping("/movie/{name}")
-    public String findMovies(Model model,@RequestParam String name){
-        List<Movie> movies = movieService.findByTitle(name);
+        Page<Movie> movies = movieService.findByTitle(name,page);
 
         model.addAttribute("movieframe",movies);
-        return "initial_screen";
-    }
-*/
-    @PostMapping("/movies/{id}/review/new")
-    public ResponseEntity<Review> newReview(Model model,@PathVariable Long id,@RequestBody Review review){
 
-        Optional<Movie> movie = movieService.findById(id);
-
-        movie.get().setReview(review);
-
-        movieService.save(movie.get());
-
-        URI location = fromCurrentRequest().path("/movies/{id}/review/new")
-        .buildAndExpand(review.getId()).toUri();
-
-        return ResponseEntity.created(location).body(review); 
+        return "initial_screen";       
     }
 
-    @PostMapping("/movies/addition/new")
-    public ResponseEntity<Movie> newMovie(Model model,Movie movie,MultipartFile imageFile) throws IOException {
-        
-        movie.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+    @PostMapping("/movie/{id}/edition")
+    public String movieUpdating(Model model,Movie newMovie,@PathVariable Long id,@RequestParam String title,@RequestParam String gender,@RequestParam String description,HttpServletRequest request) throws IOException {
 
-        movieService.save(movie);
+        if(request.isUserInRole("ADMIN")){
 
-        URI location = fromCurrentRequest().path("/movies/addition/new")
-        .buildAndExpand(movie.getId()).toUri();
+            Optional<Movie> movie = movieService.findById(id);
 
-        return ResponseEntity.created(location).body(movie); 
-    }
-    
-    @GetMapping("/movie/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
-        
-        Optional<Movie> movie = movieService.findById(id);
-        
-        if (movie.isPresent() && movie.get().getImageFile() != null) {
-            Resource file = new InputStreamResource(movie.get().getImageFile().getBinaryStream());
-            return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(movie.get().getImageFile().length())
-                .body(file);
+            if (movie.isPresent()) {
+
+                //Movie newMovie = new Movie();
+
+                newMovie.setTitle(title);
+                newMovie.setCategory(gender);
+                newMovie.setDescription(description);
+                
+                int votes = movie.get().getVotes();
+                List<Director> directors = movie.get().getDirectors();
+                newMovie.setVotes(votes);
+                newMovie.setDirectors(directors);
+                Blob image = movie.get().getImageFile();
+                newMovie.setImageFile(image);
+
+                newMovie.setId(id);
+                movieService.save(newMovie);
+
+                model.addAttribute("title",newMovie.getTitle());
+                model.addAttribute("gender",newMovie.getCategory());
+                model.addAttribute("description",newMovie.getDescription());
+                model.addAttribute("picture",movie.get().getImageFile());
+                model.addAttribute("directors",movie.get().getDirectors());
+
+                return "movie_screen";
+            } else {
+                return "404";
+            }
         } else {
-            return ResponseEntity.notFound().build();
+            return "404";
         }
     }
 
-    
-    @GetMapping("/movie/{id}/director/image")
-    public ResponseEntity<Object> downloadDirectorImage(@PathVariable long id) throws SQLException {
-        
-        Optional<Director> director = directorService.findById(id);
-        
-        if (director.isPresent() && director.get().getImageFile() != null) {
-            Resource file = new InputStreamResource(director.get().getImageFile().getBinaryStream());
-            return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(director.get().getImageFile().length())
-                .body(file);
+    @PostMapping("/movie/addition/new")
+    public String newMovie(Model model,Movie movie,@RequestParam String title,@RequestParam String gender,@RequestParam String description,@RequestParam int votes,MultipartFile image1,HttpServletRequest request)throws IOException {
+
+        if(request.isUserInRole("ADMIN")){
+            movie.setTitle(title);
+            movie.setCategory(gender);
+            movie.setDescription(description);
+            movie.setVotes(votes);
+            movie.setImageFile(BlobProxy.generateProxy(image1.getInputStream(), image1.getSize()));
+
+            movieService.save(movie);
+
+            model.addAttribute("state","movie saved");
+
+            return "movie_aggregation";    
         } else {
-            return ResponseEntity.notFound().build();
-        }
-    }   
+            return "404";
+        }   
+    }
+
+    @PostMapping("/movie/{id}/review/new")
+    public String newReview(Model model,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments,HttpServletRequest request){
+ 
+        if(request.isUserInRole("USER")){
+            Optional<Movie> movie = movieService.findById(id);
+
+            if(movie.isPresent()){
+                
+                movie.get().setReview(new Review(rating,coments));
+                movieService.save(movie.get());
+
+                model.addAttribute("title",movie.get().getTitle());
+                model.addAttribute("gender",movie.get().getCategory());
+                model.addAttribute("description",movie.get().getDescription());
+                model.addAttribute("picture",movie.get().getImageFile());
+                model.addAttribute("directors",movie.get().getDirectors());
+
+                return "movie_screen";
+            }else{
+                return "404";
+            } 
+        } else {
+            return "404";
+        }  
+    }
+ 
+    @GetMapping("/movie/{id}")
+    public String getMovie(Model model,@PathVariable Long id,HttpServletRequest request){
+
+            Optional<Movie> movie = movieService.findById(id);
+
+            if(movie.isPresent()){
+                model.addAttribute("title",movie.get().getTitle());
+                model.addAttribute("gender",movie.get().getCategory());
+                model.addAttribute("description",movie.get().getDescription());
+                model.addAttribute("picture",movie.get().getImageFile());
+                model.addAttribute("directors",movie.get().getDirectors());
+                return "movie_screen";
+            }else{
+                return "404";
+            } 
+    }
+    @GetMapping("/movie/{id}/director")
+    public String getDirector(Model model,@PathVariable Long id,HttpServletRequest request){
+
+        if(request.isUserInRole("USER")){
+            Optional<Director> director = directorService.findById(id);
+            
+            if(director.isPresent()){
+                model.addAttribute("avatar",director.get().getImageFile());
+                model.addAttribute("director",director.get().getDirector());
+                model.addAttribute("biography",director.get().getBiography());
+                model.addAttribute("name",director.get().getName());
+                model.addAttribute("born",director.get().getBorn());
+                model.addAttribute("genre",director.get().getGenre());
+                model.addAttribute("residence",director.get().getResidence());
+                model.addAttribute("score",director.get().getScore());
+                return "director_screen";
+            }else{
+                return "404";
+            } 
+        } else {
+            return "404";
+        }  
+    }
     
 }

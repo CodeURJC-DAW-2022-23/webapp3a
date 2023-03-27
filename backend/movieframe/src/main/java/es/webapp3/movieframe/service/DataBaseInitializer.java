@@ -2,6 +2,8 @@ package es.webapp3.movieframe.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -37,14 +39,11 @@ public class DataBaseInitializer {
     @Autowired
 	private DirectorRepository directorRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Value("${security.user}")
-	private String user;
-
     @Value("${security.encodedPassword}")
 	private String encodedPassword;
+
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@PostConstruct
     public void init() throws IOException, URISyntaxException{
@@ -121,10 +120,22 @@ public class DataBaseInitializer {
 
         movieRepository.save(movie6);  		
 		
-		User user1 = new User("edwardKennedy",passwordEncoder.encode("edu123456"),"Edward","mimiteemoc999@gmail.com","USER");     
+		User user1 = new User();
+        user1.setUsername("edward");  
+        user1.setEncodedPassword(passwordEncoder.encode("edu123456"));  
+        user1.setName("Edward");
+        user1.setMail("mimiteemoc999@gmail.com");
+        user1.setRoles("USER");
+
         usersRepository.save(user1);
 
-        User user2 = new User(user,"{bcrypt}"+encodedPassword,"Hugh","hugh@jack.com","USER","ADMIN");        
+        User user2 = new User();
+        user2.setUsername("hughjackman"); 
+        user2.setEncodedPassword(passwordEncoder.encode("{bcrypt}" + encodedPassword));  
+        user2.setName("Hugh");
+        user2.setMail("hugh@jack.com");
+        user2.setRoles("ADMIN");
+
         usersRepository.save(user2);
         
         //a single movie can have many reviews

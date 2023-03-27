@@ -127,7 +127,7 @@
 	//console.log(tam);
 
 	var ruta='https://localhost:8443/movies/?size=' + tam;
-	alert(ruta);
+	
 
 	function loadMovies(callback,tam) {
 		$.ajax({
@@ -151,7 +151,7 @@
 	}
 
 	function sendNews(callback,movId) {
-		alert(movId);
+		
 		var ruta='https://localhost:8443/movies/' + movId;
 		$.ajax({
 			url: ruta
@@ -201,12 +201,13 @@
 
 		info.click(function (event) {
 			var val = $(event.target).attr("id").split("-")[1];	
-			alert(val);
+			
 
 			sendNews(function(movie, val){
 				var doc = new jsPDF();
 				doc.setFontSize(60);
 				doc.text(String(movie.title), 35, 25);
+				console.log(movie.title)
 				
 				doc.setFontSize(16);
 				doc.text(String(movie.description), 35, 25 + 10);

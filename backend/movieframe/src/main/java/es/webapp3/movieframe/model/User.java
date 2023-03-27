@@ -16,23 +16,12 @@ public class User{
     private String encodedPassword;
     private String name;
     private String email;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    private String roles;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     public User(){}
-
-    public User(String username,String encodedPassword,String name,String mail,String... roles){
-        super();
-        this.username=username;
-        this.encodedPassword=encodedPassword;
-        this.name=name;
-        this.email=mail;
-        this.roles=List.of(roles);
-    }
 
     public void setReview(Review review){
         reviews.add(review);
@@ -52,47 +41,47 @@ public class User{
         this.id=id;
     }
 
-    public void setUsername(String username){
-        this.username=username;
-    }
-
-    public void setEncodedPassword(String password){
-        this.encodedPassword=password;
-    }
-
-    public void setName(String name){
-        this.name=name;
-    }
-
-    public void setEmail(String mail){
-        this.email=mail;
-    }
-
-    public void setRoles(List<String> roles){
-        this.roles=roles;
-    }
-
     public Long getId(){
         return id;
+    }
+
+    public void setUsername(String username){
+        this.username=username;
     }
 
     public String getUsername(){
         return username;
     }
 
+    public void setEncodedPassword(String password){
+        this.encodedPassword=password;
+    }
+
     public String getEncodedPassword(){
         return encodedPassword;
+    }
+
+    public void setName(String name){
+        this.name=name;
     }
 
     public String getName(){
         return name;
     }
 
+    public void setMail(String mail){
+        this.email=mail;
+    }
+
     public String getEmail(){
         return email;
     }
 
-    public List<String> getRoles(){
+    public void setRoles(String rol){
+        this.roles=rol;
+    }
+
+    public String getRoles(){
         return roles;
     }
     
