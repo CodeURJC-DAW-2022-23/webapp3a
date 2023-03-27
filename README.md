@@ -97,8 +97,8 @@ El proyecto usa una base de datos MySQL:
 
 Dentro de una de las tablas (user) de la base de datos se han almacenado usuarios de la aplicación por defecto, éstos son:
 
-* usuario: `edwardkennedy`, contraseña: `edu123456`
-* usuario: `hughjackman`, contraseña cifrada: `$2a$12$NUjPcJThs24gfYaXVqmrt.tLICeySGE05lJQRm4wn5w9mCThfnp0O`
+* usuario: `edward`, contraseña: `edu123456`
+* usuario: `hughjackman`, contraseña cifrada: `$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd`
 
 La versión de java es la 17
 
