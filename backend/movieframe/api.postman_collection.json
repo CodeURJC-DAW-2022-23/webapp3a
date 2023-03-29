@@ -223,23 +223,8 @@
 			"response": []
 		},
         {
-			"name": "GET Movie image(logged)",
+			"name": "GET Movie image(public)",
 			"request": {
-                "auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "private@gmail.com",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "private",
-							"type": "string"
-						}
-					]
-				},
 				"method": "GET",
 				"header": [],
 				"url": {

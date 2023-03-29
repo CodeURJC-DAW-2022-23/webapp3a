@@ -78,7 +78,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}").hasRole("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviews/{id}").hasRole("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/{id}/review/new").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}/image").hasRole("ADMIN");
 
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/userReviewsList/{username}").hasRole("USER");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/directors/{id}").hasRole("USER");
@@ -86,7 +85,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}").hasRole("USER");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviews/{id}").hasRole("USER");
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/{id}/review/new").hasRole("USER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}/image").hasRole("USER");
 
          // Other endpoints are public
          http.authorizeRequests().anyRequest().permitAll();
