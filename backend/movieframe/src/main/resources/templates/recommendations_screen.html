@@ -126,7 +126,7 @@
 
 	//console.log(tam);
 
-	var ruta='https://localhost:8443/movies/?size=' + tam;
+	var ruta='https://localhost:8443/api/movies/?size=' + tam;
 	
 
 	function loadMovies(callback,tam) {
@@ -152,7 +152,7 @@
 
 	function sendNews(callback,movId) {
 		
-		var ruta='https://localhost:8443/movies/' + movId;
+		var ruta='https://localhost:8443/api/movies/' + movId;
 		$.ajax({
 			url: ruta
 		}).done(function (movie) {
@@ -178,7 +178,7 @@
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/movies/?size=' + tam;
+			let ruta='https://localhost:8443/api/movies/?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({

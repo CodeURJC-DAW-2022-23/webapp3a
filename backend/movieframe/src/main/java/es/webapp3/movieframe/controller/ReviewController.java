@@ -44,19 +44,22 @@ public class ReviewController {
         }
     }
     
-    @GetMapping("/reviews/user")
-    public String getUserReviews(Model model,HttpServletRequest request){    
+    @GetMapping("/reviews/{userName}")
+    public String getUserReviews(Model model,@PathVariable String userName,HttpServletRequest request){    
 
         if(request.isUserInRole("USER")){
             String name = request.getUserPrincipal().getName();
 
-            Optional<User> user = userService.findByUsername(name);
+            userName = name;
 
-            if(!user.get().getReviews().isEmpty()){
-                model.addAttribute("reviews",user.get().getReviews());
+            Optional<User> currentUser = userService.findByUsername(name);
+
+            if(!currentUser.get().getReviews().isEmpty()){
+                model.addAttribute("reviews",currentUser.get().getReviews());
             }else{
                 model.addAttribute("reviews"," ");
             }
+            model.addAttribute("userName",name);
             return "reviews_screen";
         } else {
             return "404";

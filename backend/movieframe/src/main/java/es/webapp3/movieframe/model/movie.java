@@ -26,9 +26,8 @@ public class Movie{
     
     private String title;  
     private String gender;
-
+    private  boolean image;
     
-   
     private String movie_description;
 
     @Lob 
@@ -120,6 +119,14 @@ public class Movie{
 
     public int getVotes(){
         return movie_votes;
+    }
+
+    public void setImage(boolean image){
+        this.image=image;
+    }
+
+    public boolean getImage(){
+        return image;
     }
 
 }

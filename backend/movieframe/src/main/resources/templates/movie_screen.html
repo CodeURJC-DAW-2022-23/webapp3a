@@ -73,7 +73,7 @@
 
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="/movie/{{id}}/image"/>{{picture}}</img>
+					<img src="/api/movies/{{id}}/image"/>{{picture}}</img>
 				</div>
 			</div>
 			
@@ -198,7 +198,7 @@
 		//show me the last review
 			function loadMovie(){
 				$.ajax({
-					url: 'https://localhost:8443/movies/{{id}}',
+					url: 'https://localhost:8443/api/movies/{{id}}',
 				}).done(function(data){
 					console.log(data);
 					//console.log(data.reviews);

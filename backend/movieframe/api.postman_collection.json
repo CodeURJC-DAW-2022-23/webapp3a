@@ -1,0 +1,602 @@
+{
+    "info":{
+        "_postman_id": "0fd6c2f6-0bf5-4fae-8624-3c18a74bd9c4",
+        "name": "Movieframe",
+        "schema":"https://api.postman.com/collections/26302675-b822e59f-2284-4762-916e-bf9f8a6736ce?access_key=PMAT-01GWHGPDTSW5VSEAZWQ5149E1Q"
+    },
+    "movieframe":[
+        {         
+            "name":"GET Reviews(admin)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/movies",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"GET User reviews(user)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "edu123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "edward",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/userReviewsList/Edward",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"userReviewsList",
+                        "Edward"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"GET Director By ID(user)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "edu123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "edward",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/directors/6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"directors",
+                        "6"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"GET Movie By ID(logged)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "private@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "private",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/movies/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+                        "1"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"GET Review By ID(logged)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "private@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "private",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/reviews/12",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"reviews",
+                        "12"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GET Movie director image(user)",
+			"request": {
+                "auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "edu123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "edward",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/movies/6/director/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+                        "6",
+                        "director",
+                        "image"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "GET Movie image(logged)",
+			"request": {
+                "auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "private@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "private",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/movies/4/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+                        "4",
+                        "image"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "POST Movie(admin)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Top Gun:Maverick\",\n    \"description\": \"To save the program, Maverick unilaterally changes the target speed for that day's test from Mach 9 to the final contract specification of Mach 10. However, ...\",\n    \"category\": \"Sci-fiction\",\n    \"votes\":3 \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/movies/addition/new",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+						"addition",
+                        "new"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "POST Review(logged)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "private@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "private",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4,\n    \"coments\": \"Der film ist einfach toll. David Tennant und Andy Serkis geben eine grandiose Vorstellung ihre jeweiligen Charaktere ab, sehr uberzeugend gespiel\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/movies/7/review/new",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+                        "7",
+						"review",
+                        "new"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "PUT Movie By ID(admin)",
+			"request": {
+                "auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Einstein and Eddington\",\n    \"description\": \"This is the history of the general theory of Relativity of Einstein, his relationship with Eddington and the introdution of this theory to the world\",\n    \"category\": \"Science\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/movies/7/edition",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+						"7",
+                        "edition"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "POST Movie image(admin)",
+			"request": {
+                "auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "form-data",
+					"formdata": [
+						{
+							"key": "imageFile",
+							"type": "file",
+							"src": "/main/resources/static/images/upload/film7.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/movies/addition/new/13/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+						"addition",
+                        "new",
+                        "13",
+                        "image"
+					]
+				}
+			},
+			"response": []
+		},
+        {         
+            "name":"GET Users(admin)",
+            "request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/usersList",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"usersList"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "DELETE Review By ID(admin)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "hughjackman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/reviewsList/10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"reviewsList",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+        {         
+            "name":"GET Movies(public)",
+            "request": {
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/movies",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"POST Movies name(public)",
+            "request": {
+                "method": "GET",
+				"header": [],
+                "body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"avatar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/movies/name",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"movies",
+                        "name"
+					]
+				}
+			},
+			"response": []
+        },
+        {         
+            "name":"POST User new(public)",
+            "request": {
+                "method": "POST",
+				"header": [],
+                "body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"harry\",\n    \"encodedPassword\": \"harriet68\",\n    \"name\": \"Harold\",\n    \"email\": \"edward@gmail.com\",\n    \"roles\": \"USER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/users/new",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+                        "new"
+					]
+				}
+			},
+			"response": []
+        }
+    ]
+}

@@ -51,7 +51,7 @@
 						<!--if user logged-->
 						{{#logged}}
 						{{#user}}
-					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/user">reviews</a></li>
+					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/{{userName}}">reviews</a></li>
 						<li class="btn btn-default dropdown-toggle lv1"><a href="/logout">sign out</a></li>
 						{{/user}}
 						<!--if administrator logged-->
@@ -91,7 +91,7 @@
 				<div class="movie-item">
 					
 					<div class="mv-img">
-						<img src="/movie/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
+						<img src="/api/movies/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
 					</div>
 					
 					<div class="title-in">
@@ -153,7 +153,7 @@ $(document).ready(function () {
 
 	function loadMovies(){
 		$.ajax({
-			url: 'https://localhost:8443/movies',
+			url: 'https://localhost:8443/api/movies',
 		}).done(data => {
 			//JSON.stringify(data);
 			console.log(data);

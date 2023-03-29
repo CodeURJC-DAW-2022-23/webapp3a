@@ -135,14 +135,17 @@ public class MovieController {
     }
 
     @PostMapping("/movie/{id}/review/new")
-    public String newReview(Model model,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments,HttpServletRequest request){
+    public String newReview(Model model,Review review,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments,HttpServletRequest request){
  
         if(request.isUserInRole("USER")){
             Optional<Movie> movie = movieService.findById(id);
 
             if(movie.isPresent()){
+
+                review.setRating(rating);
+                review.setComent(coments);
                 
-                movie.get().setReview(new Review(rating,coments));
+                movie.get().setReview(review);
                 movieService.save(movie.get());
 
                 model.addAttribute("title",movie.get().getTitle());

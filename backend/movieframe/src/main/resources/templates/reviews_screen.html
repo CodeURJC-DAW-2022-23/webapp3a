@@ -122,7 +122,7 @@
 	var tam = 10;
 	//console.log(tam);
 	
-	let ruta='https://localhost:8443/userReviewsList/?size=' + tam;
+	let ruta='https://localhost:8443/api/userReviewsList/{{userName}}?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -161,7 +161,7 @@
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/userReviewsList/?size=' + tam;
+			let ruta='https://localhost:8443/api/userReviewsList/{{userName}}?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({

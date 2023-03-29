@@ -53,31 +53,35 @@ public class movieRestController {
 
     @Autowired
     private DirectorService directorService;
-	
-    @GetMapping("/movies")
+
+    @GetMapping("/api/movies")
     public Page<Movie> getMovies(Model model,Pageable page){
 
         return movieService.findAll(page);
     }
 
-    @GetMapping("/reviewsList")
+    @GetMapping("/api/movies/name")
+    public Page<Movie> searchMovie(@RequestBody Movie movie,Pageable page){      
+
+        return movieService.findByTitle(movie.getTitle(),page);      
+    }
+
+    @GetMapping("/api/reviewsList")
     public Page<Review> getReviews(Model model,Pageable page){
 
         return reviewService.findAll(page);
     }
 
-    @GetMapping("/usersList")
+    @GetMapping("/api/usersList")
     public Page<User> getUsers(Model model,Pageable page){
 
         return userService.findAll(page);
     }
 
-    @GetMapping("/userReviewsList/")
-    public ResponseEntity<List<Review>> getUserReviews(Model model,HttpServletRequest request){
+    @GetMapping("/api/userReviewsList/{userName}")
+    public ResponseEntity<List<Review>> getUserReviews(Model model,@PathVariable String userName){
 
-        String name = request.getUserPrincipal().getName();
-
-        Optional<User> user = userService.findByUsername(name);
+        Optional<User> user = userService.findByUsername(userName);
 
         if(user.isPresent()){
             return ResponseEntity.ok(user.get().getReviews());
@@ -86,7 +90,7 @@ public class movieRestController {
         }
     }
 
-    @GetMapping("/movies/{id}")
+    @GetMapping("/api/movies/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
@@ -98,7 +102,7 @@ public class movieRestController {
         }   
     }
 
-    @GetMapping("/reviews/{id}")
+    @GetMapping("/api/reviews/{id}")
     public ResponseEntity<Review> getReview(@PathVariable Long id) {
 
         Optional<Review> review = reviewService.findById(id);
@@ -110,7 +114,7 @@ public class movieRestController {
         }   
     }
 
-    @DeleteMapping("/reviewsList/{id}")
+    @DeleteMapping("/api/reviewsList/{id}")
     public ResponseEntity<Review> deleteReviewById(Model model,@PathVariable Long id) {
 
         Optional<Review> review = reviewService.findById(id);
@@ -123,32 +127,15 @@ public class movieRestController {
         }   
     }
 
-    @PutMapping("/movies/{id}/edition")
-    public ResponseEntity<Movie> movieUpdating(Model model,Movie newMovie,@PathVariable Long id,@RequestParam String title,@RequestParam String gender,@RequestParam String description,HttpServletRequest request) throws IOException {
+    @PutMapping("/api/movies/{id}/edition")
+    public ResponseEntity<Movie> movieUpdating(Model model,@RequestBody Movie newMovie,@PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
 
         if (movie.isPresent()) {
 
-            newMovie.setTitle(title);
-            newMovie.setCategory(gender);
-            newMovie.setDescription(description);
-            
-            int votes = movie.get().getVotes();
-            List<Director> directors = movie.get().getDirectors();
-            newMovie.setVotes(votes);
-            newMovie.setDirectors(directors);
-            Blob image = movie.get().getImageFile();
-            newMovie.setImageFile(image);
-
             newMovie.setId(id);
             movieService.save(newMovie);
-
-            model.addAttribute("title",newMovie.getTitle());
-            model.addAttribute("gender",newMovie.getCategory());
-            model.addAttribute("description",newMovie.getDescription());
-            model.addAttribute("picture",movie.get().getImageFile());
-            model.addAttribute("directors",movie.get().getDirectors());
 
             return ResponseEntity.ok(newMovie);
         } else {
@@ -156,13 +143,19 @@ public class movieRestController {
         }
     }
     
-    @GetMapping("/directors/{id}")
+    @GetMapping("/api/directors/{id}")
     public ResponseEntity<Director> getDirector(@PathVariable long id){
+
         Optional<Director> director = directorService.findById(id);
-        return ResponseEntity.ok(director.get());
+
+        if(director.isPresent()){
+            return ResponseEntity.ok(director.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
      
-    @PostMapping("/movies/{id}/review/new")
+    @PostMapping("/api/movies/{id}/review/new")
     public ResponseEntity<Review> newReview(Model model,@PathVariable Long id,@RequestBody Review review){
 
         Optional<Movie> movie = movieService.findById(id);
@@ -171,26 +164,51 @@ public class movieRestController {
 
         movieService.save(movie.get());
 
-        URI location = fromCurrentRequest().path("/movies/{id}/review/new")
+        URI location = fromCurrentRequest().path("/{id}")
         .buildAndExpand(review.getId()).toUri();
 
         return ResponseEntity.created(location).body(review); 
     }
 
-    @PostMapping("/movies/addition/new")
-    public ResponseEntity<Movie> newMovie(Model model,Movie movie,MultipartFile imageFile) throws IOException {
-        
-        movie.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+    @PostMapping("/api/movies/addition/new")
+    public ResponseEntity<Movie> newMovie(@RequestBody Movie movie) {
 
         movieService.save(movie);
 
-        URI location = fromCurrentRequest().path("/movies/addition/new")
+        URI location = fromCurrentRequest().path("/api/movies/addition/new/{id}")
         .buildAndExpand(movie.getId()).toUri();
 
         return ResponseEntity.created(location).body(movie); 
     }
+
+    @PostMapping("/api/users/new")
+    public ResponseEntity<User> newUser(@RequestBody User user){
+
+        userService.save(user);  
+
+        URI location = fromCurrentRequest().path("/api/users/new/{id}")
+        .buildAndExpand(user.getId()).toUri();
+
+        return ResponseEntity.created(location).body(user);
+    }
+
+    @PostMapping("/api/movies/addition/new/{id}/image")
+    public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+
+        Optional<Movie> movie = movieService.findById(id);
+     
+        URI location = fromCurrentRequest().build().toUri();
+
+        movie.get().setImage(true);
+
+        movie.get().setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+
+        movieService.save(movie.get());
+
+        return ResponseEntity.created(location).build();
+    }
     
-    @GetMapping("/movie/{id}/image")
+    @GetMapping("/api/movies/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
         
         Optional<Movie> movie = movieService.findById(id);
@@ -205,9 +223,8 @@ public class movieRestController {
             return ResponseEntity.notFound().build();
         }
     }
-
     
-    @GetMapping("/movie/{id}/director/image")
+    @GetMapping("/api/movies/{id}/director/image")
     public ResponseEntity<Object> downloadDirectorImage(@PathVariable long id) throws SQLException {
         
         Optional<Director> director = directorService.findById(id);

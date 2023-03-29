@@ -120,7 +120,7 @@ footer section-->
 	var tam = 10;
 	console.log(tam);
 	
-	let ruta='https://localhost:8443/reviewsList/?size=' + tam;
+	let ruta='https://localhost:8443/api/reviewsList/?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -169,7 +169,7 @@ footer section-->
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/reviewsList/?size=' + tam;
+			let ruta='https://localhost:8443/api/reviewsList/?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
