@@ -1,28 +1,94 @@
 {
     "info":{
-        "_postman_id": "0fd6c2f6-0bf5-4fae-8624-3c18a74bd9c4",
-        "name": "Movieframe",
-        "schema":"https://api.postman.com/collections/26302675-b822e59f-2284-4762-916e-bf9f8a6736ce?access_key=PMAT-01GWHGPDTSW5VSEAZWQ5149E1Q"
+        "_postman_id": "26302675-83cfe97f-1b62-423a-a2ba-2cf344109cc3",
+        "name": "Movieframe_collection",
+        "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    "movieframe":[
+    "item":[
         {         
-            "name":"GET Reviews(admin)",
+            "name":"Admin Login",
             "request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"hughjackman\", \"password\": \"567890\" }",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
+				"url": {
+					"raw": "https://localhost:8443/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+        },
+		{         
+            "name":"User Login",
+            "request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"edward\", \"password\": \"edu123456\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+        },
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/auth/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					] 
+				}
+			},
+			"response": []
+		},
+        {         
+            "name":"Movies",
+            "request": {
                 "method": "GET",
 				"header": [],
 				"url": {
@@ -41,27 +107,21 @@
 			"response": []
         },
         {         
-            "name":"GET User reviews(user)",
+            "name":"New user",
             "request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "edu123456",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "edward",
-							"type": "string"
-						}
-					]
-				},
-                "method": "GET",
+                "method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"harry\",\n  \"encodedPassword\": \"harriet68\",\n  \"name\": \"Harold\",\n  \"email\":\"edward@gmail.com\",\n  \"roles\": \"USER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "https://localhost:8443/api/userReviewsList/Edward",
+					"raw": "https://localhost:8443/api/users/new",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -69,71 +129,25 @@
 					"port": "8443",
 					"path": [
 						"api",
-						"userReviewsList",
-                        "Edward"
+						"users",
+                        "new"
 					]
 				}
 			},
 			"response": []
         },
         {         
-            "name":"GET Director By ID(user)",
+            "name":"Movie",
             "request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "edu123456",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "edward",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
 				},
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/directors/6",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8443",
-					"path": [
-						"api",
-						"directors",
-                        "6"
-					]
-				}
-			},
-			"response": []
-        },
-        {         
-            "name":"GET Movie By ID(logged)",
-            "request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "private@gmail.com",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "private",
-							"type": "string"
-						}
-					]
-				},
-                "method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:8443/api/movies/1",
+					"raw": "https://localhost:8443/api/movies/4",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -142,34 +156,24 @@
 					"path": [
 						"api",
 						"movies",
-                        "1"
+                        "4"
 					]
 				}
 			},
 			"response": []
         },
         {         
-            "name":"GET Review By ID(logged)",
+            "name":"Review",
             "request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "private@gmail.com",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "private",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCpyrUGyx2s6x0cDPqZRnSatrrTRuLINeIU2JIECofOG+ADs/WJvrzorQgff83pnqCCCHu6k9G9Ke7dLL9wAB38jRsSO4yyjXGxQcY0cLJjG6iBNc7kmJkPj7cwQEYdlz5uQ=="
+					
 				},
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/reviews/12",
+					"raw": "https://localhost:8443/api/reviews/10",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -178,29 +182,19 @@
 					"path": [
 						"api",
 						"reviews",
-                        "12"
+                        "10"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "GET Movie director image(user)",
+			"name": "Director image",
 			"request": {
                 "auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "edu123456",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "edward",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
 				},
 				"method": "GET",
 				"header": [],
@@ -223,7 +217,7 @@
 			"response": []
 		},
         {
-			"name": "GET Movie image(public)",
+			"name": "Movie image",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -245,22 +239,12 @@
 			"response": []
 		},
         {
-			"name": "POST Movie(admin)",
+			"name": "New movie",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
 				},
 				"method": "POST",
 				"header": [],
@@ -291,28 +275,18 @@
 			"response": []
 		},
         {
-			"name": "POST Review(logged)",
+			"name": "New review",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "private@gmail.com",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "private",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"rating\": 4,\n    \"coments\": \"Der film ist einfach toll. David Tennant und Andy Serkis geben eine grandiose Vorstellung ihre jeweiligen Charaktere ab, sehr uberzeugend gespiel\"\n}",
+					"raw": "{\n    \"rating\": 5,\n    \"coments\": \"El carácter de los personajes es brutal y desternillante\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -338,22 +312,12 @@
 			"response": []
 		},
         {
-			"name": "PUT Movie By ID(admin)",
+			"name": "Update movie info",
 			"request": {
                 "auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
 				},
 				"method": "PUT",
 				"header": [],
@@ -384,22 +348,12 @@
 			"response": []
 		},
         {
-			"name": "POST Movie image(admin)",
+			"name": "New movie image",
 			"request": {
                 "auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
 				},
 				"method": "POST",
 				"header": [],
@@ -409,12 +363,12 @@
 						{
 							"key": "imageFile",
 							"type": "file",
-							"src": "/main/resources/static/images/upload/film7.jpg"
+							"src": "C:Users/mimit/OneDrive/Documentos/GitHub/webapp3a/backend/movieframe/src/main/resources/static/images/upload/film7.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/addition/new/13/image",
+					"raw": "https://localhost:8443/api/movies/addition/new/15/image",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -425,7 +379,7 @@
 						"movies",
 						"addition",
                         "new",
-                        "13",
+                        "15",
                         "image"
 					]
 				}
@@ -433,22 +387,12 @@
 			"response": []
 		},
         {         
-            "name":"GET Users(admin)",
+            "name":"Users list",
             "request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
 				},
                 "method": "GET",
 				"header": [],
@@ -468,27 +412,17 @@
 			"response": []
         },
         {
-			"name": "DELETE Review By ID(admin)",
+			"name": "Erase review",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{bcrypt}$2a$12$9nJUxHrHgRXGWWpt8tfmteaIl1Ts0EPQ/0aIgswVXIMgp7kwWHbd",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "hughjackman",
-							"type": "string"
-						}
-					]
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
 				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/reviewsList/10",
+					"raw": "https://localhost:8443/api/reviewsList/11",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -504,27 +438,7 @@
 			"response": []
 		},
         {         
-            "name":"GET Movies(public)",
-            "request": {
-                "method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:8443/api/movies",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8443",
-					"path": [
-						"api",
-						"movies"
-					]
-				}
-			},
-			"response": []
-        },
-        {         
-            "name":"POST Movies name(public)",
+            "name":"Movie searching",
             "request": {
                 "method": "GET",
 				"header": [],
@@ -552,36 +466,7 @@
 				}
 			},
 			"response": []
-        },
-        {         
-            "name":"POST User new(public)",
-            "request": {
-                "method": "POST",
-				"header": [],
-                "body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"harry\",\n    \"encodedPassword\": \"harriet68\",\n    \"name\": \"Harold\",\n    \"email\": \"edward@gmail.com\",\n    \"roles\": \"USER\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:8443/api/users/new",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8443",
-					"path": [
-						"api",
-						"users",
-                        "new"
-					]
-				}
-			},
-			"response": []
         }
+
     ]
 }

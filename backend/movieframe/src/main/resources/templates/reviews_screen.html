@@ -103,8 +103,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br> Cristobal Justo Rustarazo <br> Cassiel Seth Mayorca Heirisman <br>
-				Javier García Seller <br> Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>
@@ -122,7 +121,7 @@
 	var tam = 10;
 	//console.log(tam);
 	
-	let ruta='https://localhost:8443/api/userReviewsList/{{userName}}?size=' + tam;
+	let ruta='https://localhost:8443/userReviewsList/{{userName}}?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -130,8 +129,8 @@
 			url: ruta
 		}).done(function (reviews) {
 			console.log('reviews loaded: ' + JSON.stringify(reviews));
-			console.log(reviews);
-			console.log(reviews.length);
+			console.log(reviews.content);
+			console.log(reviews.size);
 			callback(reviews);
 		})
 	}
@@ -149,9 +148,9 @@
 
 		loadReviews(function(reviews,tam) {
 			//When reviews are loaded from server
-			if(reviews.length != 0){
-				for (var i = 0; i < reviews.length; i++) {
-					showReview(reviews[i]);
+			if(reviews.size != 0){
+				for (var i = 0; i < reviews.size; i++) {
+					showReview(reviews.content[i]);
 				}
 			}
 		});
@@ -161,22 +160,25 @@
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/api/userReviewsList/{{userName}}?size=' + tam;
+			let ruta='https://localhost:8443/userReviewsList/{{userName}}?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
 				url: ruta
 			}).done(function (reviews) {
+				$("#spinner-div").hide();
 				console.log('reviews loaded: ' + JSON.stringify(reviews));
-				console.log(reviews);
-				console.log(reviews.length);
-				if(reviews.length != 0){
-					for (var i = tam-10; i < reviews.length; i++) {
-						showReview(reviews[i]);
+				console.log(reviews.content);
+				console.log(reviews.size);
+				if(reviews.size != 0 && tam-10 < reviews.size){
+					for (var i = tam-10; i < reviews.size; i++) {
+						console.log(reviews.content[i]);
+						showReview(reviews.content[i]);
 					}
 				}
-				$("#spinner-div").hide();
+				
 			})
+			
 		})
 		
 	})

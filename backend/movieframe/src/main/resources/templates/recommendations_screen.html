@@ -126,14 +126,12 @@
 
 	//console.log(tam);
 
-	var ruta='https://localhost:8443/api/movies/?size=' + tam;
-	
+	let ruta='https://localhost:8443/movies?size=' + tam;	
 
 	function loadMovies(callback,tam) {
 		$.ajax({
 			url: ruta
 		}).done(function (movies) {
-			console.log('movies loaded: ' + JSON.stringify(movies));
 			console.log(movies.content);
 			console.log(movies.content.length);
 			callback(movies.content);
@@ -152,7 +150,7 @@
 
 	function sendNews(callback,movId) {
 		
-		var ruta='https://localhost:8443/api/movies/' + movId;
+		let ruta='https://localhost:8443/movies/' + movId;
 		$.ajax({
 			url: ruta
 		}).done(function (movie) {
@@ -178,13 +176,12 @@
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/api/movies/?size=' + tam;
+			let ruta='https://localhost:8443/movies?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
 				url: ruta
 			}).done(function (movies) {
-				console.log('movies loaded: ' + JSON.stringify(movies));
 				console.log(movies.content);
 				console.log(movies.content.length);
 				if(movies.length != 0){
@@ -198,10 +195,10 @@
 
 		var info = $("#movies");
 
-
 		info.click(function (event) {
 			var val = $(event.target).attr("id").split("-")[1];	
-			
+
+			console.log(val);
 
 			sendNews(function(movie, val){
 				var doc = new jsPDF();
@@ -221,15 +218,15 @@
 				img.src = "/images/uploads/film" +movie.id+ ".jpg"; 
 			}, val);
 		
-			loadMovies(function(movies,tam) {
+			//loadMovies(function(movies,tam) {
 				//When movies are loaded from server
-				if(movies.length != 0){
-					for (var i = 0; i < movies.length; i++) {
-						showMovie(movies[i]);
-					}
-				}
-			});
-			window.location.reload();
+			//	if(movies.length != 0){
+			//		for (var i = 0; i < movies.length; i++) {
+			//			showMovie(movies[i]);
+			//		}
+			//	}
+			//});
+			//window.location.reload();
 
 		})
 		

@@ -26,20 +26,20 @@ paths:
               $ref: '#/components/schemas/Movie'
         required: true
       responses:
-        "400":
-          description: Invalid id supplied
-        "404":
-          description: No movie with this id was found to update
         "200":
           description: Updated movie
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Movie'
+        "400":
+          description: Invalid id supplied
+        "404":
+          description: No movie with this id was found to update
   /api/users/new:
     post:
       tags:
-      - movie-rest-controller
+      - user-rest-controller
       summary: Post user
       operationId: newUser
       requestBody:
@@ -60,9 +60,9 @@ paths:
   /api/movies/{id}/review/new:
     post:
       tags:
-      - movie-rest-controller
+      - review-rest-controller
       summary: Post review into a movie
-      operationId: newReview
+      operationId: newReviewAPI
       parameters:
       - name: id
         in: path
@@ -79,14 +79,14 @@ paths:
       responses:
         "400":
           description: Invalid id supplied
+        "404":
+          description: No movie with this id was found to post a review
         "200":
           description: Posted review
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
-        "404":
-          description: No movie with this id was found to post a review
   /api/movies/addition/new:
     post:
       tags:
@@ -133,20 +133,237 @@ paths:
                   type: string
                   format: binary
       responses:
+        "400":
+          description: Invalid id supplied
+        "404":
+          description: No movie with this id was found to post it an image
         "200":
           description: Posted movie image
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Movie'
-        "400":
-          description: Invalid id supplied
-        "404":
-          description: No movie with this id was found to post it an image
-  /api/usersList:
+  /api/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: refreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logout
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      parameters:
+      - name: accessToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      - name: refreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /userReviewsList/{userName}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUserReviews
+      parameters:
+      - name: userName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageReview'
+  /reviewsList:
+    get:
+      tags:
+      - review-rest-controller
+      operationId: getReviews
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageReview'
+  /reviewsList/{id}:
+    get:
+      tags:
+      - review-rest-controller
+      operationId: deleteReviewById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageReview'
+  /reviews/{userName}:
+    get:
+      tags:
+      - review-rest-controller
+      operationId: getUserReviews_1
+      parameters:
+      - name: userName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /movies:
     get:
       tags:
       - movie-rest-controller
+      operationId: getMovies
+      parameters:
+      - name: page
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageMovie'
+  /movies/{id}:
+    get:
+      tags:
+      - movie-rest-controller
+      operationId: getMovie
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Movie'
+  /movies/{id}/image:
+    get:
+      tags:
+      - movie-rest-controller
+      operationId: downloadImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /movies/{id}/director/image:
+    get:
+      tags:
+      - movie-rest-controller
+      operationId: downloadDirectorImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/usersList:
+    get:
+      tags:
+      - user-rest-controller
       summary: Get users
       operationId: getUsers
       parameters:
@@ -167,9 +384,9 @@ paths:
   /api/userReviewsList/{userName}:
     get:
       tags:
-      - movie-rest-controller
+      - review-rest-controller
       summary: Get the currently logged user reviews
-      operationId: getUserReviews
+      operationId: getUserReviewsAPI
       parameters:
       - name: userName
         in: path
@@ -179,20 +396,20 @@ paths:
       responses:
         "400":
           description: Invalid username supplied
+        "404":
+          description: No review posted
         "200":
           description: Found user reviews
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
-        "404":
-          description: No review posted
   /api/reviewsList:
     get:
       tags:
-      - movie-rest-controller
+      - review-rest-controller
       summary: Get reviews
-      operationId: getReviews
+      operationId: getReviewsAPI
       parameters:
       - name: page
         in: query
@@ -200,18 +417,18 @@ paths:
         schema:
           $ref: '#/components/schemas/Pageable'
       responses:
-        "404":
-          description: No review founded
         "200":
           description: Found reviews list
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
+        "404":
+          description: No review founded
   /api/reviews/{id}:
     get:
       tags:
-      - movie-rest-controller
+      - review-rest-controller
       summary: Get review
       operationId: getReview
       parameters:
@@ -222,8 +439,6 @@ paths:
           type: integer
           format: int64
       responses:
-        "400":
-          description: Invalid id supplied
         "200":
           description: Found review
           content:
@@ -232,12 +447,14 @@ paths:
                 $ref: '#/components/schemas/Review'
         "404":
           description: No review with this id was found
+        "400":
+          description: Invalid id supplied
   /api/movies:
     get:
       tags:
       - movie-rest-controller
       summary: Get movies
-      operationId: getMovies
+      operationId: getMoviesAPI
       parameters:
       - name: page
         in: query
@@ -258,7 +475,7 @@ paths:
       tags:
       - movie-rest-controller
       summary: Get movie
-      operationId: getMovie
+      operationId: getMovieAPI
       parameters:
       - name: id
         in: path
@@ -267,14 +484,14 @@ paths:
           type: integer
           format: int64
       responses:
+        "400":
+          description: Invalid id supplied
         "200":
           description: Found movie
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Movie'
-        "400":
-          description: Invalid id supplied
         "404":
           description: No movie with this id was found
   /api/movies/{id}/image:
@@ -282,7 +499,7 @@ paths:
       tags:
       - movie-rest-controller
       summary: Get movie image
-      operationId: downloadImage
+      operationId: downloadImageAPI
       parameters:
       - name: id
         in: path
@@ -304,9 +521,9 @@ paths:
   /api/movies/{id}/director/image:
     get:
       tags:
-      - movie-rest-controller
+      - director-rest-controller
       summary: Get director image
-      operationId: downloadDirectorImage
+      operationId: downloadDirectorImageAPI
       parameters:
       - name: id
         in: path
@@ -354,7 +571,7 @@ paths:
   /api/directors/{id}:
     get:
       tags:
-      - movie-rest-controller
+      - director-rest-controller
       summary: Get director
       operationId: getDirector
       parameters:
@@ -365,22 +582,34 @@ paths:
           type: integer
           format: int64
       responses:
-        "400":
-          description: Invalid id supplied
-        "404":
-          description: No director with this id was found
         "200":
           description: Found director
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Director'
+        "400":
+          description: Invalid id supplied
+        "404":
+          description: No director with this id was found
+  /api/Users/current:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getCurrentUser
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
   /api/reviewsList/{id}:
     delete:
       tags:
-      - movie-rest-controller
+      - review-rest-controller
       summary: Delete review
-      operationId: deleteReviewById
+      operationId: deleteReviewById_1
       parameters:
       - name: id
         in: path
@@ -389,6 +618,8 @@ paths:
           type: integer
           format: int64
       responses:
+        "404":
+          description: No review with this id was found to delete
         "400":
           description: Invalid id supplied
         "200":
@@ -397,8 +628,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
-        "404":
-          description: No review with this id was found to delete
 components:
   schemas:
     Director:
@@ -420,15 +649,15 @@ components:
         score:
           type: number
           format: double
-        genre:
-          type: array
-          items:
-            type: string
         imageFile:
           type: object
           properties:
             binaryStream:
               type: object
+        genre:
+          type: array
+          items:
+            type: string
     Movie:
       type: object
       properties:
@@ -449,9 +678,6 @@ components:
             $ref: '#/components/schemas/Director'
         description:
           type: string
-        votes:
-          type: integer
-          format: int32
         imageFile:
           type: object
           properties:
@@ -459,6 +685,9 @@ components:
               type: object
         category:
           type: string
+        votes:
+          type: integer
+          format: int32
         review:
           $ref: '#/components/schemas/Review'
     Review:
@@ -483,8 +712,6 @@ components:
           format: int64
         username:
           type: string
-        encodedPassword:
-          type: string
         name:
           type: string
         email:
@@ -495,11 +722,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Review'
-        review:
-          $ref: '#/components/schemas/Review'
         mail:
           type: string
           writeOnly: true
+        review:
+          $ref: '#/components/schemas/Review'
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
     Pageable:
       type: object
       properties:
@@ -508,22 +754,86 @@ components:
           format: int64
         sort:
           $ref: '#/components/schemas/Sort'
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
         pageSize:
           type: integer
           format: int32
         pageNumber:
           type: integer
           format: int32
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
     Sort:
       type: object
       properties:
-        sorted:
-          type: boolean
         unsorted:
           type: boolean
+        sorted:
+          type: boolean
+        empty:
+          type: boolean
+    PageReview:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        empty:
+          type: boolean
+    PageMovie:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Movie'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        pageable:
+          $ref: '#/components/schemas/Pageable'
         empty:
           type: boolean

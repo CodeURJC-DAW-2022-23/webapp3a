@@ -27,7 +27,7 @@ public class Director {
     
     private String born;
 
-    
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
@@ -50,14 +50,12 @@ public class Director {
 
     public Director(String director,String name,String born,String residence,Double score,String... genre){
         super();
-        //this.user=author;
         this.director=director;
-        //this.biography=biography;
         this.name=name;
-        this.born=born;
-        this.genres=List.of(genre);
+        this.born=born;      
         this.residence=residence;
         this.score=score;
+        this.genres = List.of(genre);
     }
 
     public void setId(Long id){
@@ -107,14 +105,6 @@ public class Director {
     public String getBorn(){
         return born;
     }
-    
-    public void setGenre(String genre){
-        this.genres.add(genre);
-    }
-
-    public List<String> getGenre(){
-        return genres;
-    }
 
     public void setResidence(String residence){
         this.residence=residence;
@@ -130,6 +120,14 @@ public class Director {
 
     public double getScore(){
         return score;
+    }
+
+    public void setGenre(String genre){
+        this.genres.add(genre);
+    }
+
+    public List<String> getGenre(){
+        return genres;
     }
 
     public void setMovies(List<Movie> movieList){

@@ -2,6 +2,26 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.demo.DemoApplication"
+        },
+        {
+            "type": "java",
+            "name": "MovieframeVscodeApplication",
+            "request": "launch",
+            "mainClass": "es.movieframe.movieframevscode.MovieframeVscodeApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "MovieframeApplication",
+            "request": "launch",
+            "mainClass": "MovieframeApplication",
+            "projectName": "movieframe"
+        },
+        {
+            "type": "java",
             "name": "Application",
             "request": "launch",
             "mainClass": "es.codeurjc.items.Application",
@@ -25,6 +45,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "es.codeurjc.db.Application",
             "projectName": "bd_ejem20",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<rest_ejem1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "es.codeurjc.board.Application",
+            "projectName": "rest_ejem1",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

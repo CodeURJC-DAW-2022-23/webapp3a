@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import es.webapp3.movieframe.repository.ReviewRepository;
 import es.webapp3.movieframe.model.Review;
+import es.webapp3.movieframe.model.User;
 
 @Service
 public class ReviewService {
@@ -21,6 +22,10 @@ public class ReviewService {
 
 	public Optional<Review> findById(Long id) {
         return reviewsRepository.findById(id);
+	}
+
+	public Page<Review> findByUser(User user, Pageable page) {
+        return reviewsRepository.findByUser(user,page);
 	}
 
 	public void save(Review review) {

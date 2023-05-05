@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,38 +42,16 @@ public class ReviewController {
             model.addAttribute("logged", false);
         }
     }
-    
-    @GetMapping("/reviews/{userName}")
-    public String getUserReviews(Model model,@PathVariable String userName,HttpServletRequest request){    
 
-        if(request.isUserInRole("USER")){
-            String name = request.getUserPrincipal().getName();
-
-            userName = name;
-
-            Optional<User> currentUser = userService.findByUsername(name);
-
-            if(!currentUser.get().getReviews().isEmpty()){
-                model.addAttribute("reviews",currentUser.get().getReviews());
-            }else{
-                model.addAttribute("reviews"," ");
-            }
-            model.addAttribute("userName",name);
-            return "reviews_screen";
-        } else {
-            return "404";
-        }
-    }
-
-    @DeleteMapping("/reviews/deletion/{id}")
-    public String deleteReviewById(Model model,@PathVariable Long id,HttpServletRequest request) {
+    @GetMapping("/reviews/deletion/{id}")
+    public String removeReview(Model model,@PathVariable Long id,HttpServletRequest request) {
 
         if(request.isUserInRole("ADMIN")){
             Optional<Review> review = reviewService.findById(id);
 
             if(review.isPresent()){
                 reviewService.deleteById(id);
-                return "reviews_screen";
+                return "modification_reviews_screen";
             }else{
                 return "404";
             }   
@@ -92,6 +69,30 @@ public class ReviewController {
             model.addAttribute("reviews",reviews);
 
             return "modification_reviews_screen";
+        } else {
+            return "404";
+        }
+    }
+
+    
+
+    @GetMapping("/reviews/{userName}")
+    public String getUserReviews(Model model,@PathVariable String userName,HttpServletRequest request){    
+
+        if(request.isUserInRole("USER")){
+            String name = request.getUserPrincipal().getName();
+
+            userName = name;
+
+            Optional<User> currentUser = userService.findByUsername(name);
+
+            if(!currentUser.get().getReviews().isEmpty()){
+                model.addAttribute("reviews",currentUser.get().getReviews());
+            }else{
+                model.addAttribute("reviews"," ");
+            }
+            model.addAttribute("userName",name);
+            return "reviews_screen";
         } else {
             return "404";
         }

@@ -17,58 +17,73 @@
     </head>
 
 <body>
-<!--preloading-->
-<div id="preloader">
-    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
-    <div id="status">
-        <span></span>
-        <span></span>
-    </div>
-</div>
-<!--end of preloading-->
 
+<div id="preloader">
+	<img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
+	<div id="status">
+		<span></span>
+		<span></span>
+	</div>
+</div>
 
 <!-- BEGIN | Header -->
 <header class="ht-header">
 	<div class="container">
 		<nav class="navbar navbar-default navbar-custom">
 				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header logo">
-				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					    <span class="sr-only">Toggle navigation</span>
-					    <div id="nav-icon1">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-				    </div>
-				    <img class="logo" src="/images/logoMF.png" alt="" width="119" height="58">
-			    </div>
+				<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">MovieFrame</span>
+					<div id="nav-icon1">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<img class="logo" src="/images/logoMF.png" alt="" width="80" height="58">
 				<!-- Collect the nav links, forms, and other content for toggling -->
+				
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-					
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<!--if user logged-->
 						{{#logged}}
+						<!--if user logged-->
 						{{#user}}
-					    <li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><a href="/reviews/{{userName}}">reviews</a></li>
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/logout">sign out</a></li>
+						
+					    	<li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><button onclick="location.href='/reviews/{{userName}}'">reviews</button></li>
+							<li class="btn btn-default dropdown-toggle lv1">
+								<form action="/logout" method="post">
+									<input type="hidden" name="_csrf" value="{{token}}" />
+									<button class="btn btn-default navbar-btn" type="submit">log out</button>
+									
+								</form>
+							</li>
+						
 						{{/user}}
 						<!--if administrator logged-->
 						{{#admin}}
-						<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><a href="/reviews">reviews</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" ><a href="/news">news</a></li>
-						<li class="btn btn-default dropdown-toggle lv1" ><a href="/movie/addition">new movie</a></li>
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/logout">sign out</a></li>
-						{{/admin}}
-						{{/logged}}
-						<!--if didn´t log yet-->
+						
+							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/news'">news</button></li>
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/movie/addition'">new movie</button></li>
+							<li class="btn btn-default dropdown-toggle lv1">
+								<form action="/logout" method="post">
+									<input type="hidden" name="_csrf" value="{{token}}" />
+									<button class="btn btn-default navbar-btn" type="submit">log out</button>
+								</form>
+							</li>
+							
+						
+						{{/admin}}				                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+						{{/logged}}				
 						{{^logged}}
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/login">log in</a></li>	
-						<li class="btn btn-default dropdown-toggle lv1"><a href="/signup">sign up</a></li>					
+						<!--if didn´t log yet
+						-->
+							<li class="btn btn-default dropdown-toggle lv1"><a href="/login">log in</a></li>	
+							<li class="btn btn-default dropdown-toggle lv1"><a href="/signup">sign up</a></li>	
+
 						{{/logged}}
 					</ul>
-				</div>
+				</div>				
+				
 			<!-- /.navbar-collapse-->
 	    </nav>	 
 	</div>   
@@ -81,8 +96,9 @@
 	<div class="container" id="movie_item">
 
 		<form action="/movies/name" method="post">
-			<input name="name" class="movie_filter" type="text" placeholder="Enter a movie">
-			<input class="submit" type="submit" value="search">
+			<input name="name" class="movie_filter" type="text" placeholder="Enter a movie"/>		
+			<input class="submit" type="submit" value="search"/>
+			<input type="hidden" name="_csrf" value="{{token}}" />
 		</form>	
 	 
 		<div class="row">
@@ -91,7 +107,7 @@
 				<div class="movie-item">
 					
 					<div class="mv-img">
-						<img src="/api/movies/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
+						<img src="/movies/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
 					</div>
 					
 					<div class="title-in">
@@ -129,8 +145,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br> Cristobal Justo Rustarazo <br> Cassiel Seth Mayorca Heirisman <br>
-				Javier García Seller <br> Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>
@@ -153,7 +168,7 @@ $(document).ready(function () {
 
 	function loadMovies(){
 		$.ajax({
-			url: 'https://localhost:8443/api/movies',
+			url: 'https://localhost:8443/movies',
 		}).done(data => {
 			//JSON.stringify(data);
 			console.log(data);

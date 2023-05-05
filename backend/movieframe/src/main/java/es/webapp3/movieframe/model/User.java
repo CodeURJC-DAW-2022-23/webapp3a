@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User{
 
@@ -13,6 +15,8 @@ public class User{
     private Long id;
 
     private String username;
+
+    @JsonIgnore
     private String encodedPassword;
     private String name;
     private String email;
@@ -22,6 +26,12 @@ public class User{
     private List<Review> reviews = new ArrayList<>();
 
     public User(){}
+
+    public User(String username, String encodedPassword, String roles){
+        this.username=username;
+        this.encodedPassword=encodedPassword;
+        this.roles=roles;
+    }
 
     public void setReview(Review review){
         reviews.add(review);

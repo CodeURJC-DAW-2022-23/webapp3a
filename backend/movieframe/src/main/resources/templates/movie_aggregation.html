@@ -70,7 +70,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				
-				<form action="/movie/addition/new" method="newMovie" method="post" enctype="multipart/form-data">
+				<form action="/movie/addition/new" method="post" enctype="multipart/form-data">
 					<div>
 						<input type="text" name="title" rows="5" cols="2" placeholder="Movie title..."/>
 					</div>
@@ -96,7 +96,7 @@
 					<label class=reset for=radio0>reset</label>
 					<p>Image file:</p>
 					<input type='file' name='image1' accept=".jpg, .jpeg"/>
-
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 					<div class="title-hd-sm">
 						<input type="submit" value="add" class="redbtn" />
 					</div>				
@@ -113,8 +113,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br> Cristobal Justo Rustarazo <br> Cassiel Seth Mayorca Heirisman <br>
-				Javier García Seller <br> Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>	

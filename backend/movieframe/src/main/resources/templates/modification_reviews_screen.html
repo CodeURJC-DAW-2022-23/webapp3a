@@ -101,8 +101,7 @@ footer section-->
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br> Cristobal Justo Rustarazo <br> Cassiel Seth Mayorca Heirisman <br>
-				Javier García Seller <br> Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>
@@ -118,9 +117,9 @@ footer section-->
 <script>
 
 	var tam = 10;
-	console.log(tam);
+	//console.log(tam);
 	
-	let ruta='https://localhost:8443/api/reviewsList/?size=' + tam;
+	let ruta='https://localhost:8443/reviewsList?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -129,8 +128,8 @@ footer section-->
 		}).done(function (reviews) {
 			console.log('reviews loaded: ' + JSON.stringify(reviews));
 			console.log(reviews.content);
-			console.log(reviews.content.length);
-			callback(reviews.content);
+			console.log(reviews.size);
+			callback(reviews);
 		})
 	}
 
@@ -139,27 +138,17 @@ footer section-->
 
 		$('#comments').append(
 			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
-			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '" href="/reviews/deletion/' + review.id + '"> + Delete</button></p></div></div>'
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '" onclick="location.href="/reviews/deletion/' + review.id + '""> + Delete</button></p></div></div>'
 		)
-	}
-
-	//Delete item from server
-	function deleteReview(revId) {
-		$.ajax({
-			method: 'DELETE',
-			url: '/reviewsList/' + revId
-		}).done(function (review) {
-			console.log("Deleted review " + revId)
-		})
 	}
 
 	$(document).ready(function () {
 
 		loadReviews(function(reviews,tam) {
 			//When reviews are loaded from server
-			if(reviews.length != 0){
-				for (var i = 0; i < reviews.length; i++) {
-					showReview(reviews[i]);
+			if(reviews.size != 0){
+				for (var i = 0; i < reviews.size; i++) {
+					showReview(reviews.content[i]);
 				}
 			}
 		});
@@ -167,42 +156,55 @@ footer section-->
 		var info2 = $('.pagination');	
 
 		info2.click(function () {
-			tam+=10;
+			tam+=1;
 
-			let ruta='https://localhost:8443/api/reviewsList/?size=' + tam;
+			let ruta='https://localhost:8443/reviewsList?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
 				url: ruta
 			}).done(function (reviews) {
+				$("#spinner-div").hide();
 				console.log('reviews loaded: ' + JSON.stringify(reviews));
 				console.log(reviews.content);
-				console.log(reviews.content.length);
-				if(reviews.length != 0){
-					for (var i = tam-10; i < reviews.content.length; i++) {
+				console.log(reviews.size);
+				if(reviews.size != 0 && tam-1 < reviews.content.length){
+					for (var i = tam-1; i < reviews.content.length; i++) {
 						showReview(reviews.content[i]);
 					}
 				}
-				$("#spinner-div").hide();
+				
 			})
+			
 		})
 
 		var info = $("#comments");
 
 		//Handle delete buttons
 		info.click(function (event) {
+			tam = 10;
 			var val = $(event.target).attr("id").split("-")[1];	
 			//alert(val);
-			deleteReview(val);
-			
-			loadReviews(function(reviews,tam) {
+
+			let rutaBorrado='https://localhost:8443/reviewsList/' + val + '?size=10';
+			$("#spinner-div").show();
+			$.ajax({
+				url: rutaBorrado
+			}).done(function (reviews) {
+				console.log(reviews.content);
+				console.log("done");
+				console.log(reviews.content.length);
+				
 				//When reviews are loaded from server
-				if(reviews.length != 0){
-					for (var i = 0; i < reviews.length; i++) {
-						showReview(reviews[i]);
+				if(reviews.content.length != 0){
+					for (var i = 0; i < reviews.content.length; i++) {
+						showReview(reviews.content[i]);
 					}
 				}
-			});
+				
+			})
+			$("#spinner-div").hide();
+
 			window.location.reload();
 
 			//talert("review deleted");

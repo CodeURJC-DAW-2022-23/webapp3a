@@ -3,6 +3,7 @@ package es.webapp3.movieframe.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +30,11 @@ import org.springframework.web.multipart.MultipartFile;
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
+import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.DirectorService;
 import es.webapp3.movieframe.service.MovieService;
+import es.webapp3.movieframe.service.ReviewService;
+import es.webapp3.movieframe.service.UserService;
 
 @Controller
 public class MovieController {
@@ -36,6 +44,12 @@ public class MovieController {
 
     @Autowired
     private DirectorService directorService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
@@ -62,16 +76,6 @@ public class MovieController {
         }else{
             return "404";        
         }
-    }
-
-    @PostMapping("/movies/name")
-    public String searchMovie(Model model,@RequestParam String name,Pageable page){
-
-        Page<Movie> movies = movieService.findByTitle(name,page);
-
-        model.addAttribute("movieframe",movies);
-
-        return "initial_screen";       
     }
 
     @PostMapping("/movie/{id}/edition")
@@ -135,18 +139,27 @@ public class MovieController {
     }
 
     @PostMapping("/movie/{id}/review/new")
-    public String newReview(Model model,Review review,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments,HttpServletRequest request){
+    public String newReview(Model model,@PathVariable Long id,@RequestParam int rating, @RequestParam String coments,HttpServletRequest request){
  
         if(request.isUserInRole("USER")){
             Optional<Movie> movie = movieService.findById(id);
 
             if(movie.isPresent()){
 
+                Review review = new Review();
                 review.setRating(rating);
                 review.setComent(coments);
+
+                review.setMovie(movie.get());
                 
-                movie.get().setReview(review);
-                movieService.save(movie.get());
+                //movie.get().setReview(review);
+
+                Optional<User> user = userService.findByUsername(request.getUserPrincipal().getName());
+
+                review.setUser(user.get());
+                //user.get().setReview(review);
+
+                reviewService.save(review);
 
                 model.addAttribute("title",movie.get().getTitle());
                 model.addAttribute("gender",movie.get().getCategory());
@@ -174,6 +187,7 @@ public class MovieController {
                 model.addAttribute("description",movie.get().getDescription());
                 model.addAttribute("picture",movie.get().getImageFile());
                 model.addAttribute("directors",movie.get().getDirectors());
+
                 return "movie_screen";
             }else{
                 return "404";
@@ -182,7 +196,7 @@ public class MovieController {
     @GetMapping("/movie/{id}/director")
     public String getDirector(Model model,@PathVariable Long id,HttpServletRequest request){
 
-        if(request.isUserInRole("USER")){
+        if(request.isUserInRole("USER") || request.isUserInRole("ADMIN")){
             Optional<Director> director = directorService.findById(id);
             
             if(director.isPresent()){
@@ -201,6 +215,16 @@ public class MovieController {
         } else {
             return "404";
         }  
+    }
+
+    @PostMapping("/movies/name")
+    public String searchMovie(Model model,@RequestParam String name,Pageable page, HttpServletRequest request){
+
+        Page<Movie> movies = movieService.findByTitle(name,page);
+
+        model.addAttribute("movieframe",movies);
+
+        return "initial_screen";       
     }
     
 }

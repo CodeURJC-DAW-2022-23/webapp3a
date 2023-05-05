@@ -1,14 +1,13 @@
 package es.webapp3.movieframe.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,7 @@ import es.webapp3.movieframe.service.MovieService;
 import es.webapp3.movieframe.service.UserService;
 
 @Controller
-public class home{
+public class Home{
 
     @Autowired
     private MovieService movieService;
@@ -69,7 +68,9 @@ public class home{
     }
 
     @RequestMapping("/login")
-    public String login(Model model) {  
+    public String login(Model model) { 
+            
+        
         return "login_screen";
     }
 
@@ -97,7 +98,7 @@ public class home{
     }
 
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout(Model model) { 
         return "initial_screen";
     }
 

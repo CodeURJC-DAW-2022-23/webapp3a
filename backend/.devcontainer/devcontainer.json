@@ -1,5 +1,0 @@
-{
-    "name": "movieframe",
-    "dockerFile": "dockerFile",
-    "appPort": 8443
-}

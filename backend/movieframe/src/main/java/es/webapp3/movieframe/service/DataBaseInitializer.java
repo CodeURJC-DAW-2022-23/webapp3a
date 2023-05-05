@@ -2,14 +2,11 @@ package es.webapp3.movieframe.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,9 +36,6 @@ public class DataBaseInitializer {
     @Autowired
 	private DirectorRepository directorRepository;
 
-    @Value("${security.encodedPassword}")
-	private String encodedPassword;
-
     @Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -54,7 +48,7 @@ public class DataBaseInitializer {
 
         Review review3 = new Review(/*"hughjackman",*/4,"New Line’s remake of “Going in Style” launched with a moderate $...");
 
-        Director director1 = new Director("Joss Whedon","Joseph Hill Whedon","23 de junio de 1964 (58 años), New York","New York",4.0,"Action", "Sci-Fi", "Adventure");
+        Director director1 = new Director("Joss Whedon","Joseph Hill Whedon","23 de junio de 1964 (58 años), New York","New York",4.0,"Action");
         setDirectorImage(director1,"/images/uploads/josh_whedon3.jpg");
 
         director1.setBiography("Joseph Hill Whedon (/ˈhwiːdən/; born June 23, 1964) is an American filmmaker, composer, and comic book...");
@@ -120,21 +114,15 @@ public class DataBaseInitializer {
 
         movieRepository.save(movie6);  		
 		
-		User user1 = new User();
-        user1.setUsername("edward");  
-        user1.setEncodedPassword(passwordEncoder.encode("edu123456"));  
+		User user1 = new User("edward",passwordEncoder.encode("edu123456"),"USER");
         user1.setName("Edward");
         user1.setMail("mimiteemoc999@gmail.com");
-        user1.setRoles("USER");
 
         usersRepository.save(user1);
 
-        User user2 = new User();
-        user2.setUsername("hughjackman"); 
-        user2.setEncodedPassword(passwordEncoder.encode("{bcrypt}" + encodedPassword));  
+        User user2 = new User("hughjackman",passwordEncoder.encode("567890"),"ADMIN");
         user2.setName("Hugh");
         user2.setMail("hugh@jack.com");
-        user2.setRoles("ADMIN");
 
         usersRepository.save(user2);
         
