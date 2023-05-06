@@ -136,3 +136,65 @@ En esta fase se han realizado las siguientes tareas:
 - backend\movieframe\src\main\java\es\webapp3\movieframe\model\movie.java
 - backend\movieframe\src\main\java\es\webapp3\movieframe\service\DataBaseInitializer.java
 - backend\movieframe\src\main\resources\templates\recommendations_screen.html
+
+# FASE 3
+
+## **1. Documentación de la API Rest:**
+
+Link a la especificación OpenAPI:
+
+https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.yaml
+
+Link a la documentación en HTML:
+
+https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.html
+
+## **2. Actualización del diagrama de clases:**
+![clases1](Clases1.JPG)
+
+## **3. Instrucciones de ejecución de la aplicación dockerizada:**
+
+Primero hay que añadir las siguientes configuraciones al fichero "application.properties":
+
+```application.properties
+#MySQL connection
+
+spring.datasource.url=jdbc:mysql://db:3306/movieframe
+spring.datasource.username=root
+spring.datasource.password=Mundialmente1
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+```
+A continuación, se crea el fichero "docker-compose.yml" en el mismo directorio en el que se encuentra el archivo Dockerfile.
+Este fichero de docker-compose cuenta con 2 contenedores o servicios de la app, "web" y "db". El contenedor "db" usa la imagen estándar de mysql en DockerHub, `mysql:8.0`, además de variables de entorno que llevan las mismas configuraciones que el archivo de propiedades, y crear los volúmenes para que los datos sean persistentes. El contenedor "web" tiene definido el nombre de la imagen que se crea, las variables de entorno que usa, la ruta del Dockerfile para construir la imagen, los puertos asociados al host, una línea de código para indicar el orden de arranque, de manera que primero arranca el servicio "db" y luego el servicio "web"; y una política de espera
+
+## **4. Documentación para construir la imagen docker:**
+Como requisito principal se necesita disponer del fichero -Dockerfile- en el cual, a grandes rasgos, se añaden instrucciones para crear un contenedor de la imagen Maven llamado "builder", copiar el código y las dependencias del proyecto dentro del contenedor en la ruta /project, crear un contenedor de la imagen eclipse-temurin:17-jdk (el número de la versión se corresponde con el número de la versión con el que se ejecuta el proyecto).
+Para terminar, se introducen líneas de código para copiar el binario .jar desde el contenedor "builder", exponer el puerto 8443 y hacer el despliegue dentro del contenedor.
+Teniendo todo esto, se ejecuta el comando `docker build -t maalami2020/movieframe:v1 .`
+
+Con docker build se crea la imagen que va a contener el despliegue, con el nombre `maalami2020/movieframe`, donde "maalami2020" se refiere al nombre de usuario de DockerHub y "movieframe" al nombre del proyecto; la versión `v1` que es el tag, y el `.` porque es la dirección donde está el Dockerfile y donde se está ejecutando el comando.  
+ 
+## **5. Participación:**
+#### **_5.1. Tareas:_**
+En esta fase se han realizado las siguientes tareas:
+
+- crear los métodos de las funcionalidades de la web en versión API Rest; además, definirlos en la clase "@RestController" con la ruta empezando por "/api".
+- definir una clase "RestSecurityconfiguration" para controlar el acceso a las páginas de la API Rest
+- Definición de una colección en postman con peticiones acerca de las funcionalidades disponibles en la app, y redacción de la misma en el fichero "api.postman-collection.json"
+- Documentar la API Rest en remoto y local.
+- Construir imágenes y hacer el despliegue del proyecto en docker
+- Realizar el diseño arquitectónico con los métodos y clases de la API Rest y redactar el README
+#### **_5.2. Commits:_**
+* 385625bad3174894627c0fdfb2f1c8f13daaec36 --> peticiones Postman
+* 802d18bfa6c2b3632c455c4ae58255e85284b536 --> documentación de la API Rest en remoto
+* b7048ce05b0b97ee96ed2a33ba93a05462355ebc --> documentación de la API Rest en local
+* d2ab5480c466642eadaf3c3d07bce89c945a9d85 --> aplicación dockerizada
+*  --> diseño arquitectónico y README
+#### **_5.3. Ficheros:_**
+
+- backend\movieframe\api.postman_collection.json
+- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieRestController.java
+- backend\movieframe\pom.xml
+- backend\movieframe\docker\docker-compose.yml
+- backend\movieframe\src\main\java\es\webapp3\movieframe\security\RestSecurityconfiguration.java

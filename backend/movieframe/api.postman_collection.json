@@ -92,7 +92,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/movies",
+					"raw": "https://localhost:8443/api/movies?size=10",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -397,7 +397,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/usersList",
+					"raw": "https://localhost:8443/api/usersList?size=10",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -452,7 +452,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/name",
+					"raw": "https://localhost:8443/api/movies/name?size=10",
 					"protocol": "https",
 					"host": [
 						"localhost"
