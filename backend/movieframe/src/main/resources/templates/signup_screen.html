@@ -46,21 +46,52 @@
 </header>
 <!-- END | Header -->
 
+<div class="hero common-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					{{#logged}}
+					<h1>{{userName}}'s profile</h1>
+					{{/logged}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-			<div class="col-md-9 col-sm-12 col-xs-12">
-				<div class="form-style-1 user-pro">
-					<form action="/signup/new" method="post">
+			<form action="/signup/new" method="post" enctype="multipart/form-data">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img">
+							<img src="/user/image" alt="">{{#logged}}{{picture}}{{/logged}}<img/>
+						</div>
+						<div class="user-fav">
+							<p>Profile: </p>
+							{{#logged}}
+							<ul>
+								<li>{{username}}</li>
+								<li>{{name}}</li>
+								<li>{{email}}</li>
+							</ul>
+							{{/logged}}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="form-style-1 user-pro">
 						<div class="col-md-6 form-it">
 							<label>Username</label>
 							<input type="text" name="username"></input>
 						</div>
-                        <div class="col-md-6 form-it">
+						<div class="col-md-6 form-it">
 							<label>Name</label>
 							<input type="text" name="name"></input>
 						</div>
-                        <div class="col-md-6 form-it">
+						<div class="col-md-6 form-it">
 							<label>E-mail</label>
 							<input type="email" name="email"></input>
 						</div>
@@ -71,11 +102,14 @@
 						<div class="col-md-2">
 							<input class="submit" type="submit" value="register"></input>
 						</div>
+						<input type='file' name='image1' accept=".jpg, .jpeg"/>
+						<div class="title-hd-sm">
+							<input type="submit" value="Set avatar" class="redbtn" />
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					</form>
-                    <p>{{state}}</p>
+						<p>{{state}}</p>
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -86,8 +120,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br> Cristobal Justo Rustarazo <br> Cassiel Seth Mayorca Heirisman <br>
-				Javier García Seller <br> Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami <br>  Shadith Perez Rivera </p>
 			</div>		
 		</div>
 	</div>

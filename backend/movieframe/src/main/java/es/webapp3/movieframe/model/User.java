@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Blob;
+import javax.persistence.Lob;
 
 @Entity
 public class User{
@@ -21,6 +23,11 @@ public class User{
     private String name;
     private String email;
     private String roles;
+
+    @Lob 
+    private Blob avatar;
+
+    private  boolean image;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
@@ -93,6 +100,22 @@ public class User{
 
     public String getRoles(){
         return roles;
+    }
+
+    public Blob getImageFile(){
+        return avatar;
+    }
+
+    public void setImageFile(Blob image){
+        this.avatar=image;
+    }
+
+    public void setImage(boolean image){
+        this.image=image;
+    }
+
+    public boolean getImage(){
+        return image;
     }
     
 }

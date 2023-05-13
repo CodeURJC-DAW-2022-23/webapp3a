@@ -13,6 +13,8 @@
         <!-- CSS files -->
         <link rel="stylesheet" href="/css/plugins.css">
         <link rel="stylesheet" href="/css/style.css">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     </head>
 
     <body>
@@ -67,6 +69,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- blog list section-->
 <div class="page-single">
 	<div class="container">
@@ -85,6 +88,9 @@
             	</div>
 				<ul class="pagination">               
 					<li ><button>more results</button></li>
+				</ul>
+				<ul class="generatePDF">               
+					<li ><button>create PDF</button></li>
 				</ul>
 
 			</div>
@@ -144,6 +150,19 @@
 		)
 	}
 
+	function sendNews(callback) {
+		
+		let ruta1='https://localhost:8443/userReviewsList/{{userName}}';
+		console.log(ruta1);
+		$.ajax({
+			url: ruta1
+		}).done(function (reviews) {
+			//alert("PDF generated " + movie);
+			callback(reviews);
+			
+		})
+	}
+
 	$(document).ready(function () {
 
 		loadReviews(function(reviews,tam) {
@@ -179,6 +198,31 @@
 				
 			})
 			
+		})
+
+		var info = $('.generatePDF');
+
+		info.click(function () {
+			var cargaDatos = false;
+			sendNews(function(reviews){
+				console.log(reviews.content);
+
+				var doc = new jsPDF();
+
+				doc.setFontSize(60);
+				doc.text("REVIEWS", 55, 30);
+				doc.setFontSize(12);
+				for (var i = 1; i <= reviews.content.length; i++) {
+					console.log(reviews.content[i-1].coments);
+
+					doc.text(String(reviews.content[i-1].rating + ' /5'),25,(i+1)*30-7);
+					doc.text(doc.splitTextToSize(reviews.content[i-1].coments, 163), 25, (i+1)*30);
+				}
+				cargaDatos = true;
+				if(cargaDatos){
+					doc.save("Review listing.pdf");
+				}
+			});
 		})
 		
 	})

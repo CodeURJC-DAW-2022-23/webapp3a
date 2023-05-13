@@ -1,9 +1,16 @@
 package es.webapp3.movieframe.controller;
 
+import static org.mockito.Mockito.description;
+
+import java.io.IOException;
 import java.security.Principal;
+import java.sql.Blob;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,10 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.MovieService;
 import es.webapp3.movieframe.service.UserService;
@@ -23,8 +33,6 @@ import es.webapp3.movieframe.service.UserService;
 @Controller
 public class Home{
 
-    @Autowired
-    private MovieService movieService;
 
     @Autowired
     private UserService userService;
@@ -47,18 +55,8 @@ public class Home{
         }
     }
 
-    @GetMapping("/news")
-    public String showRecommendationScreen(HttpServletRequest request){
-        if(request.isUserInRole("ADMIN")){
-            return "recommendations_screen";
-        }else{
-            return "404";        
-        }
-    }
-
     @GetMapping("/")
     public String home(Model model,Pageable page){        
-        model.addAttribute("movieframe", movieService.findAll(page));
         return "initial_screen";
     }
 
@@ -75,20 +73,52 @@ public class Home{
     }
 
     @PostMapping("/signup/new")
-    public String newUser(Model model,User user,@RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password){
+    public String newUser(Model model,User user, @PathVariable Long id, @RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password,MultipartFile picture, HttpServletRequest request) throws IOException{
 
-        user.setUsername(username);
-        user.setName(name);
-        user.setMail(email);
-        user.setEncodedPassword(password);
-        user.setEncodedPassword(passwordEncoder.encode(password)); 
-        user.setRoles("USER");
+        if(request.isUserInRole("ADMIN") || request.isUserInRole("USER")){
 
-        userService.save(user);
+            Optional<User> usr = userService.findById(id);
 
-        model.addAttribute("state","user registered");
+            if (usr.isPresent()) {
 
-        return "signup_screen";  
+                //Movi      user = new Movie();
+
+                user.setUsername(username);
+                user.setName(name);
+                user.setMail(email);
+                user.setEncodedPassword(passwordEncoder.encode(password)); 
+                user.setRoles(usr.get().getRoles());
+                user.setImageFile(BlobProxy.generateProxy(picture.getInputStream(), picture.getSize()));
+             
+
+                user.setId(id);
+                userService.save(user);
+
+                model.addAttribute("picture",user.getImageFile());
+                model.addAttribute("username",user.getUsername());
+                model.addAttribute("name",user.getName());
+                model.addAttribute("email",user.getEmail());
+
+                model.addAttribute("state","user's info updated");
+
+            } else {
+                user.setUsername(username);
+                user.setName(name);
+                user.setMail(email);
+                user.setEncodedPassword(password);
+                user.setEncodedPassword(passwordEncoder.encode(password)); 
+                user.setRoles("USER");
+                user.setImageFile(BlobProxy.generateProxy(picture.getInputStream(), picture.getSize()));
+
+                userService.save(user);
+
+                model.addAttribute("state","user registered");
+
+
+            }
+        } 
+        return "signup_screen"; 
+
     }
     
     @GetMapping("/signup")

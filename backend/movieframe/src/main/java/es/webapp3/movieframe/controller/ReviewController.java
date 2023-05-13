@@ -63,15 +63,13 @@ public class ReviewController {
     @GetMapping("/reviews")
     public String getReviews(Model model,Pageable pageable,HttpServletRequest request){
 
-        if(request.isUserInRole("ADMIN")){
+        
             Page<Review> reviews = reviewService.findAll(pageable);
 
             model.addAttribute("reviews",reviews);
 
             return "modification_reviews_screen";
-        } else {
-            return "404";
-        }
+        
     }
 
     

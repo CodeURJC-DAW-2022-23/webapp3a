@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -218,13 +219,11 @@ public class MovieController {
     }
 
     @PostMapping("/movies/name")
-    public String searchMovie(Model model,@RequestParam String name,Pageable page, HttpServletRequest request){
+    public String searchMovie(Model model, @RequestParam String name,Pageable page,HttpServletRequest request){
 
-        Page<Movie> movies = movieService.findByTitle(name,page);
-
-        model.addAttribute("movieframe",movies);
-
-        return "initial_screen";       
+        Page<Movie> moviesFounded = movieService.findByTitle(name,PageRequest.of(0,10)); 
+        model.addAttribute("movieframe",moviesFounded);
+        return "initial_screen";    
     }
     
 }

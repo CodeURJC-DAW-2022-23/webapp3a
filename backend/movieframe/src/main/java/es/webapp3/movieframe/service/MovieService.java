@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import es.webapp3.movieframe.model.Movie;
@@ -35,7 +36,7 @@ public class MovieService {
 	}
 
 	public Page<Movie> findByTitle(String title,Pageable page) {
-		return movieRepository.findByTitle(title,page);
+		return movieRepository.findByTitle(title,PageRequest.of(0,10));
 	}
 	public List<Movie> findByGender(String gender){
 		return movieRepository.findByGender(gender);

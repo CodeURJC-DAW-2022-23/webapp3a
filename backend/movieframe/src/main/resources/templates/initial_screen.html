@@ -48,6 +48,7 @@
 						<!--if user logged-->
 						{{#user}}
 						
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/signup'">my profile</button></li>
 					    	<li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><button onclick="location.href='/reviews/{{userName}}'">reviews</button></li>
 							<li class="btn btn-default dropdown-toggle lv1">
 								<form action="/logout" method="post">
@@ -61,8 +62,7 @@
 						<!--if administrator logged-->
 						{{#admin}}
 						
-							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>
-							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/news'">news</button></li>
+							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>							
 							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/movie/addition'">new movie</button></li>
 							<li class="btn btn-default dropdown-toggle lv1">
 								<form action="/logout" method="post">
@@ -77,8 +77,9 @@
 						{{^logged}}
 						<!--if didn´t log yet
 						-->
-							<li class="btn btn-default dropdown-toggle lv1"><a href="/login">log in</a></li>	
-							<li class="btn btn-default dropdown-toggle lv1"><a href="/signup">sign up</a></li>	
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/login'">log in</button></li>	
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/signup'">sign up</button></li>
+							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>	
 
 						{{/logged}}
 					</ul>
@@ -100,11 +101,11 @@
 			<input class="submit" type="submit" value="search"/>
 			<input type="hidden" name="_csrf" value="{{token}}" />
 		</form>	
-	 
+
 		<div class="row">
-			<div  class="slick-multiItemSlider" >
-				{{#movieframe}}
-				<div class="movie-item">
+			{{#movieframe}}
+			<div class="flex-wrap-movielist mv-grid-fw">
+				<div class="movie-item-style-2 movie-item-style-1">
 					
 					<div class="mv-img">
 						<img src="/movies/{{id}}/image" alt="" width="285" height="437">{{movie_img}}</img>
@@ -119,13 +120,48 @@
 					<p><i class="ion-android-star"></i><span>{{movie_votes}}</span> /5</p>
 					
 				</div>
-				{{/movieframe}}
+			</div>
+			{{/movieframe}}
+		</div>
+
+		<div class="topbar-filter fw">
+			<p id="total-mv"></p>
+		</div>
+	 
+		<div class="row">
+			<div class="flex-wrap-movielist mv-grid-fw" id="movieList">
+
+				<!-- mv item -->
+			
+				
 			</div>
 		</div>
 	</div>
 	
 </div>
 
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="blog-detail-ct">
+					
+					<!-- comment items -->
+					<div id="comments"></div>
+				</div>
+				<ul class="pagination">               
+					<li ><button>more results</button></li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div id="spinner-div" class="pt-5">
+	<div class="spinner-border text-primary" role="status">
+	</div>
+</div>
 
 <!--end of latest new v1 section-->
 <style>
@@ -164,11 +200,125 @@
 
 <script>
 
+var tam = 10;
+//console.log(tam);
+
+let ruta='https://localhost:8443/movies?size=' + tam;
+
+function loadInitMovies(callback,tam) {
+	$.ajax({
+		url: ruta
+	}).done(function (movies) {
+		console.log('reviews loaded: ' + JSON.stringify(movies));
+		console.log(movies.content);
+		console.log(movies.size);
+		callback(movies);
+	})
+}
+
+//Show review in page
+function showMovieLoaded(movie) {
+
+	$('#movieList').append(
+		'<div class="movie-item-style-2 movie-item-style-1"><div class="mv-img"><img src="/movies/' + movie.id + '/image" alt="" width="285" height="437">' + movie.movie_img + 
+		'</img></div><div class="title-in"><div class="cate"><span class="blue">' + movie.category + '</span></div></div>{{#logged}}<h6><a href="/movie/' + movie.id + 
+		'">' + movie.title + '</a></h6>{{/logged}}{{^logged}}<h6>' + movie.title + '</h6>{{/logged}}<p><i class="ion-android-star"></i><span>' + movie.votes + '</span> /5</p></div>'
+	)
+}
+
+
 $(document).ready(function () {
+
+
+
+	loadInitMovies(function(movies,tam) {
+			//When reviews are loaded from server
+			$('#total-mv').append('Found <span>' + movies.totalElements + 'movies</span> in total')
+			if(movies.size != 0){
+				for (var i = 0; i < movies.size; i++) {
+					showMovieLoaded(movies.content[i]);
+				}
+			}
+		});
+
+	var info2 = $('.pagination');	
+	
+	info2.click(function () {
+		tam+=10;
+
+		let ruta='https://localhost:8443/movies?size=' + tam;
+		console.log(ruta);
+		$("#spinner-div").show();
+		$.ajax({
+			url: ruta
+		}).done(function (movies) {
+			$("#spinner-div").hide();
+			console.log('reviews loaded: ' + JSON.stringify(movies));
+			console.log(movies.content);
+			console.log(movies.size);
+			if(movies.size != 0 && tam-10 < movies.content.length){
+				for (var i = tam-10; i < movies.content.length; i++) {
+					showMovieLoaded(movies.content[i]);
+				}
+			}
+			
+		})
+		
+	})
+
+	var info3 = $('.submit');	
+	
+	info3.click(function () {
+		tam=10
+
+		let ruta='https://localhost:8443/movies/name?size=' + tam;
+		console.log(ruta);
+		$("#spinner-div").show();
+		$.ajax({
+			url: ruta
+		}).done(function (movies) {
+			$("#spinner-div").hide();
+			console.log('reviews loaded: ' + JSON.stringify(movies));
+			console.log(movies.content);
+			console.log(movies.size);
+			if(movies.size != 0 && tam-10 < movies.content.length){
+				for (var i = tam-10; i < movies.content.length; i++) {
+					showMovieLoaded(movies.content[i]);
+				}
+			}
+			
+		})
+		
+	})
+
+	//info3.click(function () {
+//
+	//	
+//
+	//	let ruta='https://localhost:8443/movies?size=' + tam + '&sort=title,asc';
+	//	console.log(ruta);
+	//	$("#spinner-div").show();
+	//	$.ajax({
+	//		url: ruta
+	//	}).done(function (movies) {
+	//		$("#spinner-div").hide();
+	//		console.log('reviews loaded: ' + JSON.stringify(movies));
+	//		console.log(movies.content);
+	//		console.log(movies.size);
+	//		if(movies.size != 0 && tam-10 < movies.content.length){
+	//			for (var i = tam-10; i < movies.content.length; i++) {
+	//				showMovieLoaded(movies.content[i]);
+	//			}
+	//		}
+	//		
+	//	})
+	//	
+	//	
+	//})
 
 	function loadMovies(){
 		$.ajax({
-			url: 'https://localhost:8443/movies',
+			url: 'https://localhost:8443/movies?size=' + tam,
 		}).done(data => {
 			//JSON.stringify(data);
 			console.log(data);

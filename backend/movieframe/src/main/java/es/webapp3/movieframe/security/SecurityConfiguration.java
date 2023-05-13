@@ -36,13 +36,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
-        http.authorizeRequests().antMatchers("/signup").permitAll();
-        http.authorizeRequests().antMatchers("/movies/name").permitAll();       
+        http.authorizeRequests().antMatchers("/signup").permitAll();     
         http.authorizeRequests().antMatchers("/movies/{id}/image").permitAll();
         http.authorizeRequests().antMatchers("/movie/{id}/director").hasAnyRole("ADMIN","USER");
         http.authorizeRequests().antMatchers("/movie/{id}").permitAll();
         http.authorizeRequests().antMatchers("/movies/{id}/director/image").permitAll();
+        http.authorizeRequests().antMatchers("/movies/name").permitAll();
         http.authorizeRequests().antMatchers("/movies/{id}").hasAnyRole("ADMIN","USER");
+
+        http.authorizeRequests().antMatchers("/reviews").permitAll();
+        http.authorizeRequests().antMatchers("/reviewsList").permitAll();
 
         // Private pages (all other pages)
         
@@ -52,11 +55,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/movie/addition").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/reviews/deletion/{id}").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/reviews").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/news").hasAnyRole("ADMIN");
+        
         http.authorizeRequests().antMatchers("/movie/{id}/edition").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/movie/addition/new").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/reviewsList").hasAnyRole("ADMIN");
+        
         http.authorizeRequests().antMatchers("/reviewsList/{id}").hasAnyRole("ADMIN");
 
         // Login form

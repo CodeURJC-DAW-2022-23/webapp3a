@@ -75,10 +75,7 @@
 				<div class="blog-detail-ct">
 					
 					<!-- comment items -->
-					<div id="comments">
-
-					</div>	
-					
+					<div id="comments"></div>
 				</div>
 				<ul class="pagination">               
 					<li ><button>more results</button></li>
@@ -138,7 +135,7 @@ footer section-->
 
 		$('#comments').append(
 			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
-			review.rating +'</span> /5</h3><p>' + review.coments + '</p><p><button id="review-' + review.id + '" onclick="location.href="/reviews/deletion/' + review.id + '""> + Delete</button></p></div></div>'
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p>{{#admin}}<p><button id="review-' + review.id + '" onclick="location.href="/reviews/deletion/' + review.id + '""> + Delete</button></p>{{/admin}}</div></div>'
 		)
 	}
 
@@ -156,7 +153,7 @@ footer section-->
 		var info2 = $('.pagination');	
 
 		info2.click(function () {
-			tam+=1;
+			tam+=10;
 
 			let ruta='https://localhost:8443/reviewsList?size=' + tam;
 			console.log(ruta);
@@ -168,8 +165,8 @@ footer section-->
 				console.log('reviews loaded: ' + JSON.stringify(reviews));
 				console.log(reviews.content);
 				console.log(reviews.size);
-				if(reviews.size != 0 && tam-1 < reviews.content.length){
-					for (var i = tam-1; i < reviews.content.length; i++) {
+				if(reviews.size != 0 && tam-10 < reviews.content.length){
+					for (var i = tam-10; i < reviews.content.length; i++) {
 						showReview(reviews.content[i]);
 					}
 				}

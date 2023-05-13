@@ -48,7 +48,7 @@ public class RestSecurityconfiguration extends WebSecurityConfigurerAdapter{
 
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/addition/new").hasRole("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/addition/new/{id}/image").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviewsList").hasRole("ADMIN");
+        //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviewsList").hasRole("ADMIN"); --permiso a todos los usuarios para que el no registrado pueda ver todas las reseñas
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usersList").hasRole("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/reviewsList/{id}").hasRole("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/movies/{id}/edition").hasRole("ADMIN");

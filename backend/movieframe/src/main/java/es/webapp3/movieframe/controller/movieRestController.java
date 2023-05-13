@@ -70,7 +70,7 @@ public class MovieRestController {
         @ApiResponse(responseCode = "404", description = "No movie matches this name", content = @Content)
     })
     @GetMapping("/api/movies/name")
-    public Page<Movie> searchMovie(@RequestBody Movie movie,Pageable page){      
+    public Page<Movie> searchMovieAPI(@RequestBody Movie movie,Pageable page){      
 
         return movieService.findByTitle(movie.getTitle(),page);      
     }
@@ -187,6 +187,8 @@ public class MovieRestController {
     public Page<Movie> getMovies(Model model,Pageable page){
         return movieService.findAll(page);
     }
+
+    
 
     @GetMapping("/movies/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
