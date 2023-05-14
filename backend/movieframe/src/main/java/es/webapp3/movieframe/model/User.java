@@ -27,8 +27,6 @@ public class User{
     @Lob 
     private Blob avatar;
 
-    private  boolean image;
-
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
@@ -110,12 +108,5 @@ public class User{
         this.avatar=image;
     }
 
-    public void setImage(boolean image){
-        this.image=image;
-    }
-
-    public boolean getImage(){
-        return image;
-    }
-    
+  
 }

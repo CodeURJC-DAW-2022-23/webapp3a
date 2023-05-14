@@ -8,5 +8,5 @@ public class SPAController {
     public String redirect() {
     return "forward:/new/index.html";
     }
-   
+ 
 }

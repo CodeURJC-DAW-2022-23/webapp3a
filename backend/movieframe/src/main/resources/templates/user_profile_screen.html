@@ -52,7 +52,7 @@
 			<div class="col-md-12">
 				<div class="hero-ct">
 					
-					<h1>Registration page</h1>
+					<h1>{{userName}}'s profile</h1>
 					
 				</div>
 			</div>
@@ -63,46 +63,46 @@
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-			<form action="/signup/new" method="post" enctype="multipart/form-data">
+			<form action="/user/{{userName}}/edition" method="post" enctype="multipart/form-data">
 				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="user-information">
 						<div class="user-img">
+							<img src="/user/{{userName}}/image" alt="">{{picture}}<img/>
 							<input type='file' name='image1' accept=".jpg, .jpeg"/>
 							<div class="title-hd-sm">
-								<input type="submit" value="Set avatar" class="redbtn" />
 								<input type="hidden" name="_csrf" value="{{token}}"/>
 							</div>
 						</div>
 						<div class="user-fav">
 							<p>Profile: </p>
-							<ul>
-								<li>username: {{username}}</li>
-								<li>name: {{name}}</li>
-								<li>email: {{email}}</li>
-							</ul>
+							
+								<p>username: {{username}}</p>
+								<p>name: {{name}}</p>
+								<p>email: {{email}}</p>
+							
 						</div>
 					</div>
 				</div>
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="form-style-1 user-pro">
 						<div class="col-md-6 form-it">
-							<label>Username</label>
+							<label>New username</label>
 							<input type="text" name="username"></input>
 						</div>
 						<div class="col-md-6 form-it">
-							<label>Name</label>
+							<label>New name</label>
 							<input type="text" name="name"></input>
 						</div>
 						<div class="col-md-6 form-it">
-							<label>E-mail</label>
+							<label>New e-mail</label>
 							<input type="email" name="email"></input>
 						</div>
 						<div class="col-md-6 form-it">
-							<label>Password</label>
+							<label>New password</label>
 							<input type="text" name="password" placeholder="***************"></input>
 						</div>
 						<div class="col-md-2">
-							<input class="submit" type="submit" value="register"></input>
+							<input class="submit" type="submit" value="update"></input>
 						</div>
 						
 						<p>{{state}}</p>

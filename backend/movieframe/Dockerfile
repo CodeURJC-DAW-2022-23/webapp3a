@@ -5,7 +5,7 @@ FROM node:16-alpine as builder-angular
 WORKDIR /code
 
 # se copia el codigo angular en la carpeta /code
-COPY frontend /code
+COPY frontend /code/
 
 # se instalan las dependencias
 RUN npm install
@@ -28,7 +28,7 @@ RUN mvn clean verify --fail-never
 
 # se copia el código del proyecto de angular
 COPY . /project
-COPY  --from=builder-angular /code/dist/frontend /project/src/java/resources/static/new
+COPY --from=builder-angular /code/ /project/src/main/resources/static/new
 
 # se compila el codigo de java una vez compilado el codigo de angular
 RUN mvn clean package -o -DskipTests=true

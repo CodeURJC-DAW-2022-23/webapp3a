@@ -48,7 +48,7 @@
 						<!--if user logged-->
 						{{#user}}
 						
-							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/signup'">my profile</button></li>
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/user/{{userName}}'">my profile</button></li>
 					    	<li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><button onclick="location.href='/reviews/{{userName}}'">reviews</button></li>
 							<li class="btn btn-default dropdown-toggle lv1">
 								<form action="/logout" method="post">
