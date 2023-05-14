@@ -5,8 +5,6 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
