@@ -97,7 +97,7 @@ public class UserRestController {
         }),
         @ApiResponse(responseCode = "404", description = "No user founded", content = @Content)
     })
-    @GetMapping("/api/Users/current")
+    @GetMapping("/api/users/current")
 	public ResponseEntity<User> getCurrentUser(HttpServletRequest request) {
 		
 		Principal principal = request.getUserPrincipal();

@@ -14,33 +14,21 @@ public class Director {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     
     private String director;
-
-    
     private String biography;
-
-    
     private String name;
-
-    
     private String born;
 
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
-
-    
+  
     private String residence;
-
-    
     private Double score;
-
 	
     @Lob
     private Blob img;
-
 	
     @ManyToMany
     @JsonIgnore

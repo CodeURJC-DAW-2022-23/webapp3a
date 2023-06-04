@@ -1,0 +1,158 @@
+<p>initial-screen works!</p>
+
+<div *ngIf="spinner" class="lds-ngx"></div>
+
+<div id="preloader">
+	<img class="logo" [src]="appLogo()" alt="" width="119" height="58">
+	<div id="status">
+		<span></span>
+		<span></span>
+	</div>
+</div>
+
+<header class="ht-header">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-custom">
+				<!--<div class="navbar-header logo">
+				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					    <span class="sr-only">Toggle navigation</span>
+					    <div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+				    </div>
+				    <img class="logo" [src]="appLogo()" alt="" width="119" height="58">
+			    </div>
+
+				<div *ngIf="loginService.isLogged()" class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					
+					<ul #user *ngIf="loginService.isUser()" class="nav navbar-nav flex-child-menu menu-right">
+						
+						<button class="btn btn-default dropdown-toggle lv1" (click)="myProfile()">my profile</button>
+						<button class="btn btn-default dropdown-toggle lv1" id="show_user_reviews" (click)="userReviews()">reviews</button>
+						<button class="btn btn-default dropdown-toggle lv1" (click)="logout()">sign out</button>
+					</ul>
+					<ul #admin *ngIf="loginService.isAdmin()" class="nav navbar-nav flex-child-menu menu-right">
+
+						<button class="btn btn-default dropdown-toggle lv1" id="show_reviews" (click)="reviews()">reviews</button>
+						<button class="btn btn-default dropdown-toggle lv1" (click)="newMovie()">new movie</button>
+						<button class="btn btn-default dropdown-toggle lv1" (click)="logout()">sign out</button>
+					</ul>
+				</div>
+				<div *ngIf="!loginService.isLogged()" class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					
+					<ul class="nav navbar-nav flex-child-menu menu-right">
+						<button class="btn btn-default dropdown-toggle lv1" (click)="login()">log in</button>	
+						<button class="btn btn-default dropdown-toggle lv1" (click)="signup()">sign up</button>					
+						<button class="btn btn-default dropdown-toggle lv1" id="show_reviews" (click)="reviews()">reviews</button>
+					</ul>
+				</div>-->			
+	    </nav>	 
+	</div>   
+</header>
+<!--END | Header -->
+
+<div class="slider movie-items">	
+	<div class="container" id="movie_item">
+
+		<!--<input #movieToSearch type="text" placeholder="Enter a movie"/>
+		<button (click)="searchMovies(movieToSearch.value); movieToSearch.value=''">search</button>
+	 
+		<div class="row">
+			<div  class="slick-multiItemSlider" >
+				<div *ngFor="let movieToSearch of moviesFounded">
+					<div class="mv-img">
+						<img alt="" width="285" height="437">{{movieToSearch.movie_img}}<br>
+					</div>
+					
+					<div class="title-in">
+						<div class="cate">
+							<span class="blue">{{movieToSearch.gender}}</span>
+						</div>
+					</div>
+					<h6 *ngIf="loginService.isLogged()">
+						<a [routerLink]="['/movies',movieToSearch.id]">{{movieToSearch.title}}</a>
+					</h6>
+					<h6 *ngIf="!loginService.isLogged()">{{movieToSearch.title}}</h6>
+					<p><i class="ion-android-star"></i><span>{{movieToSearch.movie_votes}}</span> /5</p>
+					
+				</div>
+			</div>
+		</div>
+		<div *ngIf="capacity">
+			<div class="topbar-filter fw">
+				<p id="total-mv" #capacity>Found <span>{{capacity}} movies</span> in total</p>
+			</div>
+		</div>-->
+	 
+		<div class="row">
+			<div class="flex-wrap-movielist mv-grid-fw" id="movieList">
+				<div *ngFor="let movie of movies">
+					<div class="movie-item-style-2 movie-item-style-1">
+						<!--<div class="mv-img">
+							<img alt="" width="285" height="437">{{movie.movie_img}}<br>
+						</div>-->
+						<div class="title-in">
+							<div class="cate">
+								<span class="blue">{{movie.category}}</span>
+							</div>
+						</div>
+						<!--<h6 *ngIf="loginService.isLogged()">
+							<a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+						</h6>
+						<h6 *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
+						<p><i class="ion-android-star"></i><span>{{movie.movie_votes}}</span> /5</p>-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>	
+</div>
+
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="blog-detail-ct">
+					
+					<div id="comments"></div>
+				</div>
+				<ul class="pagination">               
+					<button (click)="moreResults()">more results</button>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+<!--<div id="spinner-div" class="pt-5">
+	<div class="spinner-border text-primary" role="status">
+	</div>
+</div>-->
+
+<style>
+	.graph-lightbox {
+		display: block;
+		margin: 20px auto;
+	}
+</style>
+
+<!--<div id="plotlyChart" width="400" height="150"></div> ---CORREGIR GRÁFICO-->
+
+<!--footer section-->
+<footer class="ht-footer">
+	<div class="container">
+		<div class="flex-parent-ft">
+			<div class="flex-child-ft item1">
+				<p>Desarrollo de aplicaciones web<br></p>
+				<p>Maria Amparo Alami <br> Shadith Perez Rivera</p>
+			</div>		
+		</div>
+	</div>
+	
+</footer>
+<!--end of footer section-->
