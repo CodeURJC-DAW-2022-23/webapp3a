@@ -143,11 +143,11 @@ En esta fase se han realizado las siguientes tareas:
 
 Link a la especificación OpenAPI:
 
-https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.yaml
+https://raw.githack.com/CodeURJC-DAW-2022-23/webapp3a/fase-3/backend/movieframe/api-docs/api-docs.yaml
 
 Link a la documentación en HTML:
 
-https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.html
+https://raw.githack.com/CodeURJC-DAW-2022-23/webapp3a/fase-3/backend/movieframe/api-docs/api-docs.html
 
 ## **2. Actualización del diagrama de clases:**
 ![clases1](Clases1.JPG)
