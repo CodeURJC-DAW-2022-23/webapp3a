@@ -13,119 +13,114 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 
-
 @Entity
-public class Movie{
+public class Movie {
 
-
-    
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    
-    private String title;  
+
+    private String title;
     private String gender;
-    private  boolean image;
-    
+    private boolean image;
+
     private String movie_description;
 
-    @Lob 
+    @Lob
     private Blob movie_img;
-    
-    //this attribute contains a movie average value of votes
+
+    // this attribute contains a movie average value of votes
     private int movie_votes;
 
-
-    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-   
-    @ManyToMany(mappedBy="movies")
+    @ManyToMany(mappedBy = "movies")
     private List<Director> directors = new ArrayList<>();
 
-    public Movie(){}
+    public Movie() {
+    }
 
-    public void setReview(Review review){
+    public void setReview(Review review) {
         reviews.add(review);
         review.setMovie(this);
     }
 
-    public void removeReview(Review review){
+    public void removeReview(Review review) {
         reviews.remove(review);
         review.setMovie(null);
     }
 
-    public List<Review> getReviews(){
+    public List<Review> getReviews() {
         return reviews;
     }
 
-    public void removeDirector(Director director){
+    public void removeDirector(Director director) {
         this.directors.remove(director);
         director.removeMovie(this);
     }
 
-    public void setDirectors(List<Director> movieDirectors){
+    public void setDirectors(List<Director> movieDirectors) {
         this.directors = movieDirectors;
     }
 
-    public List<Director> getDirectors(){
+    public List<Director> getDirectors() {
         return directors;
     }
 
-    public void setDescription(String descript){
-        this.movie_description=descript;
+    public void setDescription(String descript) {
+        this.movie_description = descript;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return movie_description;
     }
 
-    public Blob getImageFile(){
+    public Blob getImageFile() {
         return movie_img;
     }
 
-    public void setImageFile(Blob image){
-        this.movie_img=image;
+    public void setImageFile(Blob image) {
+        this.movie_img = image;
     }
 
-    public void setCategory(String gender){
-        this.gender=gender;
+    public void setCategory(String gender) {
+        this.gender = gender;
     }
 
-    public String getCategory(){
+    public String getCategory() {
         return gender;
     }
 
-    public void setTitle(String title){
-        this.title=title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public void setId(Long id){
-        this.id=id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setVotes(int votes){
-        this.movie_votes=votes;
+    public void setVotes(int votes) {
+        this.movie_votes = votes;
     }
 
-    public int getVotes(){
+    public int getVotes() {
         return movie_votes;
     }
 
-    public void setImage(boolean image){
-        this.image=image;
+    public void setImage(boolean image) {
+        this.image = image;
     }
 
-    public boolean getImage(){
+    public boolean getImage() {
         return image;
     }
 

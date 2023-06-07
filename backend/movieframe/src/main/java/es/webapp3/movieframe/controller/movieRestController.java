@@ -40,7 +40,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 public class MovieRestController {
-    
+
     @Autowired
     private MovieService movieService;
 
@@ -49,60 +49,60 @@ public class MovieRestController {
 
     @Operation(summary = "Get movies")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found movies list", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "404", description = "No movie founded", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Found movies list", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "No movie founded", content = @Content)
     })
     @GetMapping("/api/movies")
-    public Page<Movie> getMoviesAPI(Model model,Pageable page){
+    public Page<Movie> getMoviesAPI(Model model, Pageable page) {
 
         return movieService.findAll(page);
     }
 
     @Operation(summary = "Get movies by a name introduced in a dialog box")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found movies", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "404", description = "No movie matches this name", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Found movies", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "No movie matches this name", content = @Content)
     })
     @GetMapping("/api/movies/name")
-    public Page<Movie> searchMovieAPI(@RequestBody Movie movie,Pageable page){      
+    public Page<Movie> searchMovieAPI(@RequestBody Movie movie, Pageable page) {
 
-        return movieService.findByTitle(movie.getTitle(),page);      
+        return movieService.findByTitle(movie.getTitle(), page);
     }
 
     @Operation(summary = "Get movie")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found movie", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No movie with this id was found", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Found movie", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No movie with this id was found", content = @Content)
     })
     @GetMapping("/api/movies/{id}")
     public ResponseEntity<Movie> getMovieAPI(@PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
 
-        if(movie.isPresent()){
-            return new ResponseEntity<>(movie.get(),HttpStatus.OK);
-        }else{
+        if (movie.isPresent()) {
+            return new ResponseEntity<>(movie.get(), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }   
+        }
     }
 
     @Operation(summary = "Update movie")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Updated movie", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No movie with this id was found to update", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Updated movie", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No movie with this id was found to update", content = @Content)
     })
     @PutMapping("/api/movies/{id}/edition")
-    public ResponseEntity<Movie> movieUpdating(Model model,@RequestBody Movie newMovie,@PathVariable Long id) {
+    public ResponseEntity<Movie> movieUpdating(Model model, @RequestBody Movie newMovie, @PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
 
@@ -111,7 +111,7 @@ public class MovieRestController {
             newMovie.setId(id);
             movieService.save(newMovie);
 
-            return new ResponseEntity<>(newMovie,HttpStatus.OK);
+            return new ResponseEntity<>(newMovie, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -119,10 +119,10 @@ public class MovieRestController {
 
     @Operation(summary = "Post movie")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Posted movie", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "404", description = "No movie posted", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Posted movie", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "No movie posted", content = @Content)
     })
     @PostMapping("/api/movies/addition/new")
     @ResponseStatus(HttpStatus.CREATED)
@@ -130,22 +130,23 @@ public class MovieRestController {
 
         movieService.save(movie);
 
-        return movie; 
+        return movie;
     }
 
     @Operation(summary = "Post movie image")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Posted movie image", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No movie with this id was found to post it an image", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Posted movie image", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No movie with this id was found to post it an image", content = @Content)
     })
     @PostMapping("/api/movies/addition/new/{id}/image")
-    public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+    public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+            throws IOException {
 
         Optional<Movie> movie = movieService.findById(id);
-     
+
         URI location = fromCurrentRequest().build().toUri();
 
         movie.get().setImage(true);
@@ -159,58 +160,56 @@ public class MovieRestController {
 
     @Operation(summary = "Get movie image")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found movie image", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No movie image with this id was found", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Found movie image", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No movie image with this id was found", content = @Content)
     })
     @GetMapping("/api/movies/{id}/image")
     public ResponseEntity<Object> downloadImageAPI(@PathVariable long id) throws SQLException {
-        
+
         Optional<Movie> movie = movieService.findById(id);
-        
+
         if (movie.isPresent() && movie.get().getImageFile() != null) {
             Resource file = new InputStreamResource(movie.get().getImageFile().getBinaryStream());
             return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(movie.get().getImageFile().length())
-                .body(file);
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .contentLength(movie.get().getImageFile().length())
+                    .body(file);
         } else {
             return ResponseEntity.notFound().build();
         }
-    } 
-    
-    @GetMapping("/movies")
-    public Page<Movie> getMovies(Model model,Pageable page){
-        return movieService.findAll(page);
     }
 
-    
+    @GetMapping("/movies")
+    public Page<Movie> getMovies(Model model, Pageable page) {
+        return movieService.findAll(page);
+    }
 
     @GetMapping("/movies/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
 
-        if(movie.isPresent()){
+        if (movie.isPresent()) {
             return ResponseEntity.ok(movie.get());
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
-        }   
+        }
     }
 
     @GetMapping("/movies/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
-        
+
         Optional<Movie> movie = movieService.findById(id);
-        
+
         if (movie.isPresent() && movie.get().getImageFile() != null) {
             Resource file = new InputStreamResource(movie.get().getImageFile().getBinaryStream());
             return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(movie.get().getImageFile().length())
-                .body(file);
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .contentLength(movie.get().getImageFile().length())
+                    .body(file);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -218,18 +217,18 @@ public class MovieRestController {
 
     @GetMapping("/movies/{id}/director/image")
     public ResponseEntity<Object> downloadDirectorImage(@PathVariable long id) throws SQLException {
-        
+
         Optional<Director> director = directorService.findById(id);
-        
+
         if (director.isPresent() && director.get().getImageFile() != null) {
             Resource file = new InputStreamResource(director.get().getImageFile().getBinaryStream());
             return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(director.get().getImageFile().length())
-                .body(file);
+                    .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .contentLength(director.get().getImageFile().length())
+                    .body(file);
         } else {
             return ResponseEntity.notFound().build();
         }
-    } 
-    
+    }
+
 }
