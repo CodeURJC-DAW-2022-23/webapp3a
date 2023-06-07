@@ -32,7 +32,7 @@ import es.webapp3.movieframe.service.ReviewService;
 import es.webapp3.movieframe.service.UserService;
 
 @Controller
-public class MovieController {
+public class movieController {
 
     @Autowired
     private MovieService movieService;
