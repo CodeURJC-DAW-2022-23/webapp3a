@@ -43,7 +43,7 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/reviews/deletion/{id}")
+    @GetMapping("/review/{id}")
     public String removeReview(Model model,@PathVariable Long id,HttpServletRequest request) {
 
         if(request.isUserInRole("ADMIN")){
@@ -60,21 +60,17 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/reviews")
+    @GetMapping("/review")
     public String getReviews(Model model,Pageable pageable,HttpServletRequest request){
-
-        
+     
             Page<Review> reviews = reviewService.findAll(pageable);
 
             model.addAttribute("reviews",reviews);
 
-            return "modification_reviews_screen";
-        
+            return "modification_reviews_screen";    
     }
 
-    
-
-    @GetMapping("/reviews/{userName}")
+    @GetMapping("/review/user/{userName}")
     public String getUserReviews(Model model,@PathVariable String userName,HttpServletRequest request){    
 
         if(request.isUserInRole("USER")){

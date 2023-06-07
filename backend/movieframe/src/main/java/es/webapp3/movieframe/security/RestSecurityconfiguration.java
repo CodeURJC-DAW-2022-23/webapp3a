@@ -46,20 +46,22 @@ public class RestSecurityconfiguration extends WebSecurityConfigurerAdapter{
 
         http.antMatcher("/api/**");
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/addition/new").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/addition/new/{id}/image").hasRole("ADMIN");
-        //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviewsList").hasRole("ADMIN"); --permiso a todos los usuarios para que el no registrado pueda ver todas las reseñas
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usersList").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/reviewsList/{id}").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/movies/{id}/edition").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}/director/image").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/directors/{id}").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/movies/{id}").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/{id}/image").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviews/user/{userName}").hasRole("USER");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/reviews/{id}").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/reviews/{id}").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/{id}/review/{userName}").hasRole("USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/users/{userName}").hasAnyRole("USER","ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/users/current").hasAnyRole("USER","ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/users/{id}/image").hasAnyRole("USER","ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/users/{userName}/image").hasAnyRole("USER","ADMIN");
 
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/movies/{id}/review/new").hasRole("USER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/userReviewsList/{username}").hasRole("USER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/directors/{id}").hasRole("USER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}/director/image").hasRole("USER");
-        
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}").hasAnyRole("USER","ADMIN");
+        //http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/movies/{id}").hasAnyRole("USER","ADMIN");
 
          // Other endpoints are public
         http.authorizeRequests().anyRequest().permitAll();

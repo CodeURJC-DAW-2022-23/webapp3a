@@ -1,12 +1,8 @@
 package es.webapp3.movieframe.controller;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,30 +23,6 @@ public class DirectorRestController {
 
     @Autowired
     private DirectorService directorService;
-
-    @Operation(summary = "Get director image")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found director image", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Director.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No director image with this id was found", content = @Content)
-    })
-    @GetMapping("/api/movies/{id}/director/image")
-    public ResponseEntity<Object> downloadDirectorImageAPI(@PathVariable long id) throws SQLException {
-        
-        Optional<Director> director = directorService.findById(id);
-        
-        if (director.isPresent() && director.get().getImageFile() != null) {
-            Resource file = new InputStreamResource(director.get().getImageFile().getBinaryStream());
-            return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                .contentLength(director.get().getImageFile().length())
-                .body(file);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    } 
 
     @Operation(summary = "Get director")
     @ApiResponses(value = {
