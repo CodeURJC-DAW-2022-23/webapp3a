@@ -66,6 +66,11 @@
               "browserTarget": "frontend:build:development"
             }
           },
+          "options": {
+            "port":8443,
+            "browserTarget":"movieframe:build",
+            "proxyConfig":"proxy.conf.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
