@@ -1,1 +1,0 @@
-docker build -t maalami2020/movieframe:v1 .
