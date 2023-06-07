@@ -36,8 +36,10 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+
     @Autowired
     private DirectorService directorService;
+
     @Autowired
     private UserService userService;
 
