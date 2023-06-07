@@ -181,14 +181,14 @@ public class DataBaseInitializer {
 		
 		User user1 = new User("edward",passwordEncoder.encode("edu123456"),"USER");
         user1.setName("Edward");
-        user1.setMail("mimiteemoc999@gmail.com");
+        user1.setEmail("mimiteemoc999@gmail.com");
         setUserImage(user1,"/images/uploads/userava1.jpg");
 
         usersRepository.save(user1);
 
         User user2 = new User("hughjackman",passwordEncoder.encode("567890"),"ADMIN");
         user2.setName("Hugh");
-        user2.setMail("hugh@jack.com");
+        user2.setEmail("hugh@jack.com");
         setUserImage(user2,"/images/uploads/userava2.jpg");
 
         usersRepository.save(user2);

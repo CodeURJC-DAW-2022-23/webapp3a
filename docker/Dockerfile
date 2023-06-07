@@ -1,18 +1,3 @@
-# se añaden la imagen de nodejs
-FROM node:16-alpine as builder-angular
-
-# nos situamos en la carpeta /code
-WORKDIR /code
-
-# se copia el codigo angular en la carpeta /code
-COPY frontend /code/
-
-# se instalan las dependencias
-RUN npm install
-
-# se ccompila el codigo angular
-RUN npm run build -- --prod --base-href=/new/
-
 # se añade la imagen de java
 FROM maven:3.9.0-eclipse-temurin-17 as builder
 
@@ -28,7 +13,6 @@ RUN mvn clean verify --fail-never
 
 # se copia el código del proyecto de angular
 COPY . /project
-COPY --from=builder-angular /code/ /project/src/main/resources/static/new
 
 # se compila el codigo de java una vez compilado el codigo de angular
 RUN mvn clean package -o -DskipTests=true
