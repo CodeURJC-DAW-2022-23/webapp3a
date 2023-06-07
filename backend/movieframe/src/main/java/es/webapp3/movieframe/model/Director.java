@@ -10,135 +10,127 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Director {
-    
+
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
     private String director;
 
-    
     private String biography;
 
-    
     private String name;
 
-    
     private String born;
-
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    
     private String residence;
 
-    
     private Double score;
 
-	
     @Lob
     private Blob img;
 
-	
     @ManyToMany
     @JsonIgnore
     private List<Movie> movies = new ArrayList<>();
 
-    public Director(){}
+    public Director() {
+    }
 
-    public Director(String director,String name,String born,String residence,Double score,String... genre){
+    public Director(String director, String name, String born, String residence, Double score, String... genre) {
         super();
-        this.director=director;
-        this.name=name;
-        this.born=born;      
-        this.residence=residence;
-        this.score=score;
+        this.director = director;
+        this.name = name;
+        this.born = born;
+        this.residence = residence;
+        this.score = score;
         this.genres = List.of(genre);
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.setId(id);
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public Blob getImageFile(){
+    public Blob getImageFile() {
         return img;
     }
 
-    public void setImageFile(Blob image){
-        this.img=image;
+    public void setImageFile(Blob image) {
+        this.img = image;
     }
 
-    public void setDirector(String director){
-        this.director=director;
+    public void setDirector(String director) {
+        this.director = director;
     }
 
-    public String getDirector(){
+    public String getDirector() {
         return director;
     }
 
-    public void setBiography(String biography){
-        this.biography=biography;
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 
-    public String getBiography(){
+    public String getBiography() {
         return biography;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setBorn(String born){
-        this.born=born;
+    public void setBorn(String born) {
+        this.born = born;
     }
 
-    public String getBorn(){
+    public String getBorn() {
         return born;
     }
 
-    public void setResidence(String residence){
-        this.residence=residence;
+    public void setResidence(String residence) {
+        this.residence = residence;
     }
 
-    public String getResidence(){
+    public String getResidence() {
         return residence;
     }
 
-    public void setScore(Double score){
-        this.score=score;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
-    public double getScore(){
+    public double getScore() {
         return score;
     }
 
-    public void setGenre(String genre){
+    public void setGenre(String genre) {
         this.genres.add(genre);
     }
 
-    public List<String> getGenre(){
+    public List<String> getGenre() {
         return genres;
     }
 
-    public void setMovies(List<Movie> movieList){
+    public void setMovies(List<Movie> movieList) {
         this.movies = movieList;
     }
 
-    public void removeMovie(Movie movie){
+    public void removeMovie(Movie movie) {
         this.movies.remove(movie);
     }
 
-    public List<Movie> getMovies(){
+    public List<Movie> getMovies() {
         return movies;
     }
 }
