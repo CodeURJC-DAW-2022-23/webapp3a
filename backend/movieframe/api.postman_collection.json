@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"username\": \"edward\", \"password\": \"edu123456\" }",
+					"raw": "{ \"username\": \"edward\", \"password\": \"edu123456\" },{ \"username\": \"harry\", \"password\": \"harriet68\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,7 +92,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/movies?size=10",
+					"raw": "https://localhost:8443/api/movies?page=0&size=10",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -101,6 +101,79 @@
 					"path": [
 						"api",
 						"movies"
+					]
+				}
+			},
+			"response": []
+        },
+		{         
+            "name":"User reviews",
+            "request": {
+				"auth": {
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/reviews/user/edward?page=0&size=10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"reviews",
+						"user",
+						"edward"
+					]
+				}
+			},
+			"response": []
+        },
+		{         
+            "name":"Reviews list",
+            "request": {
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/reviews",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+        },
+		{         
+            "name":"Director",
+            "request": {
+				"auth": {
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
+				},
+                "method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/directors/6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"directors",
+						"6"
 					]
 				}
 			},
@@ -121,7 +194,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/users/new",
+					"raw": "https://localhost:8443/api/users",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -129,8 +202,7 @@
 					"port": "8443",
 					"path": [
 						"api",
-						"users",
-                        "new"
+						"users"
 					]
 				}
 			},
@@ -147,7 +219,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/movies/4",
+					"raw": "https://localhost:8443/api/movies/14",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -156,7 +228,7 @@
 					"path": [
 						"api",
 						"movies",
-                        "4"
+                        "14"
 					]
 				}
 			},
@@ -173,7 +245,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/reviews/10",
+					"raw": "https://localhost:8443/api/reviews/18",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -182,7 +254,7 @@
 					"path": [
 						"api",
 						"reviews",
-                        "10"
+                        "18"
 					]
 				}
 			},
@@ -210,6 +282,33 @@
 						"movies",
                         "6",
                         "director",
+                        "image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Director image",
+			"request": {
+                "auth": {
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmQWeNaNsXPV5qSUvgqyjAA7Vi4lA5NJsPXv4xHf4PbSvCBOOuNqEsaHkv1Z3mWzlqj8gWTEK8pu8Oc1DMnBajySo1w5xNMATryVrkmKzGxrF66y1by/40/w6WDnhGO1yyDcftb/V/L50p7rkYWPf7n167yWCcplsdgU22m+N8q2PpmmzE4J+oLJVhEJhnCvUMHyx6YyPzvFr/benEo8g2cN"
+					
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/harry/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+                        "harry",
                         "image"
 					]
 				}
@@ -258,7 +357,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/addition/new",
+					"raw": "https://localhost:8443/api/movies",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -266,14 +365,13 @@
 					"port": "8443",
 					"path": [
 						"api",
-						"movies",
-						"addition",
-                        "new"
+						"movies"
 					]
 				}
 			},
 			"response": []
 		},
+		
         {
 			"name": "New review",
 			"request": {
@@ -294,7 +392,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/7/review/new",
+					"raw": "https://localhost:8443/api/movies/14/review/edward",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -303,9 +401,44 @@
 					"path": [
 						"api",
 						"movies",
-                        "7",
+                        "14",
 						"review",
-                        "new"
+                        "edward"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Last user",
+			"request": {
+                "auth": {
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"harold@gmail.com\",\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/users/harry",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"harry"
 					]
 				}
 			},
@@ -331,7 +464,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/7/edition",
+					"raw": "https://localhost:8443/api/movies/13",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -340,8 +473,44 @@
 					"path": [
 						"api",
 						"movies",
-						"7",
-                        "edition"
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New user image",
+			"request": {
+                "auth": {
+					"type": "bearer token",
+					"token": "yI9zDcX9gFoXVHaW14iwO2OR2i3o93814vyCgQCvnmTC4mMg2ou6cJ7Hhv8GnTsToM8KccLLyq4/Kt9r80cSspIP446WU6s6ZzJPIrS238nTkY/76PddyiXR8359jrwDBT507AM+WGc1hzUvgVuCp8IgtpNQ6THwps7S34goZDKa/sws9y7iU3GL5xxarGZ8IiN/LuKl4cXjl08+2vC8ygjkyUnHtWTzDlkXwx45f6fS1ygDJIgpNWA8uk64n7icdxMWwE1hwHuj1W9gCMcTMA=="
+					
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "form-data",
+					"formdata": [
+						{
+							"key": "imageFile",
+							"type": "file",
+							"src": "C:Users/mimit/OneDrive/Documentos/GitHub/webapp3a/backend/movieframe/src/main/resources/static/images/upload/cast7.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/users/21/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+                        "21",
+                        "image"
 					]
 				}
 			},
@@ -363,12 +532,12 @@
 						{
 							"key": "imageFile",
 							"type": "file",
-							"src": "C:Users/mimit/OneDrive/Documentos/GitHub/webapp3a/backend/movieframe/src/main/resources/static/images/upload/film7.jpg"
+							"src": "C:Users/mimit/OneDrive/Documentos/GitHub/webapp3a/backend/movieframe/src/main/resources/static/images/upload/mv-item7.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/addition/new/15/image",
+					"raw": "https://localhost:8443/api/movies/22/image",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -377,9 +546,7 @@
 					"path": [
 						"api",
 						"movies",
-						"addition",
-                        "new",
-                        "15",
+                        "22",
                         "image"
 					]
 				}
@@ -387,7 +554,7 @@
 			"response": []
 		},
         {         
-            "name":"Users list",
+            "name":"Current user",
             "request": {
 				"auth": {
 					"type": "bearer token",
@@ -397,7 +564,7 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/usersList?size=10",
+					"raw": "https://localhost:8443/api/users/current",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -405,7 +572,8 @@
 					"port": "8443",
 					"path": [
 						"api",
-						"usersList"
+						"users",
+						"current"
 					]
 				}
 			},
@@ -422,7 +590,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/reviewsList/11",
+					"raw": "https://localhost:8443/api/reviews/17",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -430,8 +598,8 @@
 					"port": "8443",
 					"path": [
 						"api",
-						"reviewsList",
-						"11"
+						"reviews",
+						"17"
 					]
 				}
 			},
@@ -452,7 +620,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/movies/name?size=10",
+					"raw": "https://localhost:8443/api/movies/name?page=0&size=10",
 					"protocol": "https",
 					"host": [
 						"localhost"

@@ -25,7 +25,7 @@ public class Movie{
     
     
     private String title;  
-    private String gender;
+    private String category;
     private  boolean image;
     
     private String movie_description;
@@ -89,12 +89,12 @@ public class Movie{
         this.movie_img=image;
     }
 
-    public void setCategory(String gender){
-        this.gender=gender;
+    public void setCategory(String category){
+        this.category=category;
     }
 
     public String getCategory(){
-        return gender;
+        return category;
     }
 
     public void setTitle(String title){

@@ -60,6 +60,12 @@ public class MovieRestController {
         return movieService.findAll(page);
     }
 
+    @GetMapping("/movies")
+    public Page<Movie> getMovies(Model model,Pageable page){
+
+        return movieService.findAll(page);
+    }
+
     @Operation(summary = "Get movies by a name introduced in a dialog box")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Found movies", content = {
@@ -69,6 +75,12 @@ public class MovieRestController {
     })
     @GetMapping("/api/movies/name")
     public Page<Movie> searchMovieAPI(@RequestBody Movie movie,Pageable page){      
+
+        return movieService.findByTitle(movie.getTitle(),page);      
+    }
+
+    @GetMapping("/movies/name")
+    public Page<Movie> searchMovie(@RequestBody Movie movie,Pageable page){      
 
         return movieService.findByTitle(movie.getTitle(),page);      
     }
@@ -93,6 +105,18 @@ public class MovieRestController {
         }   
     }
 
+    @GetMapping("/movies/{id}")
+    public ResponseEntity<Movie> getMovieBack(@PathVariable Long id) {
+
+        Optional<Movie> movie = movieService.findById(id);
+
+        if(movie.isPresent()){
+            return new ResponseEntity<>(movie.get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }   
+    }
+
     @Operation(summary = "Update movie")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Updated movie", content = {
@@ -101,15 +125,14 @@ public class MovieRestController {
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
         @ApiResponse(responseCode = "404", description = "No movie with this id was found to update", content = @Content)
     })
-    @PutMapping("/api/movies/{id}/edition")
-    public ResponseEntity<Movie> movieUpdating(Model model,@RequestBody Movie newMovie,@PathVariable Long id) {
+    @PutMapping("/api/movies/{id}")
+    public ResponseEntity<Movie> movieUpdating(@RequestBody Movie newMovie,@PathVariable Long id) {
 
         Optional<Movie> movie = movieService.findById(id);
 
         if (movie.isPresent()) {
 
-            newMovie.setId(id);
-            movieService.save(newMovie);
+            movieService.update(id,newMovie);
 
             return new ResponseEntity<>(newMovie,HttpStatus.OK);
         } else {
@@ -124,13 +147,16 @@ public class MovieRestController {
         }),
         @ApiResponse(responseCode = "404", description = "No movie posted", content = @Content)
     })
-    @PostMapping("/api/movies/addition/new")
+    @PostMapping("/api/movies")
     @ResponseStatus(HttpStatus.CREATED)
-    public Movie newMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Movie> newMovie(@RequestBody Movie movie) {
 
-        movieService.save(movie);
+        movieService.saveAPI(movie);
 
-        return movie; 
+        URI location = fromCurrentRequest().path("/{id}")
+            .buildAndExpand(movie.getId()).toUri();
+
+        return ResponseEntity.created(location).body(movie); 
     }
 
     @Operation(summary = "Post movie image")
@@ -141,7 +167,7 @@ public class MovieRestController {
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
         @ApiResponse(responseCode = "404", description = "No movie with this id was found to post it an image", content = @Content)
     })
-    @PostMapping("/api/movies/addition/new/{id}/image")
+    @PostMapping("/api/movies/{id}/image")
     public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
 
         Optional<Movie> movie = movieService.findById(id);
@@ -152,7 +178,7 @@ public class MovieRestController {
 
         movie.get().setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
 
-        movieService.save(movie.get());
+        movieService.saveAPI(movie.get());
 
         return ResponseEntity.created(location).build();
     }
@@ -180,25 +206,6 @@ public class MovieRestController {
             return ResponseEntity.notFound().build();
         }
     } 
-    
-    @GetMapping("/movies")
-    public Page<Movie> getMovies(Model model,Pageable page){
-        return movieService.findAll(page);
-    }
-
-    
-
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
-
-        Optional<Movie> movie = movieService.findById(id);
-
-        if(movie.isPresent()){
-            return ResponseEntity.ok(movie.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }   
-    }
 
     @GetMapping("/movies/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
@@ -210,6 +217,30 @@ public class MovieRestController {
             return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
                 .contentLength(movie.get().getImageFile().length())
+                .body(file);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    } 
+
+    @Operation(summary = "Get movie director image")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Found movie image", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "No movie image with this id was found", content = @Content)
+    })
+    @GetMapping("/api/movies/{id}/director/image")
+    public ResponseEntity<Object> downloadDirectorImageAPI(@PathVariable long id) throws SQLException {
+        
+        Optional<Director> director = directorService.findById(id);
+        
+        if (director.isPresent() && director.get().getImageFile() != null) {
+            Resource file = new InputStreamResource(director.get().getImageFile().getBinaryStream());
+            return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                .contentLength(director.get().getImageFile().length())
                 .body(file);
         } else {
             return ResponseEntity.notFound().build();
@@ -230,6 +261,6 @@ public class MovieRestController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    } 
+    }
     
 }

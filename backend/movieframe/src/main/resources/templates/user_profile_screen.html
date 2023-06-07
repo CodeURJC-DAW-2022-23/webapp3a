@@ -63,22 +63,18 @@
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-			<form action="/user/{{userName}}/edition" method="post" enctype="multipart/form-data">
+			<form action="/user/{{userName}}" method="post" enctype="multipart/form-data">
 				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="user-information">
 						<div class="user-img">
-							<img src="/user/{{userName}}/image" alt="">{{picture}}<img/>
-							<input type='file' name='image1' accept=".jpg, .jpeg"/>
-							<div class="title-hd-sm">
-								<input type="hidden" name="_csrf" value="{{token}}"/>
-							</div>
+							<img src="/users/{{userName}}/image" alt="">{{picture}}<img/>
 						</div>
 						<div class="user-fav">
 							<p>Profile: </p>
 							
-								<p>username: {{username}}</p>
-								<p>name: {{name}}</p>
-								<p>email: {{email}}</p>
+							<p>username: {{username}}</p>
+							<p>name: {{name}}</p>
+							<p>email: {{email}}</p>
 							
 						</div>
 					</div>
@@ -101,14 +97,19 @@
 							<label>New password</label>
 							<input type="text" name="password" placeholder="***************"></input>
 						</div>
+						<div class="col-md-6 form-it">
+							<input type='file' name='imageField' accept=".jpg, .jpeg"/>
+							<div class="title-hd-sm">
+								<input type="hidden" name="_csrf" value="{{token}}"/>
+							</div>
+						</div>
 						<div class="col-md-2">
 							<input class="submit" type="submit" value="update"></input>
 						</div>
-						
-						<p>{{state}}</p>
 					</div>
 				</div>
 			</form>
+			<p>{{state}}</p>
 		</div>
 	</div>
 </div>
@@ -119,7 +120,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br>  Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>

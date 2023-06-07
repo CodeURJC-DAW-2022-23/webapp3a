@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
 import javax.persistence.Lob;
 
@@ -18,8 +17,8 @@ public class User{
 
     private String username;
 
-    @JsonIgnore
     private String encodedPassword;
+
     private String name;
     private String email;
     private String roles;
@@ -68,8 +67,8 @@ public class User{
         return username;
     }
 
-    public void setEncodedPassword(String password){
-        this.encodedPassword=password;
+    public void setEncodedPassword(String encodedPassword){
+        this.encodedPassword=encodedPassword;
     }
 
     public String getEncodedPassword(){
@@ -84,8 +83,8 @@ public class User{
         return name;
     }
 
-    public void setMail(String mail){
-        this.email=mail;
+    public void setEmail(String email){
+        this.email=email;
     }
 
     public String getEmail(){

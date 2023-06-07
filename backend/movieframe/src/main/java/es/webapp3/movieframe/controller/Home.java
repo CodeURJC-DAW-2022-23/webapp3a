@@ -3,7 +3,6 @@ package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.SQLException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,61 +60,52 @@ public class Home{
     }
 
     @RequestMapping("/login")
-    public String login(Model model) { 
-            
-        
+    public String login(Model model) {        
         return "login_screen";
     }
 
-    @PostMapping("/signup/new")
-    public String newUser(Model model,User user, @RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password,MultipartFile image1, HttpServletRequest request) throws IOException, SQLException{
+    @PostMapping("/signup")
+    public String newUser(Model model,User user,MultipartFile imageField) throws IOException{
 
-                user.setUsername(username);
-                user.setName(name);
-                user.setMail(email);
-                user.setEncodedPassword(password);
-                user.setEncodedPassword(passwordEncoder.encode(password)); 
-                user.setRoles("USER");
-                if(!image1.isEmpty()){
-                    user.setImageFile(BlobProxy.generateProxy(image1.getInputStream(), image1.getSize()));
-                   
-                }
-                userService.save(user);
+        if(!imageField.isEmpty()){
+            user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+        }
+        User userSaved = userService.save(user);
 
-                model.addAttribute("username",user.getUsername());
-                model.addAttribute("name",user.getName());
-                model.addAttribute("email",user.getEmail());
-                model.addAttribute("state","user registered");
-        
-        return "signup_screen"; 
-
+        if(userSaved != null){
+            model.addAttribute("state","user registered");
+        } else {
+            model.addAttribute("state","some mandatory fields are incomplete");
+        }
+    
+        return "signup_screen";
     }
 
-    @PostMapping("/user/{userName}/edition")
-    public String userProfileEdition(Model model,@PathVariable String userName, @RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password,MultipartFile image1, HttpServletRequest request) throws IOException{
+    @PostMapping("/user/{userName}")
+    public String userProfileEdition(Model model,@RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password,MultipartFile imageField,@PathVariable String userName,HttpServletRequest request) throws IOException{
 
         if(request.isUserInRole("ADMIN") || request.isUserInRole("USER")){
 
-            Optional<User> oldUser = userService.findByUsername(userName);
+            Optional<User> user = userService.findByUsername(userName);
 
-            if (oldUser.isPresent()) {
+            if (user.isPresent()) {
 
-                User user = new User(username,passwordEncoder.encode(password),oldUser.get().getRoles());
-
-                user.setName(name);
-                user.setMail(email);                
-
-                user.setId(oldUser.get().getId());
-                user.setImageFile(BlobProxy.generateProxy(image1.getInputStream(), image1.getSize()));
-                userService.save(user);
-
-                model.addAttribute("picture",user.getImageFile());
-                model.addAttribute("username",user.getUsername());
-                model.addAttribute("name",user.getName());
-                model.addAttribute("email",user.getEmail());
-
-                model.addAttribute("state","user's info updated");
-                
+                User newUser = new User();
+                newUser.setUsername(username);
+                newUser.setName(name);
+                newUser.setEmail(email);
+                if(!password.equals("")){
+                    newUser.setEncodedPassword(passwordEncoder.encode(password));  
+                }
+                if(!imageField.isEmpty()){
+                    newUser.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+                }
+                userService.update(userName, newUser);
+                model.addAttribute("state","user's info updated");     
+                model.addAttribute("username", newUser.getUsername());
+                model.addAttribute("name", newUser.getName());
+                model.addAttribute("email", newUser.getEmail());
+                model.addAttribute("picture", newUser.getImageFile());
             } else {
                 return "404";
             }
@@ -133,12 +123,12 @@ public class Home{
             Optional<User> user = userService.findByUsername(userName);
 
             if (user.isPresent()) {
-                model.addAttribute("picture",user.get().getImageFile());
-                model.addAttribute("username",user.get().getUsername());
-                model.addAttribute("name",user.get().getName());
-                model.addAttribute("email",user.get().getEmail());
 
                 model.addAttribute("state"," ");
+                model.addAttribute("username", user.get().getUsername());
+                model.addAttribute("name", user.get().getName());
+                model.addAttribute("email", user.get().getEmail());
+                model.addAttribute("picture", user.get().getImageFile());
                 
             } else {
                 return "404";
@@ -150,10 +140,7 @@ public class Home{
     }
     
     @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("username", "");
-        model.addAttribute("name"," ");
-        model.addAttribute("email"," "); 
+    public String signup(Model model) { 
         model.addAttribute("state"," ");
         return "signup_screen";
     }

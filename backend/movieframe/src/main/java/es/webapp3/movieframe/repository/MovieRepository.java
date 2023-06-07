@@ -14,9 +14,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
     @Query("SELECT m from Movie m where m.title like ?1 order by m.movie_votes desc")
     Page<Movie> findByTitle(String name,Pageable page);
 
-    Movie findSingleByTitle(String gender);
+    Movie findSingleByTitle(String category);
 
-    List<Movie> findByGender(String gender);
+    List<Movie> findByCategory(String category);
 
     Page<Movie> findAll(Pageable page);
 
