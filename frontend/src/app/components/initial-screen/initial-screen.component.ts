@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Movie } from 'src/app/models/Movie.model';
+import { LoginService } from 'src/app/services/login.service';
+import { MoviesService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-initial-screen',
@@ -6,19 +10,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./initial-screen.component.css']
 })
 export class InitialScreenComponent {
-/* 
-  private tam: number = 10;
-	movies: Movie[] = [];
-	moviesFounded: Movie[] = [];
-	capacity: number = 0; 
-	movieService: MoviesService;
-	loginService: LoginService;
 
-	constructor(private spinner: NgxSpinnerService, loginService: LoginService, movieService:MoviesService){
-		this.movieService = movieService;
-		this.loginService = loginService;
-	}
-	//private movie!: Movie;
+  movies: Movie[] = [];
+  private tam: number = 10;
+  capacity: number = 0;
+
+/*	moviesFounded: Movie[] = [];
+	capacity: number = 0; 
+	loginService: LoginService;
+*/
+	constructor(private router: Router, private movieService: MoviesService, public loginService: LoginService) {}
+	
+  /*private movie!: Movie;
 	//private titlesGraph: string[] = [];
 	//private reviewsGraph: number[] = [];
 	//
@@ -29,17 +32,14 @@ export class InitialScreenComponent {
 	//		type: 'bar'
 	//	},
 	//	layout: {width: 400, height: 150, title: 'A Fancy Plot'}
-	//};
-
-    //constructor(private router: Router, private movieService: MoviesService, public loginService: LoginService) {}
-
+	//};*/
+  
+  ngOnInit() {
+		this.movieService.getMovies(this.tam).subscribe(
+			movies => {
+				this.capacity = movies.totalElements,
+				this.movies = movies.content;
 	
-	//ngOnInit() {
-	//	this.movieService.getMovies(this.tam).subscribe(
-	//		movies => {
-	//			this.capacity = movies.length,
-	//			this.movies = movies;
-	//
 	//			for(var i=0; i<movies.length; i++){
 	//				//console.log(movies[i]);
 	//				this.titlesGraph.push(movies[i].title);
@@ -49,47 +49,48 @@ export class InitialScreenComponent {
 	//				//console.log(movies[i].reviews.length);
 	//				this.reviewsGraph.push(movies[i].reviews.length);
 	//			}
-	//		}
-	//	);
-	//}
-
-	titulo = 'informacion';
-	router!: Router; 
-	private httpClient!: HttpClient;
+			},
+      error => console.log(error)
+		);
+	}
+  
+  movieImage(id: number){
+    return '/api/movies/' + id + '/image';
+  }
 
 	appLogo() {
-		return '/assets/logoMF.png';
+		return '/assets/images/logoMF1.png';
 	}
 
 	newMovie() {
-  		this.router.navigate(['/movies/new']);
+  	this.router.navigate(['/movies/new']);
 	}
 	
 	logout(){
-  		this.router.navigate(['/movies']);  
+  	this.router.navigate(['/movies']);  
 	}
 	
 	login(){
-  		this.router.navigate(['/login']);  
+  	this.router.navigate(['/login']);  
 	}
 	
 	signup(){
-  		this.router.navigate(['/signup']);  
+  	this.router.navigate(['/signup']);  
 	}
-	
+
 	myProfile(){
-   		this.router.navigate(['/news']);  
+   	this.router.navigate(['/news']);  
 	}
 	
 	reviews(){
-  		this.router.navigate(['/reviews']);  
+  	this.router.navigate(['/reviews']);  
 	}
 	
 	userReviews(){
 		this.router.navigate(['/userReviews']);  
 	}
 	
-	searchMovies(movieToSearch: String) {
+	/*searchMovies(movieToSearch: String) {
 		
 		this.spinner.show();
 		this.movieService.getFoundedMovies(movieToSearch,moviesSize).subscribe(

@@ -1,36 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Movie } from '../models/Movie.model';
 import { Review } from '../models/Review.model';
 
 /* REVISAR CLASE */
 
-const BASE_URL = '/api/movies/';//esta ruta debería devolver las pelis paginadas (1 num de pag, 10 elem en la pag)
+const BASE_URL = '/api/movies';//esta ruta debería devolver las pelis paginadas (1 num de pag, 10 elem en la pag)
 
 @Injectable({providedIn: 'root'})
 export class MoviesService {
 
-	http: HttpClient;
+	constructor(private http: HttpClient) { }
 
-	constructor(http: HttpClient) {
-		this.http = http;
-	 }
-
-	getMovies(tam: number): Observable<Movie[]> {
-		return this.http.get('https://localhost:8443/api/movies?size=2').pipe(
-			map(response => this.extractMovies(response as any)),
-			catchError(error => this.handleError(error))
-		)as Observable<Movie[]>;
+	getMovies(tam: number): Observable<any> {
+		return this.http.get(BASE_URL + '?size=' + tam).pipe(
+            catchError((error) => {
+                return this.handleError(error);
+            })
+		)as Observable<any>;
 	}
-
-    private extractMovies(response: { items: any; }) {
-        return response.items.map((movies: { volumeInfo: Movie[]; }) => movies.volumeInfo)
-    } 
 	
-	getMoreMovies(tam: number): Observable<Movie[]> {
+	/*getMoreMovies(tam: number): Observable<Movie[]> {
 		return this.http.get('http://localhost:8443/movies?size=' + tam).pipe(
 			map(response => this.extractMovies(response as any)),
 			catchError(error => this.handleError(error))
@@ -91,7 +84,7 @@ export class MoviesService {
 		return this.http.put(BASE_URL + movie.id + '/edition',movie).pipe(
 			catchError(error => this.handleError(error))
 		);
-	}	
+	}*/	
 
 	private handleError(error: any) {
 		console.log("ERROR:");

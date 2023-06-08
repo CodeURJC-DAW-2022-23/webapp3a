@@ -8,21 +8,22 @@ import { Review } from '../models/Review.model';
 /* REVISAR CLASE */
 
 const BASE_URL = '/api/auth';
-const USER_REVIEWS_URL = 'api/users/';
+const USER_URL = '/api/users';
+const USER_REVIEWS_URL = 'api/reviews/user/';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 	
 	tam: number = 10;
 	logged: boolean = false;
-	user: User | undefined;
+	user!: User | undefined;
 
 	constructor(private https: HttpClient) {
 		this.reqIsLogged();
 	}
 
 	reqIsLogged() {
-		this.https.get('https://localhost:8443/api/Users/current', { withCredentials: true }).subscribe(
+		this.https.get(USER_URL + '/current', { withCredentials: true }).subscribe(
 			(response: any) => {
 				this.user = response as User;
 				this.logged = true;
