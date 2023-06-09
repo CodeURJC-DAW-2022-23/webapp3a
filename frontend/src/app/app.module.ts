@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InitialScreenComponent } from './components/initial-screen/initial-screen.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+import { NgChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,8 +17,10 @@ import { InitialScreenComponent } from './components/initial-screen/initial-scre
   ],
   imports: [
     BrowserModule,
+    NgxSpinnerModule,
     FormsModule,
     HttpClientModule,
+      NgChartsModule,
     AppRoutingModule
   ],
   providers: [],

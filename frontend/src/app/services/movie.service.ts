@@ -23,21 +23,23 @@ export class MoviesService {
 		)as Observable<any>;
 	}
 	
-	/*getMoreMovies(tam: number): Observable<Movie[]> {
-		return this.http.get('http://localhost:8443/movies?size=' + tam).pipe(
-			map(response => this.extractMovies(response as any)),
-			catchError(error => this.handleError(error))
-		)as Observable<Movie[]>;
+	getMoreMovies(tam: number): Observable<any> {
+		return this.http.get(BASE_URL + '?size=' + tam).pipe(
+			catchError((error)  => {
+				return this.handleError(error);
+			})
+		)as Observable<any>;
 	}
 	
-	getFoundedMovies(movieToSearch: String,tam: number): Observable<Movie[]> {
-		return this.http.get('http://localhost:8443/api/movies/' + movieToSearch + '?size=' + tam).pipe(
-			map(response => this.extractMovies(response as any)),
-			catchError(error => this.handleError(error))
-		)as Observable<Movie[]>;
+	getFoundedMovies(): Observable<any> {
+		return this.http.get(BASE_URL).pipe(
+			catchError((error) => {
+				return this.handleError(error);
+			})
+		)as Observable<any>;
 	}
 
-	getMovie(id: number | string): Observable<Movie> {
+	/*getMovie(id: number | string): Observable<Movie> {
 		return this.http.get(BASE_URL + id).pipe(
             map(response => this.extractMovie(response as any)),
 			catchError(error => this.handleError(error))

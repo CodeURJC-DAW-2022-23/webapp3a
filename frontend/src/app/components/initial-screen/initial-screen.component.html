@@ -53,41 +53,39 @@
 		</div>
 	</nav>
 
-	<div class="container">
+	<div class="container">	
+			<div>
+				<input class="form-control me-2" [(ngModel)]="movieToSearch" placeholder="Enter a movie">
+				<button (click)="searchMovies()">Search</button>
+			</div>
 		
-
-			<!--<input #movieToSearch type="text" placeholder="Enter a movie"/>
-			<button (click)="searchMovies(movieToSearch.value); movieToSearch.value=''">search</button>
-		
-			<div class="row">
-				<div  class="slick-multiItemSlider" >
-					<div *ngFor="let movieToSearch of moviesFounded">
-						<div class="mv-img">
-							<img alt="" width="285" height="437">{{movieToSearch.movie_img}}<br>
-						</div>
-						
-						<div class="title-in">
-							<div class="cate">
-								<span class="blue">{{movieToSearch.gender}}</span>
+			<div class="album py-5 bg-body-tertiary">
+				<div class="container">		
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+						<div *ngFor="let movie of moviesFounded">
+							<div class="col">
+								<div class="card shadow-sm">
+									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
+									<div class="card-body">
+										<h6 class="card-text" *ngIf="loginService.isLogged()">
+											<a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+										</h6>
+										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
+										<small class="text-body-secondary">{{movie.category}}</small>
+										<p class="text-body-primary">{{movie.votes}} /5</p>  
+										<div class="d-flex justify-content-between align-items-center">
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<h6 *ngIf="loginService.isLogged()">
-							<a [routerLink]="['/movies',movieToSearch.id]">{{movieToSearch.title}}</a>
-						</h6>
-						<h6 *ngIf="!loginService.isLogged()">{{movieToSearch.title}}</h6>
-						<p><i class="ion-android-star"></i><span>{{movieToSearch.movie_votes}}</span> /5</p>
-						
 					</div>
 				</div>
-			</div>-->
+			</div>
 			
 			<div class="topbar-filter fw">
 				<p id="total-mv" *ngIf="capacity">Found <span>{{capacity}} movies</span> in total</p>
 			</div>
-			<form class="d-flex" role="search">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
 			<div class="album py-5 bg-body-tertiary">
 				<div class="container">		
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
@@ -113,28 +111,36 @@
 			</div>
 	</div>
 
-	<!--<div class="page-single">
+	<div class="page-single">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9 col-sm-12 col-xs-12">
-					<div class="blog-detail-ct">
-						
+					<div class="blog-detail-ct">						
 						<div id="comments"></div>
 					</div>
 					<ul class="pagination">               
 						<button (click)="moreResults()">more results</button>
 					</ul>
-				</div>
-				
+				</div>				
 			</div>
 		</div>
 	</div>
 
+	<ngx-spinner
+	bdColor="rgba(51,51,51,0.8)"
+	size="medium"
+	color="#fff"
+	type="ball-scale-multiple">
+	<p style="font-size: 20px; color: rgb(8, 8, 8)">Loading...</p>
+	</ngx-spinner>
 
-	--<div id="spinner-div" class="pt-5">
-		<div class="spinner-border text-primary" role="status">
-		</div>
-	</div>-- //COMENTARIO
+	<canvas baseChart class="chart"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+	</canvas>
 
-
-	--<div id="plotlyChart" width="400" height="150"></div> ---CORREGIR GRÁFICO-->
+	<!--<div id="plotlyChart" width="400" height="150"></div> ---CORREGIR GRÁFICO-->
