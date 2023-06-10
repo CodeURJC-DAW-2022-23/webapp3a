@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router} from '@angular/router';
 import { Movie } from 'src/app/models/Movie.model';
 import { LoginService } from 'src/app/services/login.service';
 import { MoviesService } from 'src/app/services/movie.service';
@@ -8,65 +8,71 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { BaseChartDirective } from 'ng2-charts';
 
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
 
-import { DataLabelsPlugin } from 'chartjs-plugin-datalabels';
-b@Component({
+@Component({
   selector: 'app-initial-screen',
   templateUrl: './initial-screen.component.html',
   styleUrls: ['./initial-screen.component.css']
 })
 export class InitialScreenComponent {
 
-	@ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+	@ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-public someAction(): void {
-  this.chart?.toBase64Image();
-}
-
-
-  movies: Movie[] = [];
-  private tam: number = 10;
-  capacity: number = 0;
-  moviesFounded: Movie[] = [];
-  movieToSearch: any;
+	movies: Movie[] = [];
+	private tam: number = 10;
+	capacity: number = 0;
+	moviesFounded: Movie[] = [];
+	movieToSearch: any;
+	graphicTitles: string[] = [];
+	graphicData: number[] = [];
 
 	constructor(private router: Router, private spinner: NgxSpinnerService, private movieService: MoviesService, public loginService: LoginService) {}
-	
-  /*private movie!: Movie;
-	//private titlesGraph: string[] = [];
-	//private reviewsGraph: number[] = [];
-	//
-	//public graph = {
-	//	data: {
-	//		x: this.titlesGraph,
-	//		y: this.reviewsGraph,
-	//		type: 'bar'
-	//	},
-	//	layout: {width: 400, height: 150, title: 'A Fancy Plot'}
-	//};*/
-  
-  ngOnInit() {
+
+  	ngOnInit() {
 		this.spinner.show();
 		this.movieService.getMovies(this.tam).subscribe(
 			movies => {
 				this.capacity = movies.totalElements,
 				this.movies = movies.content;
-	
-	//			for(var i=0; i<movies.length; i++){
-	//				//console.log(movies[i]);
-	//				this.titlesGraph.push(movies[i].title);
-	//			}
-	//			
-	//			for(var i=0; i<movies.length; i++){
-	//				//console.log(movies[i].reviews.length);
-	//				this.reviewsGraph.push(movies[i].reviews.length);
-	//			}
-			},
-      error => console.log(error)
+
+				//for(var i=0; i<this.movies.length; i++){
+				//	this.graphicTitles.push(this.movies[i].title);
+				//	console.log(this.graphicTitles[i]);
+				//}
+				//
+				//for(var i=0; i<this.movies.length; i++){
+				//	console.log(movies[i].reviews.length);
+				//	this.graphicData.push(this.movies[i].reviews.length);
+				//}
+			},error => console.log(error)
 		);
 		this.spinner.hide();
 	}
+
+	public barChartOptions: ChartConfiguration['options'] = {
+		responsive: true,
+		// We use these empty structures as placeholders for dynamic theming.
+		scales: {
+			x: {},
+			y: {
+				min: 10
+			}
+		},
+		plugins: {
+			legend: {
+				display: true,
+			}
+		}
+	};
+
+	public barChartType: ChartType = 'bar';
+
+	public barChartData: ChartData<'bar'> = {
+		labels: [ 1,2,3 ],
+		datasets: [
+		  	{ data: [14,15,11] }
+		]
+	};
 
 	moreResults () {
 		this.tam += 10;
