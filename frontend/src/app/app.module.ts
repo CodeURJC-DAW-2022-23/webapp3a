@@ -12,6 +12,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ReviewsScreenComponent } from './components/reviews-screen/reviews-screen.component';
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { UserReviewsScreenComponent } from './components/userReviews-screen/userReviews-screen.component';
+import { ReviewsModificationScreenComponent } from './components/reviews-modification-screen/reviews-modification-screen.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserReviewsScreenComponent } from './components/userReviews-screen/user
     InitialScreenComponent,
     ReviewsScreenComponent,
     LoginScreenComponent,
-    UserReviewsScreenComponent
+    UserReviewsScreenComponent,
+    ReviewsModificationScreenComponent
   ],
   imports: [
     BrowserModule,

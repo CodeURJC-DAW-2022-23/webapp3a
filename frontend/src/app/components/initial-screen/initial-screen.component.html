@@ -32,11 +32,11 @@
 					<div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">			
 						<ul #user *ngIf="loginService.isUser()" class="navbar-nav me-auto mb-2 mb-md-0">					
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="myProfile()">my profile</button>
-							<button type="button" class="btn btn-sm btn-outline-secondary" id="show_user_reviews" (click)="userReviews()">reviews</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="userReviews()">reviews</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button>
 						</ul>
 						<ul #admin *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">			
-							<button type="button" class="btn btn-sm btn-outline-secondary" id="show_reviews" (click)="reviews()">reviews</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviewsModification()">reviews</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="newMovie()">new movie</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button>
 						</ul>
@@ -45,7 +45,7 @@
 						<ul class="navbar-nav me-auto mb-2 mb-md-0">
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="login()">log in</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="signup()">sign up</button>
-							<button type="button" class="btn btn-sm btn-outline-secondary" id="show_reviews" (click)="reviews()">reviews</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviews()">reviews</button>
 						</ul>
 					</div>
 				</ul>

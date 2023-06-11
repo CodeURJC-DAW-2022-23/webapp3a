@@ -120,6 +120,10 @@ export class InitialScreenComponent {
 	userReviews(){
 		this.router.navigate(['/reviews/' + this.loginService.currentUser()?.username]);  
 	}
+
+	reviewsModification() {
+		this.router.navigate(['/reviews/admin/' + this.loginService.currentUser()?.username]);
+	}
 	
 	searchMovies() {
 		
