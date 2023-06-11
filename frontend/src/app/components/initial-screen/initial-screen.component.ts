@@ -97,11 +97,12 @@ export class InitialScreenComponent {
 	}
 	
 	logout(){
-  	this.router.navigate(['/movies']);  
+		this.loginService.logOut();
+  		this.router.navigate(['/movies']);  
 	}
 	
 	login(){
-  	this.router.navigate(['/login']);  
+  		this.router.navigate(['/login']);  
 	}
 	
 	signup(){
@@ -113,11 +114,11 @@ export class InitialScreenComponent {
 	}
 	
 	reviews(){
-  	this.router.navigate(['/reviews']);  
+  		this.router.navigate(['/reviews']);  
 	}
 	
 	userReviews(){
-		this.router.navigate(['/userReviews']);  
+		this.router.navigate(['/reviews/' + this.loginService.currentUser()?.username]);  
 	}
 	
 	searchMovies() {

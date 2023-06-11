@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1> Review listing</h1>
+					<h1> {{loginService.currentUser()?.username}} review's listing</h1>
 				</div>
 			</div>
 		</div>
@@ -26,20 +26,13 @@
 
 <!-- comment items -->
 <div id="comments">
-    <div *ngFor="let review of reviews">
+    <div *ngFor="let review of userReviews">
         <div class="container">
             <div class="album py-5 bg-body-tertiary">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
                         <h3>{{review.rating}} /5</h3>
                         <p>{{review.coments}}</p>
-                        <div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">			
-                            <ul #user *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">
-                                <div class="container">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteReview(review)">+ Delete</button>  
-                                </div> 
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -50,6 +43,12 @@
 <div class="container">
     <ul class="pagination">               
         <button (click)="moreResults()">more results</button>
+    </ul>
+</div>
+
+<div class="container">
+    <ul class="generatePDF">               
+        <button (click)="createPDF()">create PDF</button>
     </ul>
 </div>
 

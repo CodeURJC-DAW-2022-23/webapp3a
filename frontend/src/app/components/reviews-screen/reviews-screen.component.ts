@@ -15,9 +15,12 @@ import { LoginService } from 'src/app/services/login.service';
 export class ReviewsScreenComponent {
 
   reviews: Review[] = [];
+  userReviews: Review[] = [];
   private tam: number = 10;
+  public logService: LoginService;
   
   constructor(private router: Router, activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService, private reviewService: ReviewsService, public loginService: LoginService) {
+    this.logService = loginService;
   }
 
   ngOnInit() {
@@ -35,6 +38,7 @@ export class ReviewsScreenComponent {
     );
     window.location.reload();  
   }
+
   createPDF(): void {
     var cargaDatos = false;
     const doc = new jsPDF();

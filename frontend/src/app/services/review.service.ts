@@ -19,7 +19,23 @@ export class ReviewsService {
             })
 		)as Observable<any>;
 	}
+
+	getUserReviews(username: string | undefined): Observable<any> {
+		return this.http.get(BASE_URL + '/user/' + username).pipe(
+            catchError((error) => {
+                return this.handleError(error);
+            })
+		)as Observable<any>;
+	}
 	
+	getMoreUserReviews(tam: number, username: string | undefined): Observable<any> {
+		return this.http.get(BASE_URL + '/user/' + username + '?size=' + tam).pipe(
+			catchError((error)  => {
+				return this.handleError(error);
+			})
+		)as Observable<any>;
+	}
+
 	getMoreReviews(tam: number): Observable<any> {
 		return this.http.get(BASE_URL + '?size=' + tam).pipe(
 			catchError((error)  => {

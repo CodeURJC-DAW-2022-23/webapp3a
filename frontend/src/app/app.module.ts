@@ -10,12 +10,16 @@ import { InitialScreenComponent } from './components/initial-screen/initial-scre
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgChartsModule } from 'ng2-charts';
 import { ReviewsScreenComponent } from './components/reviews-screen/reviews-screen.component';
+import { LoginScreenComponent } from './components/login-screen/login-screen.component';
+import { UserReviewsScreenComponent } from './components/userReviews-screen/userReviews-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InitialScreenComponent,
-    ReviewsScreenComponent
+    ReviewsScreenComponent,
+    LoginScreenComponent,
+    UserReviewsScreenComponent
   ],
   imports: [
     BrowserModule,
