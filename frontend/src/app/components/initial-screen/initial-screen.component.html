@@ -1,0 +1,141 @@
+<style>
+	
+	.ini {
+	  width: 100%;
+	  height: 3rem;
+	  background-color: rgb(52, 52, 107);
+	  border-width: 1px 0;
+	}
+
+	.btn-group {
+		background-color: rgb(239, 239, 240);
+	}
+
+	.container {
+		margin-top: 159px;
+	}
+
+	.btn .btn-sm .btn-outline-secondary {
+		background-color: rgb(239, 239, 240);
+	}
+
+</style>
+
+	<nav class="navbar navbar-expand-md fixed-top">
+		<div class="container-fluid">
+			<img class="logo" [src]="appLogo()" alt="" width="129" height="98">
+		  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+		  	</button>
+		  	<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">			
+						<ul #user *ngIf="loginService.isUser()" class="navbar-nav me-auto mb-2 mb-md-0">					
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="myProfile()">my profile</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="userReviews()">reviews</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button>
+						</ul>
+						<ul #admin *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">			
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviewsModification()">reviews</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="newMovie()">new movie</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button>
+						</ul>
+					</div>	
+					<div *ngIf="!loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav me-auto mb-2 mb-md-0">
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="login()">log in</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="signup()">sign up</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviews()">reviews</button>
+						</ul>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">	
+			<div>
+				<input class="form-control me-2" [(ngModel)]="movieToSearch" placeholder="Enter a movie">
+				<button (click)="searchMovies()">Search</button>
+			</div>
+		
+			<div class="album py-5 bg-body-tertiary">
+				<div class="container">		
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+						<div *ngFor="let movie of moviesFounded">
+							<div class="col">
+								<div class="card shadow-sm">
+									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
+									<div class="card-body">
+										<h6 class="card-text" *ngIf="loginService.isLogged()">
+											<a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+										</h6>
+										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
+										<small class="text-body-secondary">{{movie.category}}</small>
+										<p class="text-body-primary">{{movie.votes}} /5</p>  
+										<div class="d-flex justify-content-between align-items-center">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="topbar-filter fw">
+				<p id="total-mv" *ngIf="capacity">Found <span>{{capacity}} movies</span> in total</p>
+			</div>
+			<div class="album py-5 bg-body-tertiary">
+				<div class="container">		
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+						<div *ngFor="let movie of movies">
+							<div class="col">
+								<div class="card shadow-sm">
+									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
+									<div class="card-body">
+										<h6 class="card-text" *ngIf="loginService.isLogged()">
+											<a [routerLink]="['/movie/',movie.id]">{{movie.title}}</a>
+										</h6>
+										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
+										<small class="text-body-secondary">{{movie.category}}</small>
+										<p class="text-body-primary">{{movie.votes}} /5</p>  
+										<div class="d-flex justify-content-between align-items-center">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">						
+						<div id="comments"></div>
+					</div>
+					<ul class="pagination">               
+						<button (click)="moreResults()">more results</button>
+					</ul>
+				</div>				
+			</div>
+		</div>
+	</div>
+
+	<ngx-spinner
+	bdColor="rgba(51,51,51,0.8)"
+	size="medium"
+	color="#fff"
+	type="ball-scale-multiple">
+	<p style="font-size: 20px; color: rgb(8, 8, 8)">Loading...</p>
+	</ngx-spinner>
+
+	<canvas baseChart class="chart"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType">
+	</canvas>

@@ -25,9 +25,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/html2canvas/dist/html2canvas.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jspdf/dist/jspdf.es.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -58,11 +65,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "port": 8443,
-            "browserTarget": "movieframe:build",
-            "proxyConfig": "proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production"
@@ -70,7 +72,10 @@
             "development": {
               "browserTarget": "frontend:build:development"
             }
-            
+          },
+          "options": {
+            "browserTarget":"movieframe:build",
+            "proxyConfig":"proxy.conf.json"
           },
           "defaultConfiguration": "development"
         },
@@ -100,8 +105,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "10a5717c-e0a0-4646-9c2a-603e80090544"
   }
 }

@@ -63,26 +63,8 @@
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-			<form action="/signup/new" method="post" enctype="multipart/form-data">
-				<div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="user-information">
-						<div class="user-img">
-							<input type='file' name='image1' accept=".jpg, .jpeg"/>
-							<div class="title-hd-sm">
-								<input type="submit" value="Set avatar" class="redbtn" />
-								<input type="hidden" name="_csrf" value="{{token}}"/>
-							</div>
-						</div>
-						<div class="user-fav">
-							<p>Profile: </p>
-							<ul>
-								<li>username: {{username}}</li>
-								<li>name: {{name}}</li>
-								<li>email: {{email}}</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+			<form action="/signup" method="post" enctype="multipart/form-data">
+		
 				<div class="col-md-9 col-sm-12 col-xs-12">
 					<div class="form-style-1 user-pro">
 						<div class="col-md-6 form-it">
@@ -99,15 +81,21 @@
 						</div>
 						<div class="col-md-6 form-it">
 							<label>Password</label>
-							<input type="text" name="password" placeholder="***************"></input>
+							<input type="password" name="encodedPassword"></input>
 						</div>
 						<div class="col-md-2">
 							<input class="submit" type="submit" value="register"></input>
 						</div>
-						
+						<div class="user-img">
+							<input type='file' name='imageField' accept=".jpg, .jpeg"/>
+							<div class="title-hd-sm">
+								<input type="hidden" name="_csrf" value="{{token}}"/>
+							</div>
+						</div>
 						<p>{{state}}</p>
 					</div>
 				</div>
+				
 			</form>
 		</div>
 	</div>
@@ -119,7 +107,7 @@
 		<div class="flex-parent-ft">
 			<div class="flex-child-ft item1">
 				<p>Desarrollo de aplicaciones web<br></p>
-				<p>Maria Amparo Alami <br>  Shadith Perez Rivera </p>
+				<p>Maria Amparo Alami</p>
 			</div>		
 		</div>
 	</div>

@@ -143,11 +143,11 @@ En esta fase se han realizado las siguientes tareas:
 
 Link a la especificación OpenAPI:
 
-https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.yaml
+https://raw.githack.com/CodeURJC-DAW-2022-23/webapp3a/fase-3/backend/movieframe/api-docs/api-docs.yaml
 
 Link a la documentación en HTML:
 
-https://rawcdn.githack.com/CodeURJC-DAW-2022-23/webapp3a/d2ab5480c466642eadaf3c3d07bce89c945a9d85/backend/movieframe/api-docs/api-docs.html
+https://raw.githack.com/CodeURJC-DAW-2022-23/webapp3a/fase-3/backend/movieframe/api-docs/api-docs.html
 
 ## **2. Actualización del diagrama de clases:**
 ![clases1](Clases1.JPG)
@@ -166,7 +166,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 ```
 A continuación, se crea el fichero "docker-compose.yml" en el mismo directorio en el que se encuentra el archivo Dockerfile.
-Este fichero de docker-compose cuenta con 2 contenedores o servicios de la app, "web" y "db". El contenedor "db" usa la imagen estándar de mysql en DockerHub, `mysql:8.0`, además de variables de entorno que llevan las mismas configuraciones que el archivo de propiedades, y crear los volúmenes para que los datos sean persistentes. El contenedor "web" tiene definido el nombre de la imagen que se crea, las variables de entorno que usa, la ruta del Dockerfile para construir la imagen, los puertos asociados al host, una línea de código para indicar el orden de arranque, de manera que primero arranca el servicio "db" y luego el servicio "web"; y una política de espera
+Este fichero de docker-compose cuenta con 2 contenedores o servicios de la app, "web" y "db". El contenedor "db" usa la imagen estándar de mysql en DockerHub, `mysql:8.0`, además de variables de entorno que llevan las mismas configuraciones que el archivo de propiedades, y crear los volúmenes para que los datos sean persistentes. El contenedor "web" tiene definido el nombre de la imagen que se crea, las variables de entorno que usa, la ruta del Dockerfile para construir la imagen, los puertos asociados al host, una línea de código para indicar el orden de arranque, de manera que primero arranca el servicio "db" y luego el servicio "web"; y una política de espera.
+
 Finalmente, se ejecuta el comando `docker-compose up` en la línea de comandos de windows powershell, y cuando la applicación esté levantada, en el navegador se introduce `https://localhost:8443`
 
 ## **4. Documentación para construir la imagen docker:**

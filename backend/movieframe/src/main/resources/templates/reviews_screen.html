@@ -127,7 +127,7 @@
 	var tam = 10;
 	//console.log(tam);
 	
-	let ruta='https://localhost:8443/userReviewsList/{{userName}}?size=' + tam;
+	let ruta='https://localhost:8443/reviews/user/{{userName}}?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -152,7 +152,7 @@
 
 	function sendNews(callback) {
 		
-		let ruta1='https://localhost:8443/userReviewsList/{{userName}}';
+		let ruta1='https://localhost:8443/reviews/user/{{userName}}';
 		console.log(ruta1);
 		$.ajax({
 			url: ruta1
@@ -179,7 +179,7 @@
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/userReviewsList/{{userName}}?size=' + tam;
+			let ruta='https://localhost:8443/reviews/user/{{userName}}?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
@@ -220,7 +220,7 @@
 				}
 				cargaDatos = true;
 				if(cargaDatos){
-					doc.save("Review listing.pdf");
+					doc.save("Reviews listing.pdf");
 				}
 			});
 		})

@@ -116,7 +116,7 @@ footer section-->
 	var tam = 10;
 	//console.log(tam);
 	
-	let ruta='https://localhost:8443/reviewsList?size=' + tam;
+	let ruta='https://localhost:8443/reviews?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -135,7 +135,7 @@ footer section-->
 
 		$('#comments').append(
 			'<div class="blog-item-style-1 blog-item-style-3"><div class="blog-it-infor"><h3><i class="ion-android-star"></i><span>' + 
-			review.rating +'</span> /5</h3><p>' + review.coments + '</p>{{#admin}}<p><button id="review-' + review.id + '" onclick="location.href="/reviews/deletion/' + review.id + '""> + Delete</button></p>{{/admin}}</div></div>'
+			review.rating +'</span> /5</h3><p>' + review.coments + '</p>{{#admin}}<p><button id="review-' + review.id + '" onclick="location.href="/review/' + review.id + '""> + Delete</button></p>{{/admin}}</div></div>'
 		)
 	}
 
@@ -144,7 +144,7 @@ footer section-->
 		loadReviews(function(reviews,tam) {
 			//When reviews are loaded from server
 			if(reviews.size != 0){
-				for (var i = 0; i < reviews.size; i++) {
+				for (var i = 0; i < reviews.content.length; i++) {
 					showReview(reviews.content[i]);
 				}
 			}
@@ -155,7 +155,7 @@ footer section-->
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/reviewsList?size=' + tam;
+			let ruta='https://localhost:8443/reviews?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
@@ -183,7 +183,7 @@ footer section-->
 			var val = $(event.target).attr("id").split("-")[1];	
 			//alert(val);
 
-			let rutaBorrado='https://localhost:8443/reviewsList/' + val + '?size=10';
+			let rutaBorrado='https://localhost:8443/reviews/' + val + '?size=10';
 			$("#spinner-div").show();
 			$.ajax({
 				url: rutaBorrado

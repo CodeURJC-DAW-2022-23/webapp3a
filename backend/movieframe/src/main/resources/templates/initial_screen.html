@@ -49,42 +49,34 @@
 						{{#user}}
 						
 							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/user/{{userName}}'">my profile</button></li>
-					    	<li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><button onclick="location.href='/reviews/{{userName}}'">reviews</button></li>
+					    	<li class="btn btn-default dropdown-toggle lv1" id="show_user_reviews"><button onclick="location.href='/review/user/{{userName}}'">reviews</button></li>
 							<li class="btn btn-default dropdown-toggle lv1">
 								<form action="/logout" method="post">
 									<input type="hidden" name="_csrf" value="{{token}}" />
-									<button class="btn btn-default navbar-btn" type="submit">log out</button>
-									
+									<button class="btn btn-default navbar-btn" type="submit">log out</button>						
 								</form>
 							</li>
-						
 						{{/user}}
 						<!--if administrator logged-->
 						{{#admin}}
-						
-							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>							
-							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/movie/addition'">new movie</button></li>
+							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/review'">reviews</button></li>							
+							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/movie'">new movie</button></li>
 							<li class="btn btn-default dropdown-toggle lv1">
 								<form action="/logout" method="post">
 									<input type="hidden" name="_csrf" value="{{token}}" />
 									<button class="btn btn-default navbar-btn" type="submit">log out</button>
 								</form>
 							</li>
-							
-						
 						{{/admin}}				                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 						{{/logged}}				
 						{{^logged}}
-						<!--if didn´t log yet
-						-->
+						<!--if didn´t log yet-->
 							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/login'">log in</button></li>	
 							<li class="btn btn-default dropdown-toggle lv1"><button onclick="location.href='/signup'">sign up</button></li>
-							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/reviews'">reviews</button></li>	
-
+							<li class="btn btn-default dropdown-toggle lv1" id="show_reviews"><button onclick="location.href='/review'">reviews</button></li>	
 						{{/logged}}
 					</ul>
-				</div>				
-				
+				</div>	
 			<!-- /.navbar-collapse-->
 	    </nav>	 
 	</div>   
@@ -96,7 +88,7 @@
 	
 	<div class="container" id="movie_item">
 
-		<form action="/movies/name" method="post">
+		<form action="/movie/name" method="post">
 			<input name="name" class="movie_filter" type="text" placeholder="Enter a movie"/>		
 			<input class="submit" type="submit" value="search"/>
 			<input type="hidden" name="_csrf" value="{{token}}" />
@@ -113,7 +105,7 @@
 					
 					<div class="title-in">
 						<div class="cate">
-							<span class="blue">{{gender}}</span>
+							<span class="blue">{{category}}</span>
 						</div>
 					</div>
 					{{#logged}}<h6><a href="/movie/{{id}}">{{title}}</a></h6>{{/logged}}{{^logged}}<h6>{{title}}</h6>{{/logged}}
@@ -290,31 +282,6 @@ $(document).ready(function () {
 		})
 		
 	})
-
-	//info3.click(function () {
-//
-	//	
-//
-	//	let ruta='https://localhost:8443/movies?size=' + tam + '&sort=title,asc';
-	//	console.log(ruta);
-	//	$("#spinner-div").show();
-	//	$.ajax({
-	//		url: ruta
-	//	}).done(function (movies) {
-	//		$("#spinner-div").hide();
-	//		console.log('reviews loaded: ' + JSON.stringify(movies));
-	//		console.log(movies.content);
-	//		console.log(movies.size);
-	//		if(movies.size != 0 && tam-10 < movies.content.length){
-	//			for (var i = tam-10; i < movies.content.length; i++) {
-	//				showMovieLoaded(movies.content[i]);
-	//			}
-	//		}
-	//		
-	//	})
-	//	
-	//	
-	//})
 
 	function loadMovies(){
 		$.ajax({

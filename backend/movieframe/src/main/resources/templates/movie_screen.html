@@ -94,7 +94,7 @@
                                             <!-- movie user review -->
                                             <div class="mv-user-review-item">
                                                  
-                                                <form action="/movie/{{id}}/review/new" method="post">
+                                                <form action="/movie/{{id}}/review" method="post">
                                                     <p class="clasificacion">
 														<input id="radio1" type="radio" name="rating" value="5">
 														<label for="radio1">★</label>
@@ -135,7 +135,7 @@
 											<div class="sb-it">
 						            			<h6>Directors: </h6>
 												{{#directors}}
-						            			<p><a href="/movie/{{id}}/director">{{director}}</a></p>
+						            				<p><a href="/movie/{{id}}/director">{{director}}</a></p>
 												{{/directors}}
 						            		</div>
 						            		<div class="sb-it">
@@ -151,12 +151,12 @@
 					</div>
 				</div>
 				{{#admin}}
-				<form action="/movie/{{id}}/edition" method="post">
+				<form action="/movie/{{id}}" method="post">
 					<div>
 						<input type="text" name="title" rows="5" cols="2" placeholder="Movie title..."/>
 					</div>
 					<div>
-						<input type="text" name="gender" rows="5" cols="2" placeholder="Movie gender..."/>
+						<input type="text" name="category" rows="5" cols="2" placeholder="Movie category..."/>
 					</div>
 					<div>
 						<textarea name="description" rows="5" cols="20" placeholder="Movie description..."></textarea>

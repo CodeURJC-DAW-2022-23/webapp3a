@@ -37,30 +37,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/signup").permitAll();     
-        http.authorizeRequests().antMatchers("/movies/{id}/image").permitAll();
-        http.authorizeRequests().antMatchers("/movie/{id}/director").hasAnyRole("ADMIN","USER");
-        http.authorizeRequests().antMatchers("/movie/{id}").permitAll();
-        http.authorizeRequests().antMatchers("/movies/{id}/director/image").permitAll();
+        http.authorizeRequests().antMatchers("/director").permitAll();
+        http.authorizeRequests().antMatchers("/movie/name").permitAll();
         http.authorizeRequests().antMatchers("/movies/name").permitAll();
+        http.authorizeRequests().antMatchers("/review/").permitAll();
+        http.authorizeRequests().antMatchers("/reviews/").permitAll();
+        http.authorizeRequests().antMatchers("/movies").permitAll();
+        http.authorizeRequests().antMatchers("/movies/{id}/image").permitAll();
+
+        // Private pages (all other pages)
+        http.authorizeRequests().antMatchers("/movies/{id}/director/image").hasAnyRole("ADMIN","USER");
+        
+        http.authorizeRequests().antMatchers("/movies/{id}/director").hasAnyRole("ADMIN","USER");
         http.authorizeRequests().antMatchers("/movies/{id}").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers("/movie/{id}").hasAnyRole("ADMIN","USER");
+        http.authorizeRequests().antMatchers("/users/{userName}").hasAnyRole("USER","ADMIN");
+        http.authorizeRequests().antMatchers("/users/{userName}/image").hasAnyRole("USER","ADMIN");
 
-        http.authorizeRequests().antMatchers("/reviews").permitAll();
-        http.authorizeRequests().antMatchers("/reviewsList").permitAll();
+        http.authorizeRequests().antMatchers("/movie").hasAnyRole("ADMIN");     
+        http.authorizeRequests().antMatchers("/reviews/{id}").hasAnyRole("ADMIN");
 
-        // Private pages (all other pages)    
-        http.authorizeRequests().antMatchers("/user/{id}/image").hasAnyRole("ADMIN","USER");
-
-        http.authorizeRequests().antMatchers("/movie/{id}/review/new").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/userReviewsList/{username}").hasAnyRole("USER");    
-        http.authorizeRequests().antMatchers("/user/{userName}/edition").hasAnyRole("USER","ADMIN"); 
-
-        http.authorizeRequests().antMatchers("/movie/addition").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/reviews/deletion/{id}").hasAnyRole("ADMIN");
-        
-        http.authorizeRequests().antMatchers("/movie/{id}/edition").hasAnyRole("ADMIN");
-        http.authorizeRequests().antMatchers("/movie/addition/new").hasAnyRole("ADMIN");
-        
-        http.authorizeRequests().antMatchers("/reviewsList/{id}").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/movies/{id}/review").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/review/user/{username}").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/reviews/user/{username}").hasAnyRole("USER");
 
         // Login form
         http.formLogin().loginPage("/login");

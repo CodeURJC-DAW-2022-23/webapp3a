@@ -2,8 +2,6 @@ package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Blob;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
