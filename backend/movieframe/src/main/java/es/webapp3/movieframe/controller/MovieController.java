@@ -33,7 +33,6 @@ import es.webapp3.movieframe.service.UserService;
 
 @Controller
 public class MovieController {
-
     @Autowired
     private MovieService movieService;
 
@@ -61,7 +60,7 @@ public class MovieController {
         }
     }
 
-    @GetMapping("/movie/addition")
+    @GetMapping("/movie")
     public String movieAdditionScreen(Model model, HttpServletRequest request) {
 
         if (request.isUserInRole("ADMIN")) {
@@ -73,9 +72,8 @@ public class MovieController {
         }
     }
 
-    @PostMapping("/movie/{id}/edition")
-    public String movieUpdating(Model model, Movie newMovie, @PathVariable Long id, @RequestParam String title,
-            @RequestParam String gender, @RequestParam String description, HttpServletRequest request)
+    @PostMapping("/movie/{id}")
+    public String movieUpdating(Model model, Movie newMovie, @PathVariable Long id, HttpServletRequest request)
             throws IOException {
 
         if (request.isUserInRole("ADMIN")) {
@@ -115,21 +113,22 @@ public class MovieController {
         }
     }
 
-    @PostMapping("/movie/addition/new")
-    public String newMovie(Model model, Movie movie, @RequestParam String title, @RequestParam String gender,
-            @RequestParam String description, @RequestParam int votes, MultipartFile image1, HttpServletRequest request)
+    @PostMapping("/movie")
+    public String newMovie(Model model, Movie movie, MultipartFile imageField, HttpServletRequest request)
             throws IOException {
 
         if (request.isUserInRole("ADMIN")) {
-            movie.setTitle(title);
-            movie.setCategory(gender);
-            movie.setDescription(description);
-            movie.setVotes(votes);
-            movie.setImageFile(BlobProxy.generateProxy(image1.getInputStream(), image1.getSize()));
+            if (!imageField.isEmpty()) {
+                movie.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+                movie.setImage(true);
+            }
+            Movie movieSaved = movieService.save(movie);
 
-            movieService.save(movie);
-
-            model.addAttribute("state", "movie saved");
+            if (movieSaved != null) {
+                model.addAttribute("state", "movie saved");
+            } else {
+                model.addAttribute("state", "some mandatory fields like title, category or picture are incomplete");
+            }
 
             return "movie_aggregation";
         } else {
@@ -137,7 +136,7 @@ public class MovieController {
         }
     }
 
-    @PostMapping("/movie/{id}/review/new")
+    @PostMapping("/movie/{id}/review")
     public String newReview(Model model, @PathVariable Long id, @RequestParam int rating, @RequestParam String coments,
             HttpServletRequest request) {
 
@@ -218,7 +217,7 @@ public class MovieController {
         }
     }
 
-    @PostMapping("/movies/name")
+    @PostMapping("/movie/name")
     public String searchMovie(Model model, @RequestParam String name, Pageable page, HttpServletRequest request) {
 
         Page<Movie> moviesFounded = movieService.findByTitle(name, PageRequest.of(0, 10));
