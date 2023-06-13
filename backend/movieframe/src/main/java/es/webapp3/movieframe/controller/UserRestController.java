@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.model.User;
 
@@ -56,7 +57,7 @@ public class UserRestController {
 
         User userSaved = userService.saveAPI(user);  
         if(userSaved != null){
-            return new ResponseEntity<>(null,HttpStatus.OK);
+            return new ResponseEntity<>(userSaved,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -102,6 +103,26 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    /*@Operation(summary = "Get user")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Found movie", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "No movie with this id was found", content = @Content)
+    })
+    @GetMapping("/api/users/{id}")
+    public ResponseEntity<User> getUserAPI(@PathVariable Long id) {
+
+        Optional<User> user = userService.findById(id);
+
+        if(user.isPresent()){
+            return new ResponseEntity<>(user.get(),HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }   
+    }*/
 
     @Operation(summary = "Get current user")
     @ApiResponses(value = {

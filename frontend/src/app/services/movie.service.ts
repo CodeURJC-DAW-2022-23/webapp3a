@@ -39,18 +39,15 @@ export class MoviesService {
 		)as Observable<any>;
 	}
 
-	/*getMovie(id: number | string): Observable<Movie> {
-		return this.http.get(BASE_URL + id).pipe(
-            map(response => this.extractMovie(response as any)),
-			catchError(error => this.handleError(error))
-		)as Observable<Movie>;
+	getMovie(id: number): Observable<any> {
+		return this.http.get(BASE_URL + '/' + id).pipe(
+			catchError((error) => {
+				return this.handleError(error);
+			})
+		)as Observable<any>;
 	}   
 
-    private extractMovie(response: { items: any; }) {
-        return response.items.map((movie: { volumeInfo: Movie; }): Movie => movie.volumeInfo)
-    }
-
-	addMovie(movie: Movie) {
+	/*addMovie(movie: Movie) {
 		if(!movie.id) {
 			return this.http.post(BASE_URL + 'addition/new', movie).pipe(
 				catchError(error => this.handleError(error))
@@ -60,23 +57,17 @@ export class MoviesService {
                 catchError(error => this.handleError(error))
             );
         }
-	}
+	}*/
 
-    addReview(movie: Movie, review: Review) {
-        
-    	if(movie.id && !review.id) {
-    		return this.http.post(BASE_URL + movie.id + '/review/new', review).pipe(
-    			catchError(error => this.handleError(error))
-    		);
-    	} else {
-			return this.http.get(BASE_URL + movie.id).pipe(
-				map(response => this.extractMovie(response as any)),
-				catchError(error => this.handleError(error))
-			);
-		}
+    addReview(movie: Movie, review: Review, user: string) {    
+		return this.http.post(BASE_URL + '/' + movie.id + '/review/' + user, review).pipe(
+			catchError((error) => {
+				return this.handleError(error)
+			})
+		);
     }
 
-	setMovieImage(movie: Movie, formData: FormData) {
+	/*setMovieImage(movie: Movie, formData: FormData) {
 		return this.http.post(BASE_URL + 'addition/new/' + movie.id + '/image', formData).pipe(
             catchError(error => this.handleError(error))
 		);

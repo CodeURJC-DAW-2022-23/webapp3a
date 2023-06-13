@@ -8,18 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.ReviewService;
 import es.webapp3.movieframe.service.UserService;
 
-@Controller
+@RestController
 public class ReviewController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class ReviewController {
     @Autowired
     private UserService userService;
 
-    @ModelAttribute
+     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
 
         Principal principal = request.getUserPrincipal();
@@ -91,5 +91,4 @@ public class ReviewController {
             return "404";
         }
     }
-    
 }
