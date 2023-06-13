@@ -6,7 +6,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="home()">home</button>                       
+                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="home()">home</button>
             </ul>
         </div>
     </div>
@@ -33,11 +33,11 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
                         <h3>{{review.rating}} /5</h3>
                         <p>{{review.coments}}</p>
-                        <div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">			
+                        <div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">
                             <ul #user *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">
                                 <div class="container">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteReview(review)">+ Delete</button>  
-                                </div> 
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteReview(review)">+ Delete</button>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
 </div>
 
 <div class="container">
-    <ul class="pagination">               
+    <ul class="pagination">
         <button (click)="moreResults()">more results</button>
     </ul>
 </div>

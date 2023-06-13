@@ -1,3 +1,4 @@
+import { Director } from './models/Director.model';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,8 @@ import { ReviewsScreenComponent } from './components/reviews-screen/reviews-scre
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { UserReviewsScreenComponent } from './components/userReviews-screen/userReviews-screen.component';
 import { ReviewsModificationScreenComponent } from './components/reviews-modification-screen/reviews-modification-screen.component';
+import { DirectorsScreenComponent } from './components/directors-screen/directors-sreen.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { ReviewsModificationScreenComponent } from './components/reviews-modific
     ReviewsScreenComponent,
     LoginScreenComponent,
     UserReviewsScreenComponent,
-    ReviewsModificationScreenComponent
+    ReviewsModificationScreenComponent,
+    DirectorsScreenComponent
   ],
   imports: [
     BrowserModule,

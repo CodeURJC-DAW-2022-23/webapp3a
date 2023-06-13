@@ -1,6 +1,5 @@
 package es.webapp3.movieframe.controller;
 
-
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
@@ -25,21 +24,20 @@ import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.service.UserService;
 
 @Controller
-public class Home{
-
+public class Home {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
 
         Principal principal = request.getUserPrincipal();
-        
-        if(principal != null) {
+
+        if (principal != null) {
             model.addAttribute("logged", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
@@ -50,41 +48,43 @@ public class Home{
     }
 
     @GetMapping("/")
-    public String home(Model model,Pageable page){        
+    public String home(Model model, Pageable page) {
         return "initial_screen";
     }
 
     @GetMapping("/director")
-    public String showDirector(){
+    public String showDirector() {
         return "director_screen";
     }
 
     @RequestMapping("/login")
-    public String login(Model model) {        
+    public String login(Model model) {
         return "login_screen";
     }
 
     @PostMapping("/signup")
-    public String newUser(Model model,User user,MultipartFile imageField) throws IOException{
+    public String newUser(Model model, User user, MultipartFile imageField) throws IOException {
 
-        if(!imageField.isEmpty()){
+        if (!imageField.isEmpty()) {
             user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
         }
         User userSaved = userService.save(user);
 
-        if(userSaved != null){
-            model.addAttribute("state","user registered");
+        if (userSaved != null) {
+            model.addAttribute("state", "user registered");
         } else {
-            model.addAttribute("state","some mandatory fields are incomplete");
+            model.addAttribute("state", "some mandatory fields are incomplete");
         }
-    
+
         return "signup_screen";
     }
 
     @PostMapping("/user/{userName}")
-    public String userProfileEdition(Model model,@RequestParam String username,@RequestParam String name,@RequestParam String email,@RequestParam String password,MultipartFile imageField,@PathVariable String userName,HttpServletRequest request) throws IOException{
+    public String userProfileEdition(Model model, @RequestParam String username, @RequestParam String name,
+            @RequestParam String email, @RequestParam String password, MultipartFile imageField,
+            @PathVariable String userName, HttpServletRequest request) throws IOException {
 
-        if(request.isUserInRole("ADMIN") || request.isUserInRole("USER")){
+        if (request.isUserInRole("ADMIN") || request.isUserInRole("USER")) {
 
             Optional<User> user = userService.findByUsername(userName);
 
@@ -94,14 +94,14 @@ public class Home{
                 newUser.setUsername(username);
                 newUser.setName(name);
                 newUser.setEmail(email);
-                if(!password.equals("")){
-                    newUser.setEncodedPassword(passwordEncoder.encode(password));  
+                if (!password.equals("")) {
+                    newUser.setEncodedPassword(passwordEncoder.encode(password));
                 }
-                if(!imageField.isEmpty()){
+                if (!imageField.isEmpty()) {
                     newUser.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
                 }
                 userService.update(userName, newUser);
-                model.addAttribute("state","user's info updated");     
+                model.addAttribute("state", "user's info updated");
                 model.addAttribute("username", newUser.getUsername());
                 model.addAttribute("name", newUser.getName());
                 model.addAttribute("email", newUser.getEmail());
@@ -116,43 +116,43 @@ public class Home{
     }
 
     @GetMapping("/user/{userName}")
-    public String userProfile(Model model,@PathVariable String userName,HttpServletRequest request){
+    public String userProfile(Model model, @PathVariable String userName, HttpServletRequest request) {
 
-        if(request.isUserInRole("ADMIN") || request.isUserInRole("USER")){
+        if (request.isUserInRole("ADMIN") || request.isUserInRole("USER")) {
 
             Optional<User> user = userService.findByUsername(userName);
 
             if (user.isPresent()) {
 
-                model.addAttribute("state"," ");
+                model.addAttribute("state", " ");
                 model.addAttribute("username", user.get().getUsername());
                 model.addAttribute("name", user.get().getName());
                 model.addAttribute("email", user.get().getEmail());
                 model.addAttribute("picture", user.get().getImageFile());
-                
+
             } else {
                 return "404";
             }
             return "user_profile_screen";
         } else {
             return "404";
-        } 
+        }
     }
-    
+
     @GetMapping("/signup")
-    public String signup(Model model) { 
-        model.addAttribute("state"," ");
+    public String signup(Model model) {
+        model.addAttribute("state", " ");
         return "signup_screen";
     }
 
     @RequestMapping("/logout")
-    public String logout(Model model) { 
+    public String logout(Model model) {
         return "initial_screen";
     }
 
     @RequestMapping("/loginerror")
-    public String loginerror(){
+    public String loginerror() {
         return "404";
     }
-    
+
 }

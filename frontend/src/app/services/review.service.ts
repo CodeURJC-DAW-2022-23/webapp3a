@@ -27,7 +27,7 @@ export class ReviewsService {
             })
 		)as Observable<any>;
 	}
-	
+
 	getMoreUserReviews(tam: number, username: string | undefined): Observable<any> {
 		return this.http.get(BASE_URL + '/user/' + username + '?size=' + tam).pipe(
 			catchError((error)  => {
@@ -50,7 +50,7 @@ export class ReviewsService {
                 return this.handleError(error);
             })
 		)as Observable<any>;
-	}   
+	}
 
     deleteReview(review: Review) {
         return this.http.delete(BASE_URL + '/' + review.id).pipe(
@@ -77,7 +77,7 @@ export class ReviewsService {
 	}
 
     addReview(movie: Movie, review: Review) {
-        
+
     	if(movie.id && !review.id) {
     		return this.http.post(BASE_URL + movie.id + '/review/new', review).pipe(
     			catchError(error => this.handleError(error))
@@ -100,7 +100,7 @@ export class ReviewsService {
 		return this.http.put(BASE_URL + movie.id + '/edition',movie).pipe(
 			catchError(error => this.handleError(error))
 		);
-	}*/	
+	}*/
 
 	private handleError(error: any) {
 		console.log("ERROR:");
