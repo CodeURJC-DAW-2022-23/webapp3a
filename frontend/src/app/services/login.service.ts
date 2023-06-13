@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { User } from '../models/User.model';
 
 /* REVISAR CLASE */
@@ -48,6 +48,21 @@ export class LoginService {
 			this.logged = false;
 			this.user = undefined;
 		});
+	}
+
+	addUser(user: User) {
+		return this.https.post(USER_URL, user).pipe(
+			catchError((error) => {
+				return this.handleError(error)
+			})
+		);
+	}
+
+	setUserImage(user: User, formData: FormData) {
+		return this.https.post(USER_URL + '/' + user.id + '/image', formData)
+		.pipe(
+			catchError(error => this.handleError(error))
+		);
 	}
 
 	isLogged() {

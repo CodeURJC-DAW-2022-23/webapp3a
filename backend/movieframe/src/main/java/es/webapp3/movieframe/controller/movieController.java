@@ -2,8 +2,6 @@ package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.Blob;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,21 +81,7 @@ public class MovieController {
 
             if (movie.isPresent()) {
 
-                // Movie newMovie = new Movie();
-
-                newMovie.setTitle(title);
-                newMovie.setCategory(gender);
-                newMovie.setDescription(description);
-
-                int votes = movie.get().getVotes();
-                List<Director> directors = movie.get().getDirectors();
-                newMovie.setVotes(votes);
-                newMovie.setDirectors(directors);
-                Blob image = movie.get().getImageFile();
-                newMovie.setImageFile(image);
-
-                newMovie.setId(id);
-                movieService.save(newMovie);
+                movieService.update(id, newMovie);
 
                 model.addAttribute("title",newMovie.getTitle());
                 model.addAttribute("gender",newMovie.getCategory());

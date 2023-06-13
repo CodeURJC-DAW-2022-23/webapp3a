@@ -67,7 +67,8 @@ export class InitialScreenComponent {
 
 	public barChartType: ChartType = 'bar';
 
-	public barChartData: ChartData<'bar'> = {
+	public barChartData: ChartData<'bar'> =
+	 {
 		labels: [ 1,2,3 ],
 		datasets: [
 		  	{ data: [14,15,11] }
