@@ -5,6 +5,8 @@ import { ReviewsScreenComponent } from './components/reviews-screen/reviews-scre
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { UserReviewsScreenComponent } from './components/userReviews-screen/userReviews-screen.component';
 import { ReviewsModificationScreenComponent } from './components/reviews-modification-screen/reviews-modification-screen.component';
+import { MovieScreenComponent } from './components/movie-screen/movie-screen.component';
+import { SignupScreenComponent } from './components/signup-screen/signup-screen.component';
 
 const routes: Routes = [
   { path: 'movies', component: InitialScreenComponent },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginScreenComponent },
   { path: 'reviews/:user', component: UserReviewsScreenComponent },
   { path: 'reviews/admin/:admin', component: ReviewsModificationScreenComponent },
+  { path: 'movies/:id', component: MovieScreenComponent },
+  { path: 'signup', component: SignupScreenComponent },
   { path: '', redirectTo: 'movies', pathMatch: 'full' }
 ];
 

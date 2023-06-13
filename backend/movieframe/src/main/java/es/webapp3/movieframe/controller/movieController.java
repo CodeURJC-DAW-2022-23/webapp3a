@@ -206,5 +206,4 @@ public class MovieController {
         model.addAttribute("movieframe",moviesFounded);
         return "initial_screen";    
     }
-    
 }

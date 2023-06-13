@@ -1,2 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 
+/***
+ *  Simple Pure CSS Star Rating Widget Bootstrap 4 
+ * 
+ *  www.TheMastercut.co
+ *  
+ ***/
+
+ @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+ /* Styling h1 and links
+ ––––––––––––––––––––––––––––––––– */
+ h1[alt="Simple"] {color: white;}
+ a[href], a[href]:hover {color: grey; font-size: 0.5em; text-decoration: none}
+ 
+ .starrating > input {display: none;}  /* Remove radio buttons */
+ 
+ .starrating > label:before { 
+   content: "★"; /* Star */
+   margin: 2px;
+   font-size: 4em;
+   font-family: FontAwesome;
+   display: inline-block; 
+ }
+ 
+ .starrating > label
+ {
+   color: #222222; /* Start color when not clicked */
+ }
+
+ .star0 > label
+ {
+   color: #222222; /* Start color when not clicked */
+ }
+
+ .starrating > input:checked ~ label
+ { color: #ffca08 ; } /* Set yellow color when star checked */
+ 
+ .starrating > input:hover ~ label
+ { color: #ffca08 ;  } /* Set yellow color when star hover */
