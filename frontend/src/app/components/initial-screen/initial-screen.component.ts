@@ -5,9 +5,10 @@ import { LoginService } from 'src/app/services/login.service';
 import { MoviesService } from 'src/app/services/movie.service';
 
 import { NgxSpinnerService } from "ngx-spinner";
-import { BaseChartDirective } from 'ng2-charts';
 
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartOptions, ChartDataset, ChartType } from 'chart.js';
+//import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+//import * from 'ng2-charts';
 
 @Component({
   selector: 'app-initial-screen',
@@ -16,64 +17,49 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 })
 export class InitialScreenComponent {
 
-	@ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+	  
 
 	movies: Movie[] = [];
 	private tam: number = 10;
 	capacity: number = 0;
 	moviesFounded: Movie[] = [];
+	public barChartLabels: string[] = [];
+	public barChartData: ChartDataset[] = [];
 	movieToSearch: any;
-	graphicTitles: string[] = [];
-	graphicData: number[] = [];
+	label1: string[]=[];
+	label11: number[]=[];
 
-	constructor(private router: Router, private spinner: NgxSpinnerService, private movieService: MoviesService, public loginService: LoginService) {}
+	constructor(private router: Router, private spinner: NgxSpinnerService, private movieService: MoviesService, public loginService: LoginService) {
+		
+	}
 
   	ngOnInit() {
+		
+
 		this.spinner.show();
 		this.movieService.getMovies(this.tam).subscribe(
 			movies => {
 				this.capacity = movies.totalElements,
 				this.movies = movies.content;
 
-				//for(var i=0; i<this.movies.length; i++){
-				//	this.graphicTitles.push(this.movies[i].title);
-				//	console.log(this.graphicTitles[i]);
-				//}
-				//
-				//for(var i=0; i<this.movies.length; i++){
-				//	console.log(movies[i].reviews.length);
-				//	this.graphicData.push(this.movies[i].reviews.length);
-				//}
+				for(var i=0; i<movies.content.length; i++){
+					//console.log(movies.content[i].title);
+					this.label1.push(movies.content[i].title);
+				//	console.log(movies.content[i].reviews.length);
+					this.label11.push(movies.content[i].reviews.length);
+				}
+				this.barChartLabels = this.label1;
+				this.barChartData = [{ 
+					data: this.label11,
+					label: 'review cantity per movie'
+				}];
 			},error => console.log(error)
 		);
-		this.spinner.hide();
+		this.spinner.hide();	
 	}
 
-	public barChartOptions: ChartConfiguration['options'] = {
-		responsive: true,
-		// We use these empty structures as placeholders for dynamic theming.
-		scales: {
-			x: {},
-			y: {
-				min: 10
-			}
-		},
-		plugins: {
-			legend: {
-				display: true,
-			}
-		}
-	};
-
 	public barChartType: ChartType = 'bar';
-
-	public barChartData: ChartData<'bar'> =
-	 {
-		labels: [ 1,2,3 ],
-		datasets: [
-		  	{ data: [14,15,11] }
-		]
-	};
+	public barChartLegend = true;
 
 	moreResults () {
 		this.tam += 10;
@@ -134,10 +120,10 @@ export class InitialScreenComponent {
 				let data: any = movies;
 				for(var i=0; i < data.content.length; i++) {
 					console.log(this.movieToSearch);
-					if(data.content[i].title == this.movieToSearch){
+					//if(data.content[i].title == this.movieToSearch){
 						console.log(data.content[i]);
-						this.moviesFounded.push(data.content[i]);
-					}
+						this.moviesFounded.push(data.content[i].title);
+					//}
 				}
 			},
 			error => alert('error founding movies according to this name: ' + error)

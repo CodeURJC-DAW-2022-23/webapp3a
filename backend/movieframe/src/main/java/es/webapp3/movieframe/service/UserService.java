@@ -63,30 +63,6 @@ public class UserService {
 	}
 
 	public User update(String userName, User newUser) {
-
-		Optional<User> user = usersRepository.findByUsername(userName);
-		newUser.setRoles(user.get().getRoles());
-		for(Review rv: user.get().getReviews()){
-			newUser.setReview(rv);
-		}
-		if(newUser.getImageFile() == null){
-			newUser.setImageFile(user.get().getImageFile());
-		}
-		if(newUser.getUsername().equals("")){
-			newUser.setUsername(user.get().getUsername());
-		}
-		if(newUser.getName().equals("")){
-			newUser.setName(user.get().getName());
-		}
-		if(newUser.getEmail().equals("")){
-			newUser.setEmail(user.get().getEmail());
-		}
-		if(newUser.getEncodedPassword() == null || newUser.getEncodedPassword().isEmpty()){			
-			newUser.setEncodedPassword(user.get().getEncodedPassword());
-		}else{
-			newUser.setEncodedPassword(passwordEncoder.encode(newUser.getEncodedPassword()));
-		}
-		newUser.setId(user.get().getId());
 		usersRepository.save(newUser);
 		return usersRepository.findById(newUser.getId()).orElseThrow();
 	}

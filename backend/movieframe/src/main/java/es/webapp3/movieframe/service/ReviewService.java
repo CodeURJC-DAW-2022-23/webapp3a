@@ -28,9 +28,9 @@ public class ReviewService {
         return reviewsRepository.findByUser(user,page);
 	}
 
-	public void save(Review review) {
+	public Review save(Review review) {
 
-		reviewsRepository.save(review);
+		return reviewsRepository.save(review);
 	}
 
 	public void deleteById(long id) {

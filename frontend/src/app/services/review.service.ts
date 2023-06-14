@@ -20,7 +20,7 @@ export class ReviewsService {
 		)as Observable<any>;
 	}
 
-	getUserReviews(username: string | undefined): Observable<any> {
+	getUserReviews(username: string): Observable<any> {
 		return this.http.get(BASE_URL + '/user/' + username).pipe(
             catchError((error) => {
                 return this.handleError(error);
@@ -28,7 +28,7 @@ export class ReviewsService {
 		)as Observable<any>;
 	}
 	
-	getMoreUserReviews(tam: number, username: string | undefined): Observable<any> {
+	getMoreUserReviews(tam: number, username: string): Observable<any> {
 		return this.http.get(BASE_URL + '/user/' + username + '?size=' + tam).pipe(
 			catchError((error)  => {
 				return this.handleError(error);

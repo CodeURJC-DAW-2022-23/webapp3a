@@ -22,11 +22,12 @@ export class SignupScreenComponent {
   register() {
     this.loginService.addUser(this.user).subscribe(
       (user: any) => { 
-        //console.log(this.user.id);
-        //console.log(user.id);
+        if(user == null){
+          alert('It might be some empty fields');
+        }
         this.uploadImage(user);
       },
-      (_: any) => alert('failed to register. It might be some empty fields')
+      (_: any) => alert('failed to register')
     );    
   }
 

@@ -13,7 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class UserReviewsScreenComponent {
 
-  userReviews: Review[] = [];
+  public userReviews: Review[] = [];
   private tam: number = 10;
   
   constructor(private router: Router, private spinner: NgxSpinnerService, private reviewService: ReviewsService, public loginService: LoginService) {
@@ -21,7 +21,7 @@ export class UserReviewsScreenComponent {
 
   ngOnInit() {
     
-    this.reviewService.getUserReviews(this.loginService.currentUser().name).subscribe(
+    this.reviewService.getUserReviews(this.loginService.currentUser().username).subscribe(
       reviews => this.userReviews = reviews.content,
       error => console.log(error)
     );

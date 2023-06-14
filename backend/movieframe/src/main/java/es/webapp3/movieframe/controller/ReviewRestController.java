@@ -149,16 +149,14 @@ public class ReviewRestController {
     })
     @PostMapping("/api/movies/{id}/review/{userName}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Review newReviewAPI(Model model,@PathVariable Long id,@PathVariable String userName,@RequestBody Review review){
+    public ResponseEntity<Review> newReviewAPI(@PathVariable Long id,@PathVariable String userName,@RequestBody Review review){
 
         Optional<Movie> movie = movieService.findById(id);
         Optional<User> user = userService.findByUsername(userName);
 
-        movie.get().setReview(review);
-        user.get().setReview(review);
+        review.setMovie(movie.get());
+        review.setUser(user.get());
 
-        movieService.save(movie.get());
-
-        return review;
+        return new ResponseEntity<>(reviewService.save(review), HttpStatus.OK);
     }
 }

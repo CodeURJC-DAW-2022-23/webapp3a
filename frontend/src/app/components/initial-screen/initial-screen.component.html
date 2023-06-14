@@ -139,8 +139,15 @@
 	<p style="font-size: 20px; color: rgb(8, 8, 8)">Loading...</p>
 	</ngx-spinner>
 
-	<canvas baseChart class="chart"
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [type]="barChartType">
-	</canvas>
+	<div>
+		<div>
+		  <div style="display: block">
+			<canvas
+			  baseChart
+			  [datasets]="barChartData"
+			  [labels]="barChartLabels"
+			  [legend]="barChartLegend"
+			></canvas>
+		  </div>
+		</div>
+	  </div>

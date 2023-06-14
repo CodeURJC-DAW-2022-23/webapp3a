@@ -43,7 +43,9 @@ export class ProfileScreenComponent {
         console.log(user.encodedPassword);
         
         //this.updateImage(user);
+        alert('registration successfully updated');
         this.loginService.setCurrentUser(user);
+        this.router.navigate(['/profile']); 
       },
       (error: any) => alert(error)
     );    

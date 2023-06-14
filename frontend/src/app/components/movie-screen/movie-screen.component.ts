@@ -12,17 +12,19 @@ import { MoviesService } from 'src/app/services/movie.service';
 export class MovieScreenComponent {
 
   movie: any;
-  coment: any;
-  rating: any;
   id: any;
   review: any;
   lastReview: any;
   directors: Director[] = [];
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public movieService: MoviesService, public loginService: LoginService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public movieService: MoviesService, public loginService: LoginService) {
+    this.review = {rating: '', coments: ''}
+    
+  }
 
-    this.id = activatedRoute.snapshot.params['id'];
-    movieService.getMovie(this.id).subscribe(
+  ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.movieService.getMovie(this.id).subscribe(
       movie => { this.movie = movie;
         this.lastReview = this.movie.reviews[this.movie.reviews.length-1];
         this.directors = this.movie.directors;
@@ -44,8 +46,7 @@ export class MovieScreenComponent {
   }
 
   writeMovieReview() {
-    this.review = { rating: this.rating, coments: this.coment };
-    this.movieService.addReview(this.movie,this.review,this.loginService.currentUser().name).subscribe(
+    this.movieService.addReview(this.movie,this.review,this.loginService.currentUser().username).subscribe(
       (_:any) => { this.lastReview = this.review;
         this.router.navigate(['/movies/',this.movie.id]);                   
       },

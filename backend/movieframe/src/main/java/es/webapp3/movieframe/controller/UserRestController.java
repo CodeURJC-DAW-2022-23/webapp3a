@@ -15,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,9 @@ public class UserRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+	private PasswordEncoder passwordEncoder;
     
     @Operation(summary = "Post user")
     @ApiResponses(value = {
@@ -81,20 +85,22 @@ public class UserRestController {
             for(Review rv: user.get().getReviews()){
                 newUser.setReview(rv);
             }
-            if(newUser.getUsername() == null || newUser.getUsername().isEmpty()){
+            if(newUser.getUsername().isEmpty()){
                 newUser.setUsername(user.get().getUsername());
             }
-            if(newUser.getEncodedPassword() == null || newUser.getEncodedPassword().isEmpty()){			
-                newUser.setEncodedPassword(user.get().getEncodedPassword());
-            }
-            if(newUser.getImageFile() == null){
-                newUser.setImageFile(user.get().getImageFile());
-            }
-            if(newUser.getName() == null || newUser.getName().isEmpty()){
+            //if(newUser.getImageFile() == null){
+            //    newUser.setImageFile(user.get().getImageFile());
+            //}
+            if(newUser.getName().isEmpty()){
                 newUser.setName(user.get().getName());
             }
-            if(newUser.getEmail() == null || newUser.getEmail().isEmpty()){
+            if(newUser.getEmail().isEmpty()){
                 newUser.setEmail(user.get().getEmail());
+            }
+            if(newUser.getEncodedPassword().isEmpty()){			
+                newUser.setEncodedPassword(user.get().getEncodedPassword());
+            }else{
+                newUser.setEncodedPassword(passwordEncoder.encode(newUser.getEncodedPassword()));
             }
             newUser.setId(user.get().getId());
             

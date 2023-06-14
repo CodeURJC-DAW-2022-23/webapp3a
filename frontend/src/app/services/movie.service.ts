@@ -45,7 +45,7 @@ export class MoviesService {
 				return this.handleError(error);
 			})
 		)as Observable<any>;
-	}   
+	}
 
 	/*addMovie(movie: Movie) {
 		if(!movie.id) {
