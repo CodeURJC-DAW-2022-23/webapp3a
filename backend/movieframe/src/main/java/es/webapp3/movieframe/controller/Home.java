@@ -97,9 +97,6 @@ public class Home{
                 if(!password.equals("")){
                     newUser.setEncodedPassword(passwordEncoder.encode(password));  
                 }
-                if(!imageField.isEmpty()){
-                    newUser.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-                }
                 userService.update(userName, newUser);
                 model.addAttribute("state","user's info updated");     
                 model.addAttribute("username", newUser.getUsername());

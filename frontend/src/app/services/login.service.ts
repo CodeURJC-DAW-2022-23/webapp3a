@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { User } from '../models/User.model';
 
 /* REVISAR CLASE */
@@ -50,8 +50,24 @@ export class LoginService {
 		});
 	}
 
+	getUser(username: string): Observable<any> {
+		return this.https.get(USER_URL + '/username/' + username).pipe(
+			catchError((error) => {
+				return this.handleError(error);
+			})
+		)as Observable<any>;
+	}  
+
 	addUser(user: User) {
 		return this.https.post(USER_URL, user).pipe(
+			catchError((error) => {
+				return this.handleError(error)
+			})
+		);
+	}
+
+	updateUser(username: string, user: User) {
+		return this.https.put(USER_URL + '/' + username, user).pipe(
 			catchError((error) => {
 				return this.handleError(error)
 			})
@@ -80,6 +96,10 @@ export class LoginService {
 
 	currentUser() {
 		return this.user;
+	}
+
+	setCurrentUser(user: User) {
+		this.user = user;
 	}
 
     handleError(error: any) {

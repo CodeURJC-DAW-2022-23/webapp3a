@@ -1,7 +1,9 @@
 package es.webapp3.movieframe.service;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,7 +62,7 @@ public class UserService {
 		usersRepository.save(user);
 	}
 
-	public void update(String userName, User newUser){
+	public User update(String userName, User newUser) {
 
 		Optional<User> user = usersRepository.findByUsername(userName);
 		newUser.setRoles(user.get().getRoles());
@@ -79,12 +81,14 @@ public class UserService {
 		if(newUser.getEmail().equals("")){
 			newUser.setEmail(user.get().getEmail());
 		}
-		if(newUser.getEncodedPassword() == null){			
+		if(newUser.getEncodedPassword() == null || newUser.getEncodedPassword().isEmpty()){			
 			newUser.setEncodedPassword(user.get().getEncodedPassword());
+		}else{
+			newUser.setEncodedPassword(passwordEncoder.encode(newUser.getEncodedPassword()));
 		}
-
 		newUser.setId(user.get().getId());
 		usersRepository.save(newUser);
+		return usersRepository.findById(newUser.getId()).orElseThrow();
 	}
     
 }

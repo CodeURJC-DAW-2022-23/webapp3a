@@ -72,7 +72,7 @@ public class UserRestController {
         @ApiResponse(responseCode = "404", description = "No movie with this id was found to update", content = @Content)
     })
     @PutMapping("/api/users/{userName}")
-    public ResponseEntity<User> movieUpdating(@RequestBody User newUser,@PathVariable String userName) {
+    public ResponseEntity<User> movieUpdating(@RequestBody User newUser,@PathVariable String userName){
 
         Optional<User> user = userService.findByUsername(userName);
 
@@ -81,48 +81,40 @@ public class UserRestController {
             for(Review rv: user.get().getReviews()){
                 newUser.setReview(rv);
             }
-            if(newUser.getUsername() == null){
+            if(newUser.getUsername() == null || newUser.getUsername().isEmpty()){
                 newUser.setUsername(user.get().getUsername());
             }
-            if(newUser.getEncodedPassword() == null){			
+            if(newUser.getEncodedPassword() == null || newUser.getEncodedPassword().isEmpty()){			
                 newUser.setEncodedPassword(user.get().getEncodedPassword());
             }
             if(newUser.getImageFile() == null){
                 newUser.setImageFile(user.get().getImageFile());
             }
-            if(newUser.getName() == null){
+            if(newUser.getName() == null || newUser.getName().isEmpty()){
                 newUser.setName(user.get().getName());
             }
-            if(newUser.getEmail() == null){
+            if(newUser.getEmail() == null || newUser.getEmail().isEmpty()){
                 newUser.setEmail(user.get().getEmail());
             }
             newUser.setId(user.get().getId());
-            userService.update(userName,newUser);
-            return new ResponseEntity<>(null,HttpStatus.OK);
+            
+            return new ResponseEntity<>(userService.update(userName,newUser),HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /*@Operation(summary = "Get user")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found movie", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Movie.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "No movie with this id was found", content = @Content)
-    })
-    @GetMapping("/api/users/{id}")
-    public ResponseEntity<User> getUserAPI(@PathVariable Long id) {
+    @GetMapping("/api/users/username/{userName}")
+    public ResponseEntity<User> getMovieAPI(@PathVariable String userName) {
 
-        Optional<User> user = userService.findById(id);
+        Optional<User> user = userService.findByUsername(userName);
 
         if(user.isPresent()){
             return new ResponseEntity<>(user.get(),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }   
-    }*/
+    }
 
     @Operation(summary = "Get current user")
     @ApiResponses(value = {

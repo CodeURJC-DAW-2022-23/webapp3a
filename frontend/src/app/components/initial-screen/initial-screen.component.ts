@@ -111,7 +111,7 @@ export class InitialScreenComponent {
 	}
 
 	myProfile(){
-   	this.router.navigate(['/news']);  
+   	this.router.navigate(['/profile']);  
 	}
 	
 	reviews(){
