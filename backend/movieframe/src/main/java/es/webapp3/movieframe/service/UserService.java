@@ -1,16 +1,13 @@
 package es.webapp3.movieframe.service;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
-import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.model.User;
 import es.webapp3.movieframe.repository.UserRepository;
 

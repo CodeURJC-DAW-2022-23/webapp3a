@@ -73,7 +73,12 @@
 									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
 									<div class="card-body">
 										<h6 class="card-text" *ngIf="loginService.isLogged()">
-											<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											<h6 #user *ngIf="loginService.isUser()">
+												<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											</h6>
+											<h6 #admin *ngIf="loginService.isAdmin()">
+												<a [routerLink]="['/movies/admin/',movie.id]">{{movie.title}}</a>
+											</h6>
 										</h6>
 										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
 										<small class="text-body-secondary">{{movie.category}}</small>
@@ -100,7 +105,12 @@
 									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
 									<div class="card-body">
 										<h6 class="card-text" *ngIf="loginService.isLogged()">
-											<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											<h6 #user *ngIf="loginService.isUser()">
+												<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											</h6>
+											<h6 #admin *ngIf="loginService.isAdmin()">
+												<a [routerLink]="['/movies/admin/',movie.id]">{{movie.title}}</a>
+											</h6>
 										</h6>
 										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
 										<small class="text-body-secondary">{{movie.category}}</small>

@@ -1,0 +1,68 @@
+<!--<style>
+
+	.btn-group {
+		background-color: rgb(239, 239, 240);
+	}
+
+	.container {
+		margin-top: 85px;
+	}
+
+    .container-fluid {
+		margin-top: 39px;
+	}
+
+	.btn .btn-sm .btn-outline-secondary {
+		background-color: rgb(239, 239, 240);
+	}
+
+    .header {
+        margin-top: 79px;
+    }
+
+</style>
+
+<nav class="navbar navbar-expand-md fixed-top">   
+        <img class="logo" [src]="appLogo()" alt="" width="129" height="98">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="home()">home</button>                       
+            </ul>
+        </div>    
+</nav>
+
+<div class="header">
+    <header>
+        <div class="col-10 text-center">
+            <h1>Movie aggregation page</h1>
+          </div>
+    </header>
+</div>
+
+<div class="container">
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="movie.title" placeholder="Movie title...">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="movie.category" placeholder="Movie category...">
+        </div>
+        <div class="form-group">
+            <textarea type="text" class="form-control" [(ngModel)]="movie.description" placeholder="Movie description..."></textarea>
+        </div>
+        <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+            <input type="radio" id="star5" [(ngModel)]="movie.votes" value="5" /><label for="star5" title="5 star"></label>
+            <input type="radio" id="star4" [(ngModel)]="movie.votes" value="4" /><label for="star4" title="4 star"></label>
+            <input type="radio" id="star3" [(ngModel)]="movie.votes" value="3" /><label for="star3" title="3 star"></label>
+            <input type="radio" id="star2" [(ngModel)]="movie.votes" value="2" /><label for="star2" title="2 star"></label>
+            <input type="radio" id="star1" [(ngModel)]="movie.votes" value="1" /><label for="star1" title="1 star"></label>
+        </div> 
+        <div class="form-group">
+            <input #file type='file' name='imageFile' accept=".jpg, .jpeg">
+        </div>
+        <div class="container-fluid">
+            <button class="btn btn-primary w-25 py-4"  type="submit" (click)="add()">Add</button>
+        </div>   
+</div>-->

@@ -16,7 +16,7 @@ export class LoginScreenComponent {
     event.preventDefault();
 
     this.loginService.logIn(user, pass);
-    this.router.navigate(['/movies']);
+    this.router.navigate(['/movies']);  
   }
 
   home() {

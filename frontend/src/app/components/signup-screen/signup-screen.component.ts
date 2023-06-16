@@ -20,15 +20,19 @@ export class SignupScreenComponent {
   }
 
   register() {
-    this.loginService.addUser(this.user).subscribe(
-      (user: any) => { 
-        if(user == null){
-          alert('It might be some empty fields');
-        }
-        this.uploadImage(user);
-      },
-      (_: any) => alert('failed to register')
-    );    
+    if(this.user.username == '' && this.user.encodedPassword == '' && this.user.name == '' && this.user.email == ''){
+      alert('some fields might be empty');
+    }else{
+      this.loginService.addUser(this.user).subscribe(
+        (user: any) => { 
+          if(user == null){
+            alert('It might be some empty fields');
+          }
+          this.uploadImage(user);
+        },
+        (_: any) => alert('failed to register')
+      );   
+    } 
   }
 
   uploadImage(user: User): void {

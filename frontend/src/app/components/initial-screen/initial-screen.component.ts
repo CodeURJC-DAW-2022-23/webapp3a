@@ -29,13 +29,10 @@ export class InitialScreenComponent {
 	label1: string[]=[];
 	label11: number[]=[];
 
-	constructor(private router: Router, private spinner: NgxSpinnerService, private movieService: MoviesService, public loginService: LoginService) {
-		
+	constructor(private router: Router, private spinner: NgxSpinnerService, private movieService: MoviesService, public loginService: LoginService) {		
 	}
 
   	ngOnInit() {
-		
-
 		this.spinner.show();
 		this.movieService.getMovies(this.tam).subscribe(
 			movies => {
@@ -51,7 +48,7 @@ export class InitialScreenComponent {
 				this.barChartLabels = this.label1;
 				this.barChartData = [{ 
 					data: this.label11,
-					label: 'review cantity per movie'
+					label: 'reviews amount per movie'
 				}];
 			},error => console.log(error)
 		);
@@ -71,7 +68,7 @@ export class InitialScreenComponent {
 		this.spinner.hide();
 	}
   
-	movieImage(id: number){
+	movieImage(id: number | undefined){
 		return '/api/movies/' + id + '/image';
 	}
 
@@ -80,7 +77,7 @@ export class InitialScreenComponent {
 	}
 
 	newMovie() {
-  	this.router.navigate(['/movies/new']);
+  	this.router.navigate(['/movies/release/admin']);
 	}
 	
 	logout(){
@@ -120,10 +117,10 @@ export class InitialScreenComponent {
 				let data: any = movies;
 				for(var i=0; i < data.content.length; i++) {
 					console.log(this.movieToSearch);
-					//if(data.content[i].title == this.movieToSearch){
+					if(data.content[i].title == this.movieToSearch){
 						console.log(data.content[i]);
-						this.moviesFounded.push(data.content[i].title);
-					//}
+						this.moviesFounded.push(data.content[i]);
+					}
 				}
 			},
 			error => alert('error founding movies according to this name: ' + error)

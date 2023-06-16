@@ -2,7 +2,9 @@ package es.webapp3.movieframe.controller;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -29,6 +31,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import es.webapp3.movieframe.model.Director;
 import es.webapp3.movieframe.model.Movie;
+import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.service.DirectorService;
 import es.webapp3.movieframe.service.MovieService;
 
@@ -132,9 +135,29 @@ public class MovieRestController {
 
         if (movie.isPresent()) {
 
-            movieService.update(id,newMovie);
+            newMovie.setVotes(movie.get().getVotes());//votes do not change
 
-            return new ResponseEntity<>(newMovie,HttpStatus.OK);
+            newMovie.setDirectors(movie.get().getDirectors());//directors do not change
+
+            for(var i=0; i<movie.get().getReviews().size(); i++){//reviews list does not change
+                newMovie.setReview(movie.get().getReviews().get(i));
+            }
+            
+            newMovie.setImageFile(movie.get().getImageFile());//picture does not change
+
+            if(newMovie.getTitle().isEmpty()){
+                newMovie.setTitle(movie.get().getTitle());
+            }
+            if(newMovie.getCategory().isEmpty()){
+                newMovie.setCategory(movie.get().getCategory());
+            }
+            if(newMovie.getDescription().isEmpty()){
+                newMovie.setDescription(movie.get().getDescription());
+            }
+
+            newMovie.setId(movie.get().getId());
+
+            return new ResponseEntity<>(movieService.update(id,newMovie),HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -151,10 +174,10 @@ public class MovieRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Movie> newMovie(@RequestBody Movie movie) {
 
-        movieService.saveAPI(movie);
-
         URI location = fromCurrentRequest().path("/{id}")
             .buildAndExpand(movie.getId()).toUri();
+
+        movieService.saveAPI(movie);
 
         return ResponseEntity.created(location).body(movie); 
     }

@@ -4,8 +4,7 @@ export interface Director{
     biography: String;
     name: String;
     born: String;
-    genres: String[];
+    genre: String[];
     residence: String;
     score: number;
-	img: Blob;
 }

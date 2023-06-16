@@ -56,37 +56,12 @@ public class MovieService {
 		}
 	}
 
-	public void saveAPI(Movie movie) {
-		movieRepository.save(movie);
+	public Movie saveAPI(Movie movie) {
+		return movieRepository.save(movie);
 	}
 
-	public void update(Long id, Movie newMovie){
-
-		Optional<Movie> movie = movieRepository.findById(id);
-		
-		int votes = movie.get().getVotes();//votes do not change
-		newMovie.setVotes(votes);
-		List<Director> directors = movie.get().getDirectors();//directors do not change
-		newMovie.setDirectors(directors);
-		List<Review> reviews = movie.get().getReviews();//reviews list does not change
-		for(Review oldReview: reviews){
-			newMovie.setReview(oldReview);
-		}
-		Blob image = movie.get().getImageFile();//picture does not change
-		newMovie.setImageFile(image);
-
-		if(newMovie.getTitle().equals("")){
-			newMovie.setTitle(movie.get().getTitle());
-		}
-		if(newMovie.getCategory().equals("")){
-			newMovie.setCategory(movie.get().getCategory());
-		}
-		if(newMovie.getDescription().equals("")){
-			newMovie.setDescription(movie.get().getDescription());
-		}
-
-		newMovie.setId(id);
-		movieRepository.save(newMovie);
+	public Movie update(Long id, Movie newMovie){
+		return movieRepository.save(newMovie);
 	}
 
 	public void delete(long id) {

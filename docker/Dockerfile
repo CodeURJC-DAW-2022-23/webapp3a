@@ -1,20 +1,33 @@
-# se añade la imagen de java
-FROM maven:3.9.0-eclipse-temurin-17 as builder
+#construcción de la app de angular
+FROM node:18-alpine AS builder
 
+WORKDIR /project
+
+COPY frontend/ .
+
+RUN npm install
+RUN npm run build -- --prod --base-href=/new/
+
+#construcción de la app de Spring Boot
+# se añade la imagen de java
+FROM maven:3.9.0-eclipse-temurin-17 as backend
 
 # se define el directorio de trabajo donde ejecutar comandos
 WORKDIR /project
 
 # se copian las dependencias del proyecto
-COPY pom.xml /project/
+COPY backend/pom.xml /project/
 
 # se descargan las dependencias del proyecto
 RUN mvn clean verify --fail-never
 
-# se copia el código del proyecto de angular
-COPY . /project
+# se copia el código del proyecto del backend
+COPY backend/src /project/src
 
-# se compila el codigo de java una vez compilado el codigo de angular
+#construccion de la app de angular en una ruta particular
+#COPY --from=builder 
+
+# se compila el codigo de java una vez compilado el codigo
 RUN mvn clean package -o -DskipTests=true
 
 #################################################
@@ -26,7 +39,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /usr/src/app/
 
 # Copia el JAR del contenedor de compilación
-COPY --from=builder /project/target/*.jar /usr/src/app/
+COPY --from=backend /project/target/*.jar /usr/src/app/
 
 # Indica el puerto que expone el contenedor
 EXPOSE 8443

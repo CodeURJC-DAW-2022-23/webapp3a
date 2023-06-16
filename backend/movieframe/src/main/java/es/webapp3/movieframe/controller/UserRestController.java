@@ -28,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import es.webapp3.movieframe.model.Movie;
 import es.webapp3.movieframe.model.Review;
 import es.webapp3.movieframe.model.User;
 

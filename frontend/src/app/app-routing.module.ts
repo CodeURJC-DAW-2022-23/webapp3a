@@ -8,6 +8,9 @@ import { ReviewsModificationScreenComponent } from './components/reviews-modific
 import { MovieScreenComponent } from './components/movie-screen/movie-screen.component';
 import { SignupScreenComponent } from './components/signup-screen/signup-screen.component';
 import { ProfileScreenComponent } from './components/profile-screen/profile-screen.component';
+//import { DirectorScreenComponent } from './components/director-screen/director-screen.component';
+//import { MovieAggregationScreenComponent } from './components/movie-aggregation-screen/movie-aggregation-screen.component';
+//import { MovieModificationScreenComponent } from './components/movie-modification-screen/movie-modification-screen.component';
 
 const routes: Routes = [
   { path: 'movies', component: InitialScreenComponent },
@@ -15,7 +18,10 @@ const routes: Routes = [
   { path: 'login', component: LoginScreenComponent },
   { path: 'reviews/:user', component: UserReviewsScreenComponent },
   { path: 'reviews/admin/:admin', component: ReviewsModificationScreenComponent },
+ // { path: 'movies/release/admin', component: MovieAggregationScreenComponent },
+ // { path: 'movies/admin/:id', component: MovieModificationScreenComponent },
   { path: 'movies/:id', component: MovieScreenComponent },
+  //{ path: 'directors/:id', component: DirectorScreenComponent },
   { path: 'signup', component: SignupScreenComponent },
   { path: 'profile', component: ProfileScreenComponent },
   { path: '', redirectTo: 'movies', pathMatch: 'full' }

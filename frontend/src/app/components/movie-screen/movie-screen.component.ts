@@ -18,8 +18,7 @@ export class MovieScreenComponent {
   directors: Director[] = [];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, public movieService: MoviesService, public loginService: LoginService) {
-    this.review = {rating: '', coments: ''}
-    
+    this.review = {rating: '', coments: ''}  
   }
 
   ngOnInit() {
@@ -37,7 +36,7 @@ export class MovieScreenComponent {
 		return '/assets/images/logoMF1.png';
 	}
 
-  movieImage(id: number){
+  movieImage(id: number | undefined){
 		return '/api/movies/' + id + '/image';
 	}
 

@@ -12,6 +12,13 @@ services:
     restart: always
     depends_on:
       - db
+  frontend:
+    image: frontend
+    container_name: frontend
+    ports:
+      - 4200:80
+    depends_on:
+      - web
   db:
     image: mysql:8.0
     environment:
