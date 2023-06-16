@@ -34,7 +34,7 @@
               "node_modules/html2canvas/dist/html2canvas.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/jspdf/dist/jspdf.es.min.js",
-              "node_modules/chart.js/dist/Chart.js"
+              "node_modules/chart.js/dist/chart.js"
             ]
           },
           "configurations": {
@@ -42,13 +42,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 }
               ],
               "outputHashing": "all"

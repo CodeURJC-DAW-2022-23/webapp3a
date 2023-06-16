@@ -3,10 +3,10 @@ FROM node:18-alpine AS builder
 
 WORKDIR /project
 
-COPY frontend/ .
+COPY frontend /project/
 
-RUN npm install
-RUN npm run build -- --prod --base-href=/new/
+
+RUN npm run build
 
 #construcción de la app de Spring Boot
 # se añade la imagen de java
@@ -16,16 +16,16 @@ FROM maven:3.9.0-eclipse-temurin-17 as backend
 WORKDIR /project
 
 # se copian las dependencias del proyecto
-COPY backend/pom.xml /project/
+COPY backend/movieframe/pom.xml /project/
 
 # se descargan las dependencias del proyecto
 RUN mvn clean verify --fail-never
 
 # se copia el código del proyecto del backend
-COPY backend/src /project/src
+COPY backend/movieframe/src /project/src
 
 #construccion de la app de angular en una ruta particular
-#COPY --from=builder 
+COPY --from=builder /project/dist/frontend /project/src/main/resources/static/new
 
 # se compila el codigo de java una vez compilado el codigo
 RUN mvn clean package -o -DskipTests=true

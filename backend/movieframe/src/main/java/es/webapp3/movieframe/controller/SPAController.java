@@ -6,6 +6,6 @@ public class SPAController {
 
     @GetMapping({"/new/**/{path:[^\\.]*}", "/{path:new[^\\.]*}"})
     public String redirect() {
-    return "forward:/new/movies.html";
+    return "forward:/new/index.html";
     }
 }
