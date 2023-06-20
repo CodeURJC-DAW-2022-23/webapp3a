@@ -3,10 +3,10 @@ FROM node:18-alpine AS builder
 
 WORKDIR /project
 
-COPY frontend /project/
+COPY frontend/ .
 
-
-RUN npm run build
+RUN npm install
+RUN npm run build -- --base-href=/new/
 
 #construcción de la app de Spring Boot
 # se añade la imagen de java

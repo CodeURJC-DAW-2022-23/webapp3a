@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.sql.Blob;
 import javax.persistence.Lob;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User{
 

@@ -191,7 +191,7 @@ public class MovieRestController {
         @ApiResponse(responseCode = "404", description = "No movie with this id was found to post it an image", content = @Content)
     })
     @PostMapping("/api/movies/{id}/image")
-    public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+    public ResponseEntity<Movie>uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
 
         Optional<Movie> movie = movieService.findById(id);
      

@@ -60,6 +60,7 @@ public class UserRestController {
 
         User userSaved = userService.saveAPI(user);  
         if(userSaved != null){
+            userSaved.setEncodedPassword("");
             return new ResponseEntity<>(userSaved,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -156,7 +157,7 @@ public class UserRestController {
         @ApiResponse(responseCode = "404", description = "No movie with this id was found to post it an image", content = @Content)
     })
     @PostMapping("/api/users/{id}/image") 
-    public ResponseEntity<Object> uploadUserImageAPI(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+    public ResponseEntity<User> uploadUserImageAPI(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
 
         Optional<User> user = userService.findById(id);
      
