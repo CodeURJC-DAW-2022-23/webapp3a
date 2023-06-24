@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Director } from 'src/app/models/Director.model';
 
 const BASE_URL = '/api/directors';
 
