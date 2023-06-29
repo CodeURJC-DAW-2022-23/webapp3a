@@ -200,3 +200,61 @@ En esta fase se han realizado las siguientes tareas:
 - backend\movieframe\pom.xml
 - backend\movieframe\docker\docker-compose.yml
 - backend\movieframe\src\main\java\es\webapp3\movieframe\security\RestSecurityconfiguration.java
+
+# FASE 4
+
+## **1. Preparación del entorno de desarrollo:**
+
+Para compilar y ejecutar y ejecutar la aplicación SPA con Angular hay que modificar el fichero Dockerfile añadiéndole una instrucción para instalar el comando npm, otro para generar los ficheros para producir la app en la ruta new, y un último para copiar los ficheros producidos en el front, en una carpeta hay que crear en el back, y que lleva el mismo nombre donde se lanzará la app SPA "new":
+
+```Dockerfile
+npm install
+ng build -- --base-href=/new/
+cp dist/frontend src/main/resources/static/new
+```
+
+Aparte, en la carpeta del controlador se hace necesario crear una clase controladora SPA con un método que devuelve un recurso correspondiente al index.html de Angular en "/new/":
+
+```SPAController
+@Controller
+public class SPAController {
+
+    @GetMapping({"/new/**/{path:[^\\.]*}", "/{path:new[^\\.]*}"})
+    public String redirect() {
+        return "forward:/new/index.html";
+    }
+}
+```
+Seguidamente, se ejecuta el comando `docker build -t maalami2020/movieframe:v1 .` para construir nuevamente la aplicación.
+Y para terminar, el comando `docker-compose up` para levantar la applicación, y en el navegador, la ruta `https://localhost:8443` para hacer trabajar con la parte del back-end y la ruta `https://localhost:8443/new` para hacer trabajar con la parte del front-end.
+
+## **2. Diagrama de clases de la SPA:**
+
+![spa](SPA_diagram.JPG)
+
+## **3. Participación de los miembros:**
+---
+# *3.1. María Amparo Alami:*
+#### **_3.1.1. Tareas:_**
+- implementación con typescript de una pantalla genérica con todas la reseñas existentes visibles por cualquier usuario, haciendo uso de ajax
+- implementación con typescript de una pantalla para que el administrador pueda eliminar una reseña
+- implementación con typescript de una pantalla para que un usuario pueda logearse
+- implementación con typescript de una pantalla para visualizar la información de una peli particular y generación del enlace a la pantalla del director director de dicha película
+- implementación con typescript de una pantalla para registrarse en la web
+- implementación en typescript de una pantalla de inicio en la que se muestran todas la películas y una gráfica que muestra el conteo de reseña por película
+- ampliación del docker con el fron-end
+#### **_3.1.2. Commits:_**
+* 496f9850248f1a437e9b3a57ca205fa2f436a5e9 --> login y ventana con reseñas del usuario
+* 756cdf0a3aa478dd5147cfa52745209e286fdc23 --> eliminación de reseña: funcionalidad del admin
+* f88ed554d95b4a3b102e9d703a0485a46924ce9c --> pantalla particular
+* 21433d9c841cd060bf9d8b7c439fa8cab5fb7a1b --> actulizacion del perfil
+* cecafe7da1bcce8463f0ea0abcbad5754af3db97 --> gráfica
+#### **_3.1.3. Ficheros:_**
+
+- frontend\src\app\components\profile-screen\profile-screen.component.html
+- frontend\src\app\components\userReviews-screen\userReviews-screen.component.ts
+- frontend\src\app\components\reviews-modification-screen\reviews-modification-screen.component.ts
+- frontend\src\app\services\login.service.ts
+- frontend\src\app\services\review.service.ts
+
+## **4. Vídeo:**

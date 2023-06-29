@@ -1,4 +1,4 @@
-#construcción de la app de angular
+#se añade la imagen de node
 FROM node:18-alpine AS builder
 
 WORKDIR /project
@@ -6,9 +6,9 @@ WORKDIR /project
 COPY frontend/ .
 
 RUN npm install
+# generación de los ficheros para producción en la ruta específica "new"
 RUN npm run build -- --base-href=/new/
 
-#construcción de la app de Spring Boot
 # se añade la imagen de java
 FROM maven:3.9.0-eclipse-temurin-17 as backend
 
@@ -24,10 +24,12 @@ RUN mvn clean verify --fail-never
 # se copia el código del proyecto del backend
 COPY backend/movieframe/src /project/src
 
-#construccion de la app de angular en una ruta particular
+# se copian los ficheros
+# origen: dist/frontend
+# destino: src/main/resources/static/new
 COPY --from=builder /project/dist/frontend /project/src/main/resources/static/new
 
-# se compila el codigo de java una vez compilado el codigo
+# construccion de la app una vez compilado el codigo
 RUN mvn clean package -o -DskipTests=true
 
 #################################################
