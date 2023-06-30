@@ -1,0 +1,88 @@
+<style>
+  .container-fluid {
+
+  margin-top: 9px;
+}
+
+  .blog-post {
+      margin-top: 89px;
+  }
+
+  a {
+  font-size: 17px;
+  color: blue;
+}
+</style>
+
+<nav class="navbar navbar-expand-md fixed-top">
+  <div class="container-fluid">
+      <img class="logo" [src]="appLogo()" alt="" width="129" height="98">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="home()">home</button>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<div *ngIf="movie">
+
+  <div class="container">
+      <header class="border-bottom lh-1 py-2">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-10 text-center">
+              <h1 class="blog-header-logo text-body-emphasis text-decoration-none">{{movie.title}}</h1>
+            </div>
+        </div>
+      </header>
+  </div>
+
+  <div class="container-fluid">
+      <div class="row mb-4">
+          <div class="col-md-3">
+              <div class="row g-0 border rounded overflow-hidden">
+                  <div class="col-auto d-none d-lg-block">
+                      <img alt="" width="auto" height="437" [src]="movieImage(movie.id)"/>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-7">
+              <article class="blog-post">
+                  <p>{{movie.description}}</p>
+                  <hr>
+              </article>
+              <br>
+              <h2>Movie updating</h2>
+              <div class="form-group">
+                  <input #newTitle type="text" class="form-control" placeholder="Movie title...">
+              </div>
+              <div class="form-group">
+                  <input #newCategory type="text" class="form-control" placeholder="Movie category...">
+              </div>
+              <div class="form-group">
+                  <textarea #newDescription type="text" class="form-control" placeholder="Movie description..."></textarea>
+              </div>
+              <div>
+                  <div class="container-fluid">
+                      <button class="btn btn-primary w-40 py-1"  type="submit" (click)="updateMovie()">update movie</button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-2">
+              <article class="blog-post">
+                  <p>Directors:</p>
+                  <div *ngFor="let director of directors">
+                      <a [routerLink]="['/directors/',director.id]">{{director.director}}</a>
+                  </div>
+                  <br>
+                  <p>Genres:</p>
+                  <p>{{movie.category}}</p>
+              </article>
+          </div>
+      </div>
+  </div>
+
+</div>

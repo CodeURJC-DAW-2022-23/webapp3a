@@ -8,6 +8,9 @@ import { UserReviewsScreenComponent } from './components/userReviews-screen/user
 import { ReviewsModificationScreenComponent } from './components/reviews-modification-screen/reviews-modification-screen.component';
 import { MovieScreenComponent } from './components/movie-screen/movie-screen.component';
 import { SignupScreenComponent } from './components/signup-screen/signup-screen.component';
+import { MoviesModificationScreenComponent } from './components/movies-modification-screen/movies-modification-screen.component';
+import { MovieAggregationScreenComponent } from './components/movie-aggregation-screen/movie-aggregation-screen.component';
+
 
 const routes: Routes = [
   { path: 'movies', component: InitialScreenComponent },
@@ -18,7 +21,10 @@ const routes: Routes = [
   { path: 'reviews/admin/:admin', component: ReviewsModificationScreenComponent },
   { path: 'movies/:id', component: MovieScreenComponent },
   { path: 'signup', component: SignupScreenComponent },
-  { path: '', redirectTo: 'movies', pathMatch: 'full' }
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
+  { path: 'movies/admin/:id', component: MoviesModificationScreenComponent },
+  { path: 'movies/release/admin', component: MovieAggregationScreenComponent },
+
 ];
 
 @NgModule({

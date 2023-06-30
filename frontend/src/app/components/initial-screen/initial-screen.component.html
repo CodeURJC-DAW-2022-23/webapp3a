@@ -1,5 +1,5 @@
 <style>
-	
+
 	.ini {
 	  width: 100%;
 	  height: 3rem;
@@ -34,22 +34,22 @@
 		  	</button>
 		  	<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">			
-						<ul #user *ngIf="loginService.isUser()" class="navbar-nav me-auto mb-2 mb-md-0">					
-							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="myProfile()">my profile</button>
+					<div *ngIf="loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">
+						<ul #user *ngIf="loginService.isUser()" class="navbar-nav me-auto mb-2 mb-md-0">
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="myProfile()">my profile</button><!-- DONE -->
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="userReviews()">reviews</button> <!--DONE-->
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button> <!--DONE-->
 						</ul>
-						<ul #admin *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">			
+						<ul #admin *ngIf="loginService.isAdmin()" class="navbar-nav me-auto mb-2 mb-md-0">
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviewsModification()">reviews</button> <!--DONE-->
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="newMovie()">new movie</button>
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="logout()">sign out</button> <!--DONE-->
 						</ul>
-					</div>	
+					</div>
 					<div *ngIf="!loginService.isLogged()" class="collapse navbar-collapse" id="navbarCollapse">
 						<ul class="navbar-nav me-auto mb-2 mb-md-0">
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="login()">log in</button> <!--DONE-->
-							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="signup()">sign up</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="signup()">sign up</button><!-- DONE -->
 							<button type="button" class="btn btn-sm btn-outline-secondary" (click)="reviews()">reviews</button> <!--DONE-->
 						</ul>
 					</div>
@@ -58,14 +58,14 @@
 		</div>
 	</nav>
 
-	<div class="container">	
+	<div class="container">
 			<div>
 				<input class="form-control me-2" [(ngModel)]="movieToSearch" placeholder="Enter a movie">
 				<button (click)="searchMovies()">Search</button>
 			</div>
-		
+
 			<div class="album py-5 bg-body-tertiary">
-				<div class="container">		
+				<div class="container">
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 						<div *ngFor="let movie of moviesFounded">
 							<div class="col">
@@ -73,11 +73,16 @@
 									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
 									<div class="card-body">
 										<h6 class="card-text" *ngIf="loginService.isLogged()">
-											<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											<h6 #user *ngIf="loginService.isUser()">
+												<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											</h6>
+											<h6 #admin *ngIf="loginService.isAdmin()">
+												<a [routerLink]="['/movies/admin/',movie.id]">{{movie.title}}</a>
+											</h6>
 										</h6>
 										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
 										<small class="text-body-secondary">{{movie.category}}</small>
-										<p class="text-body-primary">{{movie.votes}} /5</p>  
+										<p class="text-body-primary">{{movie.votes}} /5</p>
 										<div class="d-flex justify-content-between align-items-center">
 										</div>
 									</div>
@@ -87,12 +92,12 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="topbar-filter fw">
 				<p id="total-mv" *ngIf="capacity">Found <span>{{capacity}} movies</span> in total</p>
 			</div>
 			<div class="album py-5 bg-body-tertiary">
-				<div class="container">		
+				<div class="container">
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 						<div *ngFor="let movie of movies">
 							<div class="col">
@@ -100,11 +105,16 @@
 									<img alt="" width="285" height="437" [src]="movieImage(movie.id)"/>
 									<div class="card-body">
 										<h6 class="card-text" *ngIf="loginService.isLogged()">
-											<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											<h6 #user *ngIf="loginService.isUser()">
+												<a [routerLink]="['/movies/',movie.id]">{{movie.title}}</a>
+											</h6>
+											<h6 #admin *ngIf="loginService.isAdmin()">
+												<a [routerLink]="['/movies/admin/',movie.id]">{{movie.title}}</a>
+											</h6>
 										</h6>
 										<h6 class="card-text" *ngIf="!loginService.isLogged()">{{movie.title}}</h6>
 										<small class="text-body-secondary">{{movie.category}}</small>
-										<p class="text-body-primary">{{movie.votes}} /5</p>  
+										<p class="text-body-primary">{{movie.votes}} /5</p>
 										<div class="d-flex justify-content-between align-items-center">
 										</div>
 									</div>
@@ -120,13 +130,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9 col-sm-12 col-xs-12">
-					<div class="blog-detail-ct">						
+					<div class="blog-detail-ct">
 						<div id="comments"></div>
 					</div>
-					<ul class="pagination">               
+					<ul class="pagination">
 						<button (click)="moreResults()">more results</button>
 					</ul>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>
@@ -139,8 +149,15 @@
 	<p style="font-size: 20px; color: rgb(8, 8, 8)">Loading...</p>
 	</ngx-spinner>
 
-	<canvas baseChart class="chart"
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [type]="barChartType">
-	</canvas>
+	<div>
+		<div>
+		  <div style="display: block">
+			<canvas
+			  baseChart
+			  [datasets]="barChartData"
+			  [labels]="barChartLabels"
+			  [legend]="barChartLegend"
+			></canvas>
+		  </div>
+		</div>
+	  </div>

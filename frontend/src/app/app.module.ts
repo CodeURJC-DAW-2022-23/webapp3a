@@ -15,6 +15,8 @@ import { LoginScreenComponent } from './components/login-screen/login-screen.com
 import { UserReviewsScreenComponent } from './components/userReviews-screen/userReviews-screen.component';
 import { ReviewsModificationScreenComponent } from './components/reviews-modification-screen/reviews-modification-screen.component';
 import { DirectorScreenComponent } from './components/director-screen/director-screen.component';
+import { MoviesModificationScreenComponent } from './components/movies-modification-screen/movies-modification-screen.component';
+import { MovieAggregationScreenComponent } from './components/movie-aggregation-screen/movie-aggregation-screen.component';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { DirectorScreenComponent } from './components/director-screen/director-s
     LoginScreenComponent,
     UserReviewsScreenComponent,
     ReviewsModificationScreenComponent,
-    DirectorScreenComponent
+    DirectorScreenComponent,
+    MoviesModificationScreenComponent,
+    MovieAggregationScreenComponent,
+
   ],
   imports: [
     BrowserModule,

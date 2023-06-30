@@ -22,7 +22,7 @@ export class MoviesService {
             })
 		)as Observable<any>;
 	}
-	
+
 	getMoreMovies(tam: number): Observable<any> {
 		return this.http.get(BASE_URL + '?size=' + tam).pipe(
 			catchError((error)  => {
@@ -30,7 +30,7 @@ export class MoviesService {
 			})
 		)as Observable<any>;
 	}
-	
+
 	getFoundedMovies(): Observable<any> {
 		return this.http.get(BASE_URL).pipe(
 			catchError((error) => {
@@ -45,39 +45,39 @@ export class MoviesService {
 				return this.handleError(error);
 			})
 		)as Observable<any>;
-	}   
+	}
 
-	/*addMovie(movie: Movie) {
-		if(!movie.id) {
-			return this.http.post(BASE_URL + 'addition/new', movie).pipe(
-				catchError(error => this.handleError(error))
-			);
-		} else {
-            return this.http.put(BASE_URL + movie.id + '/edition', movie).pipe(
-                catchError(error => this.handleError(error))
-            );
-        }
-	}*/
-
-    addReview(movie: Movie, review: Review, user: string) {    
-		return this.http.post(BASE_URL + '/' + movie.id + '/review/' + user, review).pipe(
+  addMovie(movie: Movie) {
+		return this.http.post(BASE_URL, movie).pipe(
 			catchError((error) => {
 				return this.handleError(error)
 			})
 		);
-    }
-
-	/*setMovieImage(movie: Movie, formData: FormData) {
-		return this.http.post(BASE_URL + 'addition/new/' + movie.id + '/image', formData).pipe(
-            catchError(error => this.handleError(error))
-		);
 	}
 
-	updateMovie(movie: Movie) {
-		return this.http.put(BASE_URL + movie.id + '/edition',movie).pipe(
-			catchError(error => this.handleError(error))
+  addReview(movie: Movie, review: Review, user: string) {
+  return this.http.post(BASE_URL + '/' + movie.id + '/review/' + user, review).pipe(
+    catchError((error) => {
+      return this.handleError(error)
+    })
+  );
+  }
+
+  setMovieImage(movie: Movie, formData: FormData) {
+    return this.http.post(BASE_URL + '/' + movie.id + '/image', formData).pipe(
+      catchError((error) => {
+        return this.handleError(error)
+      })
+    );
+  }
+
+  updateMovie(id: number, movie: Movie) {
+		return this.http.put(BASE_URL + '/' + id, movie).pipe(
+			catchError((error) => {
+				return this.handleError(error)
+			})
 		);
-	}*/	
+	}
 
 	private handleError(error: any) {
 		console.log("ERROR:");
