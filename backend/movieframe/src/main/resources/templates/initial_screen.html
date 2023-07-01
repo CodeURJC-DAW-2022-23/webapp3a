@@ -195,7 +195,7 @@
 var tam = 10;
 //console.log(tam);
 
-let ruta='https://localhost:8443/movies?size=' + tam;
+let ruta='https://10.100.139.187:8443/movies?size=' + tam;
 
 function loadInitMovies(callback,tam) {
 	$.ajax({
@@ -238,7 +238,7 @@ $(document).ready(function () {
 	info2.click(function () {
 		tam+=10;
 
-		let ruta='https://localhost:8443/movies?size=' + tam;
+		let ruta='https://10.100.139.187:8443/movies?size=' + tam;
 		console.log(ruta);
 		$("#spinner-div").show();
 		$.ajax({
@@ -263,7 +263,7 @@ $(document).ready(function () {
 	info3.click(function () {
 		tam=10
 
-		let ruta='https://localhost:8443/movies/name?size=' + tam;
+		let ruta='https://10.100.139.187:8443/movies/name?size=' + tam;
 		console.log(ruta);
 		$("#spinner-div").show();
 		$.ajax({
@@ -285,7 +285,7 @@ $(document).ready(function () {
 
 	function loadMovies(){
 		$.ajax({
-			url: 'https://localhost:8443/movies?size=' + tam,
+			url: 'https://10.100.139.187:8443/movies?size=' + tam,
 		}).done(data => {
 			//JSON.stringify(data);
 			console.log(data);
