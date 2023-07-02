@@ -20,10 +20,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/auth/login",
+					"raw": "https://localhost:8443/api/auth/login",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -50,10 +50,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/auth/login",
+					"raw": "https://localhost:8443/api/auth/login",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -71,10 +71,10 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/auth/logout",
+					"raw": "https://localhost:8443/api/auth/logout",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -92,10 +92,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies?page=0&size=10",
+					"raw": "https://localhost:8443/api/movies?page=0&size=10",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -117,10 +117,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/reviews/user/edward?page=0&size=10",
+					"raw": "https://localhost:8443/api/reviews/user/edward?page=0&size=10",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -139,10 +139,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/reviews",
+					"raw": "https://localhost:8443/api/reviews",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -164,10 +164,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/directors/6",
+					"raw": "https://localhost:8443/api/directors/6",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -194,10 +194,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/users",
+					"raw": "https://localhost:8443/api/users",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -219,10 +219,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/14",
+					"raw": "https://localhost:8443/api/movies/14",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -245,10 +245,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/reviews/18",
+					"raw": "https://localhost:8443/api/reviews/18",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -271,10 +271,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/6/director/image",
+					"raw": "https://localhost:8443/api/movies/6/director/image",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -299,10 +299,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/users/harry/image",
+					"raw": "https://localhost:8443/api/users/harry/image",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -321,10 +321,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/4/image",
+					"raw": "https://localhost:8443/api/movies/4/image",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -357,10 +357,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies",
+					"raw": "https://localhost:8443/api/movies",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -392,10 +392,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/14/review/edward",
+					"raw": "https://localhost:8443/api/movies/14/review/edward",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -429,10 +429,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/users/harry",
+					"raw": "https://localhost:8443/api/users/harry",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -464,10 +464,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/13",
+					"raw": "https://localhost:8443/api/movies/13",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -500,10 +500,10 @@
 					]
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/users/21/image",
+					"raw": "https://localhost:8443/api/users/21/image",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -537,10 +537,10 @@
 					]
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/22/image",
+					"raw": "https://localhost:8443/api/movies/22/image",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -564,10 +564,10 @@
                 "method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/users/current",
+					"raw": "https://localhost:8443/api/users/current",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -590,10 +590,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/reviews/17",
+					"raw": "https://localhost:8443/api/reviews/17",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
@@ -620,10 +620,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://10.100.139.187:8443/api/movies/name?page=0&size=10",
+					"raw": "https://localhost:8443/api/movies/name?page=0&size=10",
 					"protocol": "https",
 					"host": [
-						"10.100.139.187"
+						"localhost"
 					],
 					"port": "8443",
 					"path": [
