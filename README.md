@@ -5,9 +5,6 @@
 | Nombre y apellidos | Correo | Cuenta github |
 | --- | --- | --- |
 | Maria Amparo Alami | ma.alami.2020@alumnos.urjc.es | MaAlami2020 |
-| Cristobal Justo Rustarazo | c.justo.2019@alumnos.urjc.es | CristobalJR |
-| Cassiel Seth Mayorca Heirisman | cs.mayorca.2018@alumnos.urjc.es | cassiel_smh |
-| Javier García Seller | j.garcias.2020@alumnos.urjc.es | Javarto |
 | Shadith Perez  Rivera | sy.perez.2022@alumnos.urjc.es | Shadith |
 
 #### Zona de organizacion [Trello](https://trello.com/w/movieframe)
@@ -259,10 +256,9 @@ Pasos a ejecutar:
 - implementación con typescript de una pantalla genérica con todas la reseñas existentes visibles por cualquier usuario, haciendo uso de ajax
 - implementación con typescript de una pantalla para que el administrador pueda eliminar una reseña
 - implementación con typescript de una pantalla para que un usuario pueda logearse
-- implementación con typescript de una pantalla para visualizar la información de una peli particular y generación del enlace a la pantalla del director director de dicha película
 - implementación con typescript de una pantalla para registrarse en la web
 - implementación en typescript de una pantalla de inicio en la que se muestran todas la películas y una gráfica que muestra el conteo de reseña por película
-- ampliación del docker con el fron-end
+
 #### **_3.1.2. Commits:_**
 * [496f9850248f1a437e9b3a57ca205fa2f436a5e9](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/496f9850248f1a437e9b3a57ca205fa2f436a5e9) --> login y ventana con reseñas del usuario
 * [756cdf0a3aa478dd5147cfa52745209e286fdc23](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/756cdf0a3aa478dd5147cfa52745209e286fdc23) --> eliminación de reseña: funcionalidad del admin
@@ -276,5 +272,28 @@ Pasos a ejecutar:
 - [frontend\src\app\components\reviews-modification-screen\reviews-modification-screen.component.ts](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/frontend/src/app/components/reviews-modification-screen/reviews-modification-screen.component.ts)
 - [frontend\src\app\services\login.service.ts](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/frontend/src/app/services/login.service.ts)
 - [frontend\src\app\services\review.service.ts](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/frontend/src/app/services/review.service.ts)
+
+# *3.2. Shadith Perez Rivera:*
+#### **_3.2.1. Tareas:_**
+- implementación con typescript de una pantalla para visualizar la información de una pelicula en particular
+- implementación con typescript para la modificacion y actualizacion de la información de una pelicula
+- implementación con typescript de una pantalla para crear una nueva pelicula
+- implementación con typescript de una pantalla para visualizar la informacion de un director, con un enlace en la pelicula 
+- ampliación del docker con el fron-end
+- despliegue de la aplicacion 
+
+#### **_3.2.2. Commits:_**
+* [cd83a9f7ae329bb9e59b3d998a47b9e1f830592e] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/cd83a9f7ae329bb9e59b3d998a47b9e1f830592e) --> Modificacion y agregacion pelicula
+* [b529c227cb268b993e98c83fda4ee9255886882c] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/b529c227cb268b993e98c83fda4ee9255886882c) --> Informcion Director
+* [ac7cbe9bd7c201a7682ad71ed794c94d13928768] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/ac7cbe9bd7c201a7682ad71ed794c94d13928768) --> Errores y funcionamiento
+* [f5cc4b322798cfe8db43584dbdee09bc42c46f99] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/f5cc4b322798cfe8db43584dbdee09bc42c46f99) --> Despliegue en MV
+* [35947b1f1568b512965e21a7386937106edb9ea3] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/35947b1f1568b512965e21a7386937106edb9ea3) --> Docker
+
+#### **_3.1.3. Ficheros:_**
+- [frontend/src/app/components/director-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/director-screen)
+- [frontend/src/app/components/movie-aggregation-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-aggregation-screen)
+- [frontend/src/app/components/movie-modification-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-modification-screen)
+- [docker/Dockerfile] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/docker/Dockerfile)
+- [docker/create_image.sh] (docker/create_image.sh)
 
 ## **4. Vídeo:**
