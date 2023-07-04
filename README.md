@@ -297,3 +297,5 @@ Pasos a ejecutar:
 - [docker/create_image.sh](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/docker/create_image.sh)
 
 ## **4. Vídeo:**
+
+Link video: https://youtu.be/q5dmS3T7l6s 
