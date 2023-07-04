@@ -73,11 +73,11 @@ export class InitialScreenComponent {
 	}
 
 	appLogo() {
-		return '/assets/images/logoMF1.png';
+		return '/frontend/src/assets/images/logoMF1.png';
 	}
 
 	newMovie() {
-  	this.router.navigate(['/movies/release/admin']);
+  		this.router.navigate(['/movies/release/admin']);
 	}
 	
 	logout(){

@@ -88,9 +88,9 @@ public class UserRestController {
             if(newUser.getUsername().isEmpty()){
                 newUser.setUsername(user.get().getUsername());
             }
-            //if(newUser.getImageFile() == null){
-            //    newUser.setImageFile(user.get().getImageFile());
-            //}
+            if(newUser.getImageFile() == null){
+                newUser.setImageFile(user.get().getImageFile());
+            }
             if(newUser.getName().isEmpty()){
                 newUser.setName(user.get().getName());
             }

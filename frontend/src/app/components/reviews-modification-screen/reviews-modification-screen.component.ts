@@ -29,10 +29,10 @@ export class ReviewsModificationScreenComponent {
   deleteReview(review: Review) {
     console.log(review.id);
     this.reviewService.deleteReview(review).subscribe(
-      (_:any) => this.router.navigate(['/reviews']),
+      (_:any) => window.location.reload(),
       (error: any) => console.error(error)
     );
-    window.location.reload();  
+    //window.location.reload();  
   }
 
   home() {
@@ -50,7 +50,7 @@ export class ReviewsModificationScreenComponent {
 	}
 
   appLogo() {
-		return '/assets/images/logoMF1.png';
+		return '/images/logoMF1.png';
 	}
 
 }
