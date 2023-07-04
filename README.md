@@ -273,7 +273,7 @@ Pasos a ejecutar:
 * cecafe7da1bcce8463f0ea0abcbad5754af3db97 --> gráfica
 #### **_3.1.3. Ficheros:_**
 
-- frontend\src\app\components\profile-screen\profile-screen.component.html
+- [frontend\src\app\components\profile-screen\profile-screen.component.html](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/frontend/src/app/components/profile-screen/profile-screen.component.html)
 - frontend\src\app\components\userReviews-screen\userReviews-screen.component.ts
 - frontend\src\app\components\reviews-modification-screen\reviews-modification-screen.component.ts
 - frontend\src\app\services\login.service.ts
