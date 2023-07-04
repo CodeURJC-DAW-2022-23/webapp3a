@@ -188,18 +188,18 @@ En esta fase se han realizado las siguientes tareas:
 - Construir imágenes y hacer el despliegue del proyecto en docker
 - Realizar el diseño arquitectónico con los métodos y clases de la API Rest y redactar el README
 #### **_5.2. Commits:_**
-* 385625bad3174894627c0fdfb2f1c8f13daaec36 --> peticiones Postman
-* 802d18bfa6c2b3632c455c4ae58255e85284b536 --> documentación de la API Rest en remoto
-* b7048ce05b0b97ee96ed2a33ba93a05462355ebc --> documentación de la API Rest en local
-* d2ab5480c466642eadaf3c3d07bce89c945a9d85 --> aplicación dockerizada
-*  ac51a4b0f9453ecb2bc08b05af5fa81417912d3b --> diseño arquitectónico y README
+* [385625bad3174894627c0fdfb2f1c8f13daaec36](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/385625bad3174894627c0fdfb2f1c8f13daaec36) --> peticiones Postman
+* [802d18bfa6c2b3632c455c4ae58255e85284b536](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/802d18bfa6c2b3632c455c4ae58255e85284b536) --> documentación de la API Rest en remoto
+* [b7048ce05b0b97ee96ed2a33ba93a05462355ebc](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/b7048ce05b0b97ee96ed2a33ba93a05462355ebc) --> documentación de la API Rest en local
+* [d2ab5480c466642eadaf3c3d07bce89c945a9d85](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/d2ab5480c466642eadaf3c3d07bce89c945a9d85) --> aplicación dockerizada
+* [ac51a4b0f9453ecb2bc08b05af5fa81417912d3b](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/ac51a4b0f9453ecb2bc08b05af5fa81417912d3b) --> diseño arquitectónico y README
 #### **_5.3. Ficheros:_**
 
-- backend\movieframe\api.postman_collection.json
-- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieRestController.java
-- backend\movieframe\pom.xml
-- backend\movieframe\docker\docker-compose.yml
-- backend\movieframe\src\main\java\es\webapp3\movieframe\security\RestSecurityconfiguration.java
+- [backend\movieframe\api.postman_collection.json](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/api.postman_collection.json)
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieRestController.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/controller/MovieRestController.java)
+- [backend\movieframe\pom.xml](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/pom.xml)
+- [backend\movieframe\docker\docker-compose.yml](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/docker/docker-compose.yml)
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\security\RestSecurityconfiguration.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/security/RestSecurityconfiguration.java)
 
 # FASE 4
 
@@ -266,11 +266,11 @@ Pasos a ejecutar:
 - implementación en typescript de una pantalla de inicio en la que se muestran todas la películas y una gráfica que muestra el conteo de reseña por película
 - ampliación del docker con el fron-end
 #### **_3.1.2. Commits:_**
-* 496f9850248f1a437e9b3a57ca205fa2f436a5e9 --> login y ventana con reseñas del usuario
-* 756cdf0a3aa478dd5147cfa52745209e286fdc23 --> eliminación de reseña: funcionalidad del admin
-* f88ed554d95b4a3b102e9d703a0485a46924ce9c --> pantalla particular
-* 21433d9c841cd060bf9d8b7c439fa8cab5fb7a1b --> actulizacion del perfil
-* cecafe7da1bcce8463f0ea0abcbad5754af3db97 --> gráfica
+* [496f9850248f1a437e9b3a57ca205fa2f436a5e9](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/496f9850248f1a437e9b3a57ca205fa2f436a5e9) --> login y ventana con reseñas del usuario
+* [756cdf0a3aa478dd5147cfa52745209e286fdc23](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/756cdf0a3aa478dd5147cfa52745209e286fdc23) --> eliminación de reseña: funcionalidad del admin
+* [f88ed554d95b4a3b102e9d703a0485a46924ce9c](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/f88ed554d95b4a3b102e9d703a0485a46924ce9c) --> pantalla particular
+* [21433d9c841cd060bf9d8b7c439fa8cab5fb7a1b](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/21433d9c841cd060bf9d8b7c439fa8cab5fb7a1b) --> actulizacion del perfil
+* [cecafe7da1bcce8463f0ea0abcbad5754af3db97](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/cecafe7da1bcce8463f0ea0abcbad5754af3db97) --> gráfica
 #### **_3.1.3. Ficheros:_**
 
 - [frontend\src\app\components\profile-screen\profile-screen.component.html](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/frontend/src/app/components/profile-screen/profile-screen.component.html)
