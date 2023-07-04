@@ -16,9 +16,9 @@ import { ReviewsModificationScreenComponent } from './components/reviews-modific
 import { MovieScreenComponent } from './components/movie-screen/movie-screen.component';
 import { SignupScreenComponent } from './components/signup-screen/signup-screen.component';
 import { ProfileScreenComponent } from './components/profile-screen/profile-screen.component';
-//import { DirectorScreenComponent } from './components/director-screen/director-screen.component';
-//import { MovieAggregationScreenComponent } from './components/movie-aggregation-screen/movie-aggregation-screen.component';
-//import { MovieModificationScreenComponent } from './components/movie-modification-screen/movie-modification-screen.component';
+import { DirectorScreenComponent } from './components/director-screen/director-screen.component';
+import { MovieAggregationScreenComponent } from './components/movie-aggregation-screen/movie-aggregation-screen.component';
+import { MovieModificationScreenComponent } from './components/movie-modification-screen/movie-modification-screen.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +31,9 @@ import { ProfileScreenComponent } from './components/profile-screen/profile-scre
     MovieScreenComponent,
     SignupScreenComponent,
     ProfileScreenComponent,
-//  DirectorScreenComponent,
-//  MovieAggregationScreenComponent,
-//  MovieModificationScreenComponent
+    DirectorScreenComponent,
+    MovieAggregationScreenComponent,
+    MovieModificationScreenComponent
   ],
   imports: [
     BrowserModule,

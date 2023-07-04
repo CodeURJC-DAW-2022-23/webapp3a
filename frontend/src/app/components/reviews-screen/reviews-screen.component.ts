@@ -73,7 +73,7 @@ export class ReviewsScreenComponent {
 	}
 
   appLogo() {
-		return '/assets/images/logoMF1.png';
+		return '/images/logoMF1.png';
 	}
 
 }

@@ -33,7 +33,7 @@ export class MovieScreenComponent {
   }
 
   appLogo() {
-		return '/assets/images/logoMF1.png';
+		return '/images/logoMF1.png';
 	}
 
   movieImage(id: number | undefined){
