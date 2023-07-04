@@ -123,19 +123,17 @@ En esta fase se han realizado las siguientes tareas:
 - se posibilitó al usuario registrado mostrarle todas sus reseñas en una pantalla y  editar una
 - se añadió seguridad para chequear el tipo de usuario logeado después de iniciar sesión
 #### **_5.2. Commits:_**
-* a36aab1736b5930af5d56943880c7ceb17878684 --> implementadas funcionalidades de la gráfica, mostrar películas de la pantalla inicial, mostrar una movie, escribir una reseña, mostrar info. de un director
-* 9dad6feca2b5f09d9c0538e13f40a939e0aa4e21
---> implementada pantalla del administrador
-* d388b8478dcb7b264b9f684b7d7e88282dd25f78 --> algoritmo de consulta avanzada
-* b1e1a342334029d30fc58e480a3d3a7dcbc34643 --> generar recomendación de una peli en PDF
-* fa90679c32908f059306abd9555ebb78af2cf26c --> @post del administrador de una peli con imagen
+* [a36aab1736b5930af5d56943880c7ceb17878684](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/a36aab1736b5930af5d56943880c7ceb17878684) --> implementadas funcionalidades de la gráfica, mostrar películas de la pantalla inicial, mostrar una movie, escribir una reseña, mostrar info. de un director
+* [9dad6feca2b5f09d9c0538e13f40a939e0aa4e21](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/9dad6feca2b5f09d9c0538e13f40a939e0aa4e21) --> implementada pantalla del administrador
+  [d388b8478dcb7b264b9f684b7d7e88282dd25f78](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/d388b8478dcb7b264b9f684b7d7e88282dd25f78) --> algoritmo de consulta avanzada
+* [b1e1a342334029d30fc58e480a3d3a7dcbc34643](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/b1e1a342334029d30fc58e480a3d3a7dcbc34643) --> generar recomendación de una peli en PDF
+* [fa90679c32908f059306abd9555ebb78af2cf26c](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/fa90679c32908f059306abd9555ebb78af2cf26c) --> @post del administrador de una peli con imagen
 #### **_5.3. Ficheros:_**
-
-- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\Home.java
-- backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieController.java
-- backend\movieframe\src\main\java\es\webapp3\movieframe\model\movie.java
-- backend\movieframe\src\main\java\es\webapp3\movieframe\service\DataBaseInitializer.java
-- backend\movieframe\src\main\resources\templates\recommendations_screen.html
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\controller\Home.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/controller/Home.java)
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\controller\MovieController.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/controller/MovieController.java)
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\model\movie.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/model/movie.java)
+- [backend\movieframe\src\main\java\es\webapp3\movieframe\service\DataBaseInitializer.java](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/java/es/webapp3/movieframe/service/DataBaseInitializer.java
+- [backend\movieframe\src\main\resources\templates\recommendations_screen.html](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/backend/movieframe/src/main/resources/templates/recommendations_screen.html)
 
 # FASE 3
 
