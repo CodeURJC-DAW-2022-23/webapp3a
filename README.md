@@ -283,17 +283,17 @@ Pasos a ejecutar:
 - despliegue de la aplicacion 
 
 #### **_3.2.2. Commits:_**
-* [cd83a9f7ae329bb9e59b3d998a47b9e1f830592e] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/cd83a9f7ae329bb9e59b3d998a47b9e1f830592e) --> Modificacion y agregacion pelicula
-* [b529c227cb268b993e98c83fda4ee9255886882c] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/b529c227cb268b993e98c83fda4ee9255886882c) --> Informcion Director
-* [ac7cbe9bd7c201a7682ad71ed794c94d13928768] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/ac7cbe9bd7c201a7682ad71ed794c94d13928768) --> Errores y funcionamiento
-* [f5cc4b322798cfe8db43584dbdee09bc42c46f99] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/f5cc4b322798cfe8db43584dbdee09bc42c46f99) --> Despliegue en MV
-* [35947b1f1568b512965e21a7386937106edb9ea3] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/35947b1f1568b512965e21a7386937106edb9ea3) --> Docker
+* [cd83a9f7ae329bb9e59b3d998a47b9e1f830592e](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/cd83a9f7ae329bb9e59b3d998a47b9e1f830592e) --> Modificacion y agregacion pelicula
+* [b529c227cb268b993e98c83fda4ee9255886882c](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/b529c227cb268b993e98c83fda4ee9255886882c) --> Informcion Director
+* [ac7cbe9bd7c201a7682ad71ed794c94d13928768](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/ac7cbe9bd7c201a7682ad71ed794c94d13928768) --> Errores y funcionamiento
+* [f5cc4b322798cfe8db43584dbdee09bc42c46f99](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/f5cc4b322798cfe8db43584dbdee09bc42c46f99) --> Despliegue en MV
+* [35947b1f1568b512965e21a7386937106edb9ea3](https://github.com/CodeURJC-DAW-2022-23/webapp3a/commit/35947b1f1568b512965e21a7386937106edb9ea3) --> Docker
 
 #### **_3.1.3. Ficheros:_**
-- [frontend/src/app/components/director-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/director-screen)
-- [frontend/src/app/components/movie-aggregation-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-aggregation-screen)
-- [frontend/src/app/components/movie-modification-screen] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-modification-screen)
-- [docker/Dockerfile] (https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/docker/Dockerfile)
-- [docker/create_image.sh] (docker/create_image.sh)
+- [frontend/src/app/components/director-screen](https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/director-screen)
+- [frontend/src/app/components/movie-aggregation-screen](https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-aggregation-screen)
+- [frontend/src/app/components/movie-modification-screen](https://github.com/CodeURJC-DAW-2022-23/webapp3a/tree/main/frontend/src/app/components/movie-modification-screen)
+- [docker/Dockerfile](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/docker/Dockerfile)
+- [docker/create_image.sh](https://github.com/CodeURJC-DAW-2022-23/webapp3a/blob/main/docker/create_image.sh)
 
 ## **4. Vídeo:**
