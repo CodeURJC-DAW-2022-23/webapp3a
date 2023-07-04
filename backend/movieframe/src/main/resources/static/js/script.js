@@ -1,6 +1,6 @@
 function loadReviews(callback, size){
     $.ajax({
-        url: 'http://localhost:8081/reviews/?page=1&size='+size,
+        url: 'http://10.100.139.187:8081/reviews/?page=1&size='+size,
     })
     .then(response => {
         if(response.status !== 200){
@@ -24,7 +24,7 @@ function loadReviews(callback, size){
 
 function loadUserReviews(callback, size){
     $.ajax({
-        url: 'http://localhost:8081/{user}?page=1&size='+size,
+        url: 'http://10.100.139.187:8081/{user}?page=1&size='+size,
     })
     .then(response => {
         if(response.status !== 200){
@@ -57,7 +57,7 @@ function showReview(review) {
 
 function loadMovies(callback){
     $.ajax({
-        url: 'https://localhost:8081/movies',
+        url: 'https://10.100.139.187:8081/movies',
     })
     .then(response => {
         if(response.status !== 200){

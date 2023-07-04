@@ -116,7 +116,7 @@ footer section-->
 	var tam = 10;
 	//console.log(tam);
 	
-	let ruta='https://localhost:8443/reviews?size=' + tam;
+	let ruta='https://10.100.139.1879.187:8443/reviews?size=' + tam;
 	console.log(ruta);
 
 	function loadReviews(callback,tam) {
@@ -155,7 +155,7 @@ footer section-->
 		info2.click(function () {
 			tam+=10;
 
-			let ruta='https://localhost:8443/reviews?size=' + tam;
+			let ruta='https://10.100.139.1879.187:8443/reviews?size=' + tam;
 			console.log(ruta);
 			$("#spinner-div").show();
 			$.ajax({
@@ -183,7 +183,7 @@ footer section-->
 			var val = $(event.target).attr("id").split("-")[1];	
 			//alert(val);
 
-			let rutaBorrado='https://localhost:8443/reviews/' + val + '?size=10';
+			let rutaBorrado='https://10.100.139.1879.187:8443/reviews/' + val + '?size=10';
 			$("#spinner-div").show();
 			$.ajax({
 				url: rutaBorrado

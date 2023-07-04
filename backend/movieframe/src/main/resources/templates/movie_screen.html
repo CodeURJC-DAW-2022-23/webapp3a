@@ -199,7 +199,7 @@
 		//show me the last review
 			function loadMovie(){
 				$.ajax({
-					url: 'https://localhost:8443/movies/{{id}}',
+					url: 'https://10.100.139.187:8443/movies/{{id}}',
 				}).done(function(data){
 					console.log(data);
 					console.log(data.reviews);

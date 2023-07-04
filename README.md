@@ -225,8 +225,30 @@ public class SPAController {
     }
 }
 ```
-Seguidamente, se ejecuta el comando `docker build -t maalami2020/movieframe:v1 .` para construir nuevamente la aplicación.
+Seguidamente, se ejecuta el comando `docker build -t maalami2020/movieframe:v3 .` para construir nuevamente la aplicación.
 Y para terminar, el comando `docker-compose up` para levantar la applicación, y en el navegador, la ruta `https://localhost:8443` para hacer trabajar con la parte del back-end y la ruta `https://localhost:8443/new` para hacer trabajar con la parte del front-end.
+
+## **1.1. Despliegue de la app en la máquina virtual:**
+
+1. ¿Cómo conectarse por SSH a la máquina virtual?
+
+Abrir la terminal de "WSL" de linux o la terminal "Powershell" de windows en la ruta en la que se encuanetra la carpeta '.ssh' del escritorio y que contiene en fichero "appWeb-xx".
+
+En linux, ejecutar el comando `chmod 600 appWeb-xx` para no tener problemas con la clave privada al intentar conectarse. A continuación, ejecutar el comando `ssh -i appWeb-xx vmuser@10.100.139.187` para conectarse por SSH a la máquina remota
+
+2. ¿Cómo instalar docker en la máquina?
+
+instalar los comandos necesarios para establecer el repositorio Docker; y aquellos que permiten instalar y actualizar Docker desde el repositorio
+
+3. Publicación
+
+Pasos a ejecutar:
+ 
+ - Clonar el repositorio del GitHub de la rama main
+ - Meterse en la carpeta "docker" del proyecto
+ - Ejecutar el comando "docker compose up -d" para levantar la app con la imagen de la web `maalami2020/movieframe:v3`, y la imagen de la base de datos `mysql:8.0`
+ - Introducir en el navegador la url "https://10.100.139.187:8443"
+ para lanzar el backend, y la url "https://10.100.139.187:8443/new/" para lanzar el frontend
 
 ## **2. Diagrama de clases de la SPA:**
 

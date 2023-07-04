@@ -20,10 +20,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/auth/login",
+					"raw": "https://10.100.139.187:8443/api/auth/login",
 					"protocol": "https",
 					"host": [
-						"localhost"
+						"10.100.139.187"
 					],
 					"port": "8443",
 					"path": [
@@ -50,7 +50,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8443/api/auth/login",
+					"raw": "https://10.100.139.187:8443/api/auth/login",
 					"protocol": "https",
 					"host": [
 						"localhost"
