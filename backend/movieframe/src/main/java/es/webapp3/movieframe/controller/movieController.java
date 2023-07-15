@@ -172,7 +172,7 @@ public class MovieController {
 
                 return "movie_screen";
             }else{
-                return "404";
+                return "error/404";
             } 
     }
     @GetMapping("/movie/{id}/director")
